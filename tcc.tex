@@ -1,0 +1,87 @@
+%\documentclass{abnt}
+
+%\usepackage[latin1]{inputenc}
+%\usepackage[brazil]{babel}
+%\usepackage{amsthm,amsfonts}
+
+%\usepackage{graphicx}
+%\usepackage{color}
+%\usepackage{multirow}
+%\usepackage{empheq,amsmath}
+
+\documentclass[12pt,a4paper,ruledheader]{abnt}
+\usepackage[center]{caption}
+\usepackage[brazil]{babel}
+
+%Pacote para acentuação 
+\usepackage[latin1]{inputenc}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{latexsym}
+\usepackage{ae}
+\usepackage{hyperref}
+\usepackage[alf]{abntcite}
+\usepackage{lscape}
+\renewcommand{\rmdefault}{aess}
+\renewcommand{\sfdefault}{aess}
+
+\usepackage{amsmath}
+\usepackage{xtab}
+\usepackage{multirow}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+
+ %comando para que a lista de figura saia com numero dos capitulos
+\numberwithin{figure}{chapter}
+%  \numberwithin{algorithm}{chapter}
+
+% %altera a fonte do documento
+%  \renewcommand{\rmdefault}{aess}
+%  \renewcommand{\sfdefault}{aess}
+%  \renewcommand{\familydefault}{\sfdefault}
+
+%\renewcommand{\ABNTchaptersize}{\huge}       % altera o tamanho da fonte dos capitulos
+ \renewcommand{\ABNTchaptersize}{\LARGE}       % altera o tamanho da fonte dos capitulos
+ \renewcommand{\ABNTchapterfont}{\bfseries}    % altera  o tipo da fonte dos capitulos
+ \renewcommand{\ABNTsectionfont}{\bf \large}   % altera o tamanho da fonte da secao
+ 
+%Comandos definidos pelo usuario
+\newcommand{\tamanhogrande}{\fontsize{16pt}{20pt}\selectfont}
+\newcommand{\tamanhomedio}{\fontsize{14pt}{18pt}\selectfont}
+\newcommand{\tamanhonormal}{\fontsize{12pt}{16pt}\selectfont}
+
+\setlength{\parindent}{3cm}
+\setlength{\listparindent}{3cm}
+
+\begin{document}
+
+	\input{1Capa/Capa}
+
+	%\sumario
+	\onehalfspacing
+	\listoffigures
+	\listoftables	
+	\input{1Capa/ListaSiglas}
+	\tableofcontents
+	
+	\input{2Introducao/Introducao}
+	
+	%\input{[3]_Desenvolvimento/[Cap_1]_A_HISTORIA_DA_CRIACAO_E_A_EVOLUCAO_DOS_PROCESSADORES/Desenvolvimento}
+	
+	%\input{[4]_Conclusao/Conclusao}
+	
+	%\bibliographystyle{abnt-alf}
+	% refbi é o nome do arquivo .bib
+	%\bibliography{[5]_Referencia/Bibli} 
+
+	%Glossário (se necessário)
+	%\include{./glossario}
+	%\input{[5]_Referencia/Bibliografia}
+	%\bibliographystyle{abnt-alf}
+	%\bibliography{[5]_Referencia/Bibli} 
+	
+	%Apêndices (se necessário)
+	%\include{[6]_Apendice/Apendice_A}
+	%\include{[7]_Anexos/Anexo_A}
+	
+\end{document}
