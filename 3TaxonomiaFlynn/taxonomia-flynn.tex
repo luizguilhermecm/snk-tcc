@@ -1,0 +1,59 @@
+% vim: set ai tw=80: 
+%-------------------------------------------------------------------------------
+\chapter{Taxonomia de Flynn}
+
+\noindent Taxonomia de Flynn, proposta em 1966 \cite{flynn1966} por Michael 
+Flynn e melhorada em 1972 \cite{flynn1972}, é uma das formas de classificar o 
+parale lismo disponível no processador.  
+
+%A nível de instrução, paralelismo significa que várias operações podem ser 
+%executadas concorrentemente em um programa.  
+
+Taxonomia de Flynn utiliza o conceito de sequência de objetos ou ações, que são
+chamados de \textit{Stream}. Há dois tipos de \textit{Stream}, de instrução e 
+de dados. Existe no entanto 4 combinação de \textit{Streams} que descrevem as 
+arqu iteturas de computadores mais comuns \cite{Flynn1996}:
+
+\begin{itemize}
+        \item \textbf{SISD:} \textit{Single Instruction, Single Data}
+        \item \textbf{SIMD:} \textit{Single Instruction, Multiple Data}
+        \item \textbf{MISD:} \textit{Multiple Instruction, Single Data}
+        \item \textbf{MIMD:} \textit{Multiple Instruction, Multiple Data}
+\end{itemize}
+
+\subsection{SISD: Single Instruction, Single Data}
+
+\noindent A classe de arquiteturas de processadores \textit{SISD} incluem a 
+maior parte dos processadores utilizados nos dias de hoje, os processadores 
+\textit{single-core}, embora os programadores não percebam o paralelismo 
+inerente destes processadores, muita concorrência pode estar presente.  
+
+Em 1966 Flynn cita o \textit{Pipeline} como uma forma de se obter concorrência 
+em processadores \textit{SISD}, embora ele considere a decodificação das 
+inúmeras instruções como sendo um \textit{bottleneck} devido a tecnologia da 
+época. Nos dias de hoje, grande parte dos dos processadores utilizam-se de 
+\textit{Pipeline} assim como também se aproveitam de alguma forma de múltiplas 
+instruções.  
+
+A concorrência em processadores \textit{SISD} são explorados durante a execução,
+assim realizando mais de uma operação por ciclo de \textit{clock} da máquina 
+através do \textit{Stream} de instruções. \textit{Stream} de instruções 
+consiste em uma sequência de instruções ou também chamada de 
+\textit{instruction word (IW)}
+
+Uma instrução ou \textit{instruction word} é uma cadeia de 0's e 1's que 
+representa a menor operação visível ao programador e que será executada pelo 
+processador.
+
+
+
+\subsection{SIMD: Single Instruction, Multiple Data}
+
+
+
+\subsection{MISD: Multiple Instruction, Single Data}
+
+
+
+\subsection{MIMD: Multiple Instruction, Multiple Data}
+ 
