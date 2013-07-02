@@ -1,2 +1,8 @@
+*.aux
+*.lof
+*.log
+*.lot
+*.out
+*.toc
 *.pdf
 \[3\]_Desenvolvimento
