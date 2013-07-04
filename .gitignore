@@ -7,4 +7,4 @@
 *.pdf
 *.bbl
 *.blg
-\[3\]_Desenvolvimento
+.DS_Store
