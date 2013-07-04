@@ -17,6 +17,8 @@ run:
 	$(RM) *.lot
 	$(RM) *.log
 	$(RM) *.lof
+	$(RM) *.bbl
+	$(RM) *.blg
 	
 bib:
 	$(MAKE)
@@ -37,3 +39,5 @@ clean:
 	$(RM) *.lot
 	$(RM) *.log
 	$(RM) *.lof
+	$(RM) *.bbl
+	$(RM) *.blg
