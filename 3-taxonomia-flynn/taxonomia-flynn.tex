@@ -6,53 +6,79 @@
 Flynn e expandida em 1972 \cite{Flynn:1972}, é uma das formas de classificar o 
 paralelismo disponível no processador.  
 
-%A nível de instrução, paralelismo significa que várias operações podem ser 
-%executadas concorrentemente em um programa.  
-
 Taxonomia de Flynn utiliza o conceito de sequência de objetos ou ações, que são
-chamados de \textit{Stream}. Há dois tipos de \textit{Stream}, de instrução e 
-de dados. Existe no entanto 4 combinação de \textit{Streams} que descrevem as 
+chamados de \textit{Stream}. Flynn introduziu dois tipos de \textit{Stream}, o 
+\textit{Stream} de instrução e também o \textit{Stream} de dados. 
+
+O \textit{Stream} de instrução consiste em uma sequência de instruções. 
+Uma instrução ou \textit{instruction word (IW)} é uma cadeia de 0's e 1's que 
+representa a menor operação visível ao programador e que será executada pelo 
+processador. Uma instrução pode conter uma ou mais operações, devido a isso
+alguns autores utilizam \textit{instruction} para instruções que contenham 
+apenas uma operação e \textit{instruction word} para instruções que contenham 
+mais de uma operação.
+
+\begin{comment}
+Processadores escalares (\textit{scalar processors}) e processadores
+superescalares (\textit{superscalar processors}) executam uma ou mais
+\textit{instructions} por ciclo de \textit{clock} da máquina. 
+\end{comment}
+
+Existem no entanto quatro combinações de \textit{Streams} que descrevem as 
 arquiteturas de computadores mais comuns \cite{Flynn:1996}:
 
-\begin{itemize}
+\begin{enumerate}
         \item \textbf{SISD:} \textit{Single Instruction, Single Data}
         \item \textbf{SIMD:} \textit{Single Instruction, Multiple Data}
         \item \textbf{MISD:} \textit{Multiple Instruction, Single Data}
         \item \textbf{MIMD:} \textit{Multiple Instruction, Multiple Data}
-\end{itemize}
+\end{enumerate}
+
+Cada combinação de \textit{Stream} caracteriza uma classe de arquitetura 
+e cada classe possui seus tipos de paralelismo.
 
 \subsection{SISD: Single Instruction, Single Data}
 
-\noindent A classe de arquiteturas de processadores \textit{SISD} incluem a 
+\noindent A classe de arquiteturas de processadores \textit{SISD}, inclui a 
 maior parte dos processadores utilizados nos dias de hoje, os processadores 
 \textit{single-core}, embora os programadores não percebam o paralelismo 
 inerente destes processadores, muita concorrência pode estar presente.  
 
 Em 1966 Flynn cita o \textit{Pipeline} como uma forma de se obter concorrência 
-em processadores \textit{SISD}, embora ele considere a decodificação das 
-inúmeras instruções como sendo um \textit{bottleneck} devido a tecnologia da 
-época. Nos dias de hoje, grande parte dos dos processadores utilizam-se de 
-\textit{Pipeline} assim como também se aproveitam de alguma forma de múltiplas 
-instruções.  
+nos processadores \textit{SISD}, embora ele considere a decodificação das 
+inúmeras \textit{instructions} como sendo um \textit{bottleneck}, devido a 
+tecnologia da época. Nos dias de hoje, grande parte dos dos processadores 
+utilizam-se de \textit{Pipeline} assim como também se aproveitam de alguma forma 
+de múltiplas \textit{instructions}.
 
 A concorrência em processadores \textit{SISD} são explorados durante a execução,
 assim realizando mais de uma operação por ciclo de \textit{clock} da máquina 
-através do \textit{Stream} de instruções. \textit{Stream} de instruções 
-consiste em uma sequência de instruções ou também chamada de 
-\textit{instruction word (IW)}
+do \textit{Stream} de instruções.
 
-Uma instrução ou \textit{instruction word} é uma cadeia de 0's e 1's que 
-representa a menor operação visível ao programador e que será executada pelo 
-processador.
+A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
+é determinada por quatro fatores principais:
+
+\begin{enumerate}
+        \item O número de operações que podem ser executadas concorrentemente.
+        \item A forma como as operações serão arranjadas para execução,
+                podendo ser estaticamente, dinamicamente ou até mesmo das duas
+                formas.
+        \item A ordem em que as operações são colocadas e retiradas em relação
+                a ordem original do programa.
+        \item A maneira em o processador irá tratar cada exceção, podendo ser 
+                preciso, impreciso ou das duas maneiras.
+\end{enumerate}
 
 
+\subsubsection{Processadores Escalares}
+
+
+\subsubsection{Processadores Superescalares}
+
+\subsubsection{Processadores VLIW}
 
 \subsection{SIMD: Single Instruction, Multiple Data}
 
-
-
 \subsection{MISD: Multiple Instruction, Single Data}
-
-
 
 \subsection{MIMD: Multiple Instruction, Multiple Data}
