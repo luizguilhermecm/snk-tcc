@@ -1,1 +1,24 @@
 Trabalho de Conclusão de Curso de Ciência da Computação da Universiadade Estatudal de Londrina
+
+
+|-- Capa
+|
+|-- Introdução
+|
+|-- Taxonomia de Flynn
+|   |
+|   |-- SISD
+|   |   |
+|   |   |-- Processadores Escalares
+|   |   |
+|   |   |-- Processadores Superescalares
+|   |   |
+|   |   |-- Processadores VLIW
+|   |
+|   |-- SIMD
+|   |
+|   |-- MISD
+|   |
+|   |-- MDMD
+|   |
+|   
