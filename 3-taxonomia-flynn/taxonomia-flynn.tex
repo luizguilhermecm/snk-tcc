@@ -7,13 +7,15 @@ Flynn e expandida em 1972 \cite{Flynn:1972}, é uma das formas de classificar o
 paralelismo disponível no processador.  
 
 Taxonomia de Flynn utiliza o conceito de sequência de objetos ou ações, que são
-chamados de \textit{Stream}. Flynn introduziu dois tipos de \textit{Stream}, o 
-\textit{Stream} de instrução e também o \textit{Stream} de dados. 
+chamados de \textit{stream}.
+Flynn introduziu dois tipos de \textit{stream}, o 
+\textit{stream} de instrução e também o \textit{stream} de dados. 
 
-O \textit{Stream} de instrução consiste em uma sequência de instruções. 
+O \textit{stream} de instrução consiste em uma sequência de instruções. 
 Uma instrução ou \textit{instruction word (IW)} é uma cadeia de 0's e 1's que 
 representa a menor operação visível ao programador e que será executada pelo 
-processador. Uma instrução pode conter uma ou mais operações, devido a isso
+processador. 
+Uma instrução pode conter uma ou mais operações, devido a isso
 alguns autores utilizam \textit{instruction} para instruções que contenham 
 apenas uma operação e \textit{instruction word} para instruções que contenham 
 mais de uma operação.
@@ -24,7 +26,7 @@ superescalares (\textit{superscalar processors}) executam uma ou mais
 \textit{instructions} por ciclo de \textit{clock} da máquina. 
 \end{comment}
 
-Existem no entanto quatro combinações de \textit{Streams} que descrevem as 
+Existem no entanto quatro combinações de \textit{streams} que descrevem as 
 arquiteturas de computadores mais comuns \cite{Flynn:1996}:
 
 \begin{enumerate}
@@ -34,8 +36,11 @@ arquiteturas de computadores mais comuns \cite{Flynn:1996}:
         \item \textbf{MIMD:} \textit{Multiple Instruction, Multiple Data}
 \end{enumerate}
 
-Cada combinação de \textit{Stream} caracteriza uma classe de arquitetura 
+Cada combinação de \textit{stream} caracteriza uma classe de arquitetura 
 e cada classe possui seus tipos de paralelismo.
+
+
+%-------------------------------------------------------------------------------
 
 \subsection{SISD: Single Instruction, Single Data}
 
@@ -47,13 +52,14 @@ inerente destes processadores, muita concorrência pode estar presente.
 Em 1966 Flynn cita o \textit{Pipeline} como uma forma de se obter concorrência 
 nos processadores \textit{SISD}, embora ele considere a decodificação das 
 inúmeras \textit{instructions} como sendo um \textit{bottleneck}, devido a 
-tecnologia da época. Nos dias de hoje, grande parte dos dos processadores 
+tecnologia da época. 
+Nos dias de hoje, grande parte dos dos processadores 
 utilizam-se de \textit{Pipeline} assim como também se aproveitam de alguma forma 
 de múltiplas \textit{instructions}.
 
 A concorrência em processadores \textit{SISD} são explorados durante a execução,
-assim realizando mais de uma operação por ciclo de \textit{clock} da máquina 
-do \textit{Stream} de instruções.
+realizando mais de uma operação por ciclo de \textit{clock} da máquina.
+%do \textit{stream} de instruções.
 
 A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
 é determinada por quatro fatores principais:
@@ -69,16 +75,116 @@ A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
                 preciso, impreciso ou das duas maneiras.
 \end{enumerate}
 
+%-------------------------------------------------------------------------------
 
 \subsubsection{Processadores Escalares}
 
+\noindent Processadores escalares são processadores simples, que executam no 
+máximo uma instrução e no máximo uma operação por ciclo de \textit{clock} de 
+máquina. 
+As instruções do \textit{stream} de instruções são executadas 
+sequencialmente, assim uma nova instrução não será executada até que a execução 
+da instrução em execução seja finalizada e seu resultado devidamente
+armazenado.
+A semântica de instrução determina que uma sequência de ações devem ocorrer
+para que se objenha o resultado esperado, sendo: buscar a instrução,
+decodifica-la, acessar o dado ou registrador, execução da operação e armazenar o
+resultado. 
+Podendo ocorrer \textit{overlap} entre as ações mas o resultado deve
+aparecer na ordem especificada.
+Esse comportamento sequencial descreve o modelo de execução sequencial.
+No modelo de execução sequencial, a execução é dita \textit{instruction-precise}
+se encontrar as sequintes condições:
+
+\begin{itemize}
+        \item Todas as instruções ou operações que precederam a instrução atual
+                ou operação atual já foram executadas e seus resultados
+                armazenados.
+        \item Todas as instruções ou operações na fila de execução não foram
+                executadas ou seus resultados ainda não foram armazenados.
+        \item A instrução ou operação em execução no momento está em um dos
+                estados de execução, tendo ou não seu resultado já armazenado.
+\end{itemize}
+
+A maioria dos processadores escalares implementam diretamente o modelo de
+execução sequencial.
+
+
+%-------------------------------------------------------------------------------
 
 \subsubsection{Processadores Superescalares}
 
+Enquando processadores escalares estão limitados a executar uma única instrução 
+por ciclo de \textit{clock} de máquina os processadores superescalares decoficam
+várias instruções por ciclo de \textit{clock} de máquina, utilizando varios
+unidades funcionais e alocação dinâmica para executar várias instruções por
+ciclo de \textit{clock} de máquina. 
+Processadores superescalares tem um comportamente similar ao \textit{pipeline}.
+
+A capacidade de executar múltiplas instruções implica em verificar se existe
+dependências entre as instruções, essa verificação tem que ser feita em nível de
+\textit{hardware}. 
+Processadores superescalares mais avançados geralmente incluem 
+\textit{hardwares} que preservam a ordem e precisamente lida com as exceções, 
+assim simplificando o modelo de programação.
+
+Devido a complexidade da lógica para alocação dinâmica das instruções,
+processadores superescalares de alto desempenho em geral estão limitados a
+executarem de quatro a oito instruções por ciclo de \textit{clock} de máquina.
+
+
+%-------------------------------------------------------------------------------
+
 \subsubsection{Processadores VLIW}
+
+Processadores VLIW (\textit{Very Long Instruction Word}) assim como os
+processadores superescalares decodificam inúmeras instruções por ciclo de
+\textit{clock} de máquina e utilizam várias unidades funcionais.
+
+Ao contrário dos processadores superescalares que utilizam \textit{hardware}
+para realizar alocação dinâmica das instruções os processadores VLIW executam as 
+intruções atravéz de alocação estática, essa alocação depende de uma análise do
+compilador.
+Assim os processadores VLIW são menos complexos e apresentam desempenho 
+potencialmente maior.
+
+Para aplicações que podem ser efetivamente alocada de forma estática os
+processadores VLIW apresentam grande desempenho, embora nem todas as aplicações
+tenham esta caracterista assim a ordem de execução estática determinada pelo
+compilador não seja procedente. 
+Duas classes de execução podem ocorrer e afetar o comportamento da execução 
+estática:
+
+\begin{enumerate}
+        \item Atrasos de resultados de operações devido a diferença da latência
+                ocorrida com a latência considerada durante a alocação pelo
+                compilador.
+        \item Exceções ou interrupções que colocam a ordem de execução em um
+                estado não antecipado pelo compilador.
+\end{enumerate}
+
+O processador consegue lidar com os atrasos, embora isso tenha um impacto 
+significante no desempenho. 
+A causa mais comum de atrasos na execução devem ao dado não estar mais na 
+memória cache, esse fator é tratado considerando-se o pior caso de latência 
+possível e até evitando o uso da memória cache. 
+Na falta de paralelismo para cobrir as lacunas da latênica, resulta na 
+alocação de instruções com um número menor de operações que o processador 
+conseque executar, assim diminuindo o desempenho.
+
+
+%-------------------------------------------------------------------------------
 
 \subsection{SIMD: Single Instruction, Multiple Data}
 
+
+
+%-------------------------------------------------------------------------------
+
 \subsection{MISD: Multiple Instruction, Single Data}
+
+
+
+%-------------------------------------------------------------------------------
 
 \subsection{MIMD: Multiple Instruction, Multiple Data}
