@@ -41,7 +41,6 @@ e cada classe possui seus tipos de paralelismo.
 
 
 %-------------------------------------------------------------------------------
-
 \subsection{SISD: Single Instruction, Single Data}
 
 \noindent A classe de arquiteturas de processadores \textit{SISD}, inclui a 
@@ -76,7 +75,6 @@ A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
-
 \subsubsection{Processadores Escalares}
 
 \noindent Processadores escalares são processadores simples, que executam no 
@@ -111,7 +109,6 @@ execução sequencial.
 
 
 %-------------------------------------------------------------------------------
-
 \subsubsection{Processadores Superescalares}
 
 Enquando processadores escalares estão limitados a executar uma única instrução 
@@ -134,7 +131,6 @@ executarem de quatro a oito instruções por ciclo de \textit{clock} de máquina.
 
 
 %-------------------------------------------------------------------------------
-
 \subsubsection{Processadores VLIW}
 
 Processadores VLIW (\textit{Very Long Instruction Word}) assim como os
@@ -174,17 +170,36 @@ conseque executar, assim diminuindo o desempenho.
 
 
 %-------------------------------------------------------------------------------
-
 \subsection{SIMD: Single Instruction, Multiple Data}
 
+\noindent A classe de processadores \textit{SIMD} incluem dois tipos de
+processadores, vetoriais e matriciais.
+Processadores \textit{SIMD} são projetados para utilizarem determinadas
+estruturas de dados, como vetores e matrizes. 
+Em nível de código de máquina, programar para processadores \textit{SIMD} é 
+bastante similar a processadores \textit{SISD}, a diferença é realizar operações
+nas estruturas de dados agregadas. Como no processamendo de algoritmos 
+científicos há um grande uso de vetores e matrizes, processadores \textit{SIMD}
+tem obtido grande desempenho na área.
+
+Processadores vetoriais e matriciais apresentam diferenças tando na 
+implementação quando na organização dos dados.
+
+Processadores matriciais consistem em elementos de processos interconectados
+cada um tendo seu próprio espaço de memória. Processadores vetoriais consistem
+em um único processo que referencia a um espaço de memória global.
+
+%-------------------------------------------------------------------------------
+\subsubsection{Processadores Matriciais}
 
 
 %-------------------------------------------------------------------------------
+\subsubsection{Processadores Vetoriais}
 
+
+%-------------------------------------------------------------------------------
 \subsection{MISD: Multiple Instruction, Single Data}
 
 
-
 %-------------------------------------------------------------------------------
-
 \subsection{MIMD: Multiple Instruction, Multiple Data}
