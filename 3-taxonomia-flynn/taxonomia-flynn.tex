@@ -200,6 +200,39 @@ em um único processo que referencia a um espaço de memória global.
 %-------------------------------------------------------------------------------
 \subsection{MISD: Multiple Instruction, Single Data}
 
+\noindent A classe de processadores \textit{MISD} abstratamente é um
+\textit{pipeline} de múltiplas unidades funcionais operando independentemente
+sob um único \textit{stream} de dados. Em nível de micro-arquitetura é
+exatamente o que os processadores vetoriais fazem.
+
+Segundo \cite{Openshaw:1999} exceto no caso de um cientista da computação
+interssado em estranhas formas de computação a classe \textit{MISD} é uma forma
+restritiva e impraticável de paralelismo.
 
 %-------------------------------------------------------------------------------
 \subsection{MIMD: Multiple Instruction, Multiple Data}
+
+\noindent Na classe de processadores \textit{MIMD} estão os multiprocessadores
+com alguma forma de interconexão entre os processadores. Do ponto de vista do
+programador, cada processo é executado independentemente e de forma cooperativa
+para solucionar um mesmo problema, embora alguma forma de sincronização entre os
+processos é necessária para que as informações e dados sejam trocados entre os
+processadores.
+
+Não existe limitações em que todos os processadores sejam idênticos, embora a
+maioria das configurações \textit{MIMD} são homogênios, com processadores
+idênticos. Configurações heterogênias de processadores são geralmente utilizados
+para aplicações com propósitos espécificos.
+
+Da perspectiva de \textit{hardware} exitem dois tipos de \textit{MIMD}, sendo os
+processadores \textit{multi-cores} e processadores \textit{multi-threaded}.
+
+
+%-------------------------------------------------------------------------------
+\subsubsection{Processadores Multi-Threaded}
+
+
+%-------------------------------------------------------------------------------
+\subsubsection{Processadores Multi-Core}
+
+
