@@ -231,8 +231,31 @@ processadores \textit{multi-cores} e processadores \textit{multi-threaded}.
 %-------------------------------------------------------------------------------
 \subsubsection{Processadores Multi-Threaded}
 
+\noindent Em \textit{multi-threaded} \textit{MIMD}, um processador base é
+extendido para incluir múltiplos conjuntos de registradores para dados e para o
+programa.
+Com essa configuração, diferentes \textit{threads} ou programas ocupam cada
+conjunto de registrador. Assim que recursos se tornam disponíveis as
+\textit{threads} continuam sua execução.
+
+Uma vez que cada \textit{thread} é independente, também o é no uso dos recursos
+disponíveis, assim múltiplas \textit{threads}, fazem melhor uso dos recursos e
+em consequência aumenta-se o números de instruções executadas por ciclo de
+\textit{clock} de máquina.
+
+\textit{Threads} ditas críticas, podem ter prioridade na execução para garantir
+que sejam executadas em menor tempo, enquanto \textit{threads} não críticas se
+utilizam de recursos ociosos.
+
 
 %-------------------------------------------------------------------------------
 \subsubsection{Processadores Multi-Core}
 
+\noindent Os processadores \textit{multi-core} e também os múltiplos
+\textit{multi-core}, necessitam comunicar os resultados de suas execuções
+atravéz a uma rede de intercomunicação e do controle de tarefas.
+Assim sua implementação é significativamente mais complexa que processadores
+\textit{multi-threaded}.
 
+A rede de intercomunicação troca dados entre os processadores e realiza a
+sincronização das execuções independentes.
