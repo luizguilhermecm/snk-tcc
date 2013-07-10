@@ -257,5 +257,11 @@ atravéz a uma rede de intercomunicação e do controle de tarefas.
 Assim sua implementação é significativamente mais complexa que processadores
 \textit{multi-threaded}.
 
-A rede de intercomunicação troca dados entre os processadores e realiza a
+A rede de intercomunicação de troca dados entre os processadores e realiza a
 sincronização das execuções independentes.
+
+Quando a comunicação realizada entre os processadores atravéz de memória
+compartilhada surgem dois principais problemas, manter a consistência da memória
+e também a coerência de cache.
+A solução para ambos os problemas se dão em técnicas de \textit{software} e
+\textit{hardware}.
