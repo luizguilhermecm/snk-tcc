@@ -2,23 +2,23 @@ Trabalho de Conclusão de Curso de Ciência da Computação da Universiadade Est
 
 
 |-- Capa
-|
-|-- Ficha Catalográfica
-|
-|-- Contracapa
-|
-|-- Folha de Rosto
-|
-|-- Dedicatória
-|
-|-- Agradecimentos
-|
-|-- Epígrafe
-|
-|-- Resumo
-|
-|-- Lista de Siglas
-|
+|   |
+|   |-- Ficha Catalográfica
+|   |
+|   |-- Contracapa
+|   |
+|   |-- Folha de Rosto
+|   |
+|   |-- Dedicatória
+|   |
+|   |-- Agradecimentos
+|   |
+|   |-- Epígrafe
+|   |
+|   |-- Resumo
+|   |
+|   |-- Lista de Siglas
+|   
 |
 |-- Introdução
 |
@@ -32,12 +32,13 @@ Trabalho de Conclusão de Curso de Ciência da Computação da Universiadade Est
 |   |   |
 |   |   |-- Processadores VLIW
 |   |
+|   |
 |   |-- SIMD
 |   |   |
 |   |   |-- Processadores Matriciais
 |   |   |
 |   |   |-- Processadores Vetoriais
-|   |   |
+|   |   
 |   |
 |   |-- MISD
 |   |
@@ -46,6 +47,6 @@ Trabalho de Conclusão de Curso de Ciência da Computação da Universiadade Est
 |   |   |-- Processadores Multi-Threaded
 |   |   |
 |   |   |-- Processadores Multi-Core
-|   |   |
-|   |   
+|      
+|      
 |   
