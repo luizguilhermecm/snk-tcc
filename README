@@ -16,9 +16,19 @@ Trabalho de Conclusão de Curso de Ciência da Computação da Universiadade Est
 |   |   |-- Processadores VLIW
 |   |
 |   |-- SIMD
+|   |   |
+|   |   |-- Processadores Matriciais
+|   |   |
+|   |   |-- Processadores Vetoriais
+|   |   |
 |   |
 |   |-- MISD
 |   |
 |   |-- MDMD
-|   |
+|   |   |
+|   |   |-- Processadores Multi-Threaded
+|   |   |
+|   |   |-- Processadores Multi-Core
+|   |   |
+|   |   
 |   
