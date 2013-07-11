@@ -1,2 +1,15 @@
 % vim: set ai tw=80 fileencoding=latin1: 
 %-------------------------------------------------------------------------------
+
+\chapter{Capítulo}
+
+\noindent Texto...
+
+Texto...
+
+%-------------------------------------------------------------------------------
+\subsection{Subcapítulo}
+
+\noindent Texto...
+
+Texto...
