@@ -7,4 +7,5 @@
 *.pdf
 *.bbl
 *.blg
+*.idx
 .DS_Store
