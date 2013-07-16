@@ -19,6 +19,7 @@ run:
 	$(RM) *.lof
 	$(RM) *.bbl
 	$(RM) *.blg
+	$(RM) *.idx
 	
 bib:
 	$(MAKE)
@@ -41,3 +42,4 @@ clean:
 	$(RM) *.lof
 	$(RM) *.bbl
 	$(RM) *.blg
+	$(RM) *.idx

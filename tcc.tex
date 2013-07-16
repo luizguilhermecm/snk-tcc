@@ -1,114 +1,130 @@
-% vim: set ai tw=80 fileencoding=latin1: 
+% vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
-
-%\documentclass{abnt}
-
-%\usepackage[latin1]{inputenc}
-%\usepackage[brazil]{babel}
-%\usepackage{amsthm,amsfonts}
-
-%\usepackage{graphicx}
-%\usepackage{color}
-%\usepackage{multirow}
-%\usepackage{empheq,amsmath}
-
-\documentclass[12pt,a4paper,ruledheader]{abnt}
-\usepackage[center]{caption}
-\usepackage[brazil]{babel}
-\usepackage[latin1]{inputenc}
-\usepackage{indentfirst}
-\usepackage{verbatim}
-
-\newcommand{\nome}{LUIZ GUILHERME CASTILHO MARTINS}
-
-\newcommand{\titulotcc}{DESENVOLVIMENTO DE T�CNICAS DE PARALELIZA��O DE C�DIGO}
-\newcommand{\titulotccen}{DESIGNING TECHNIQUES FOR CODE PARALELLIZATION}
-
-\usepackage[pdftex]{graphicx}
-\usepackage{latexsym}
-\usepackage{ae}
-\usepackage{hyperref}
-%\usepackage[alf]{abntcite}
-\usepackage{lscape}
-\renewcommand{\rmdefault}{aess}
-\renewcommand{\sfdefault}{aess}
-
-\usepackage{amsmath}
-\usepackage{xtab}
-\usepackage{multirow}
-\numberwithin{figure}{chapter}
-\numberwithin{table}{chapter}
-
- %comando para que a lista de figura saia com numero dos capitulos
-\numberwithin{figure}{chapter}
-%  \numberwithin{algorithm}{chapter}
-
-% %altera a fonte do documento
-%  \renewcommand{\rmdefault}{aess}
-%  \renewcommand{\sfdefault}{aess}
-%  \renewcommand{\familydefault}{\sfdefault}
+\documentclass[
+  % -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	twoside,			% para impressão em verso e anverso. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe dc-uel --
+	tcc,			% tipo do trabalho (opções: tcc, dissertacao, qualificacaoms)
+	]{dc-uel}
 
 
-% altera o tamanho da fonte dos capitulos
-%\renewcommand{\ABNTchaptersize}{\huge}
+% ---
+% PACOTES
+% ---
 
-% altera o tamanho da fonte dos capitulos
-\renewcommand{\ABNTchaptersize}{\LARGE}
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{graphicx}			% Inclusão de gráficos
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
 
-% altera  o tipo da fonte dos capitulos
-\renewcommand{\ABNTchapterfont}{\bfseries}
+% ---
+% Informações de dados para CAPA, FOLHA DE ROSTO e outros elementos
+% ---
+\titulo{Desenvolvimento de Técnicas de Paralelização de Código}
+\tituloingles{Designing Techiniques for Code Paralellization}
+\palavraschave{palavra chave1. palavra chave2.}
+\palavraschaveingles{word 1. key word2.}
+\autor{Luiz Guilherme Castilho Martins}
+\citacaoautor{MARTINS, L. G. C.}
+\data{2013}
 
-% altera o tamanho da fonte da secao
-\renewcommand{\ABNTsectionfont}{\bf \large}
+\diadefesa{24 de novembro}
+\orientador{Prof. Dr. Wesley Attrot} % É membro nato e presidente da Banca Examinadora
+\membrobancadois{Prof. Dr. Segundo Membro da Banca}
+\instmembrobancadois{Universidade/Instituição do Segundo Membro da Banca}
+\membrobancatres{Prof. Msc. Terceiro Membro da Banca}
+\instmembrobancatres{Universidade/Instituição do Terceiro Membro da Banca}
+% \membrobancaquatro{Prof. Esp. Quarto Membro da Banca}
+% \instmembrobancaquatro{Universidade/Instituição do Quarto Membro da Banca}
 
- 
-%Comandos definidos pelo usuario
-\newcommand{\tamanhogrande}{\fontsize{16pt}{20pt}\selectfont}
-\newcommand{\tamanhomedio}{\fontsize{14pt}{18pt}\selectfont}
-\newcommand{\tamanhonormal}{\fontsize{12pt}{16pt}\selectfont}
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
 
-\setlength{\parindent}{3cm}
-\setlength{\listparindent}{3cm}
-
+% ----
+% Início do documento
+% ----
 \begin{document}
 
-%  \input{1-capa/0-capa}
-%  \input{1-capa/1-ficha-catalografica}
-%  \input{1-capa/2-contracapa}
-%  \input{1-capa/3-folha-de-rosto}
-%  \input{1-capa/4-dedicatoria}
-%  \input{1-capa/5-agradecimentos}
-%  \input{1-capa/6-epigrafe}
-%  \input{1-capa/7-resumo}
-%  \input{1-capa/8-abstract}
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
 
-	\sumario
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
 
-	\onehalfspacing
 
-% \listoffigures
-%	\listoftables	
+  \input{1-capa/0-capa}
+  \input{1-capa/1-folha-de-rosto}
+  \input{1-capa/2-errata}
+  \input{1-capa/3-folha-aprovacao}
+  \input{1-capa/4-dedicatoria}
+  \input{1-capa/5-agradecimentos}
+  \input{1-capa/6-epigrafe}
+  \input{1-capa/7-resumo}
+  \input{1-capa/8-abstract}
 
-	\input{1-capa/9-lista-siglas}
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+\input{1-listas/lista-siglas}
+
+%\input{1-listas/lista-simbolos}
+
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+\textual
+
+\input{2-introducao/introducao}
+
+\input{3-taxonomia-flynn/taxonomia-flynn}
 	
-%	\input{2-introducao/introducao}
+\input{4-memoria/memoria}
+	
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
 
-% \input{3-taxonomia-flynn/taxonomia-flynn}
-	
-  \input{4-memoria/memoria}
-	
-  %\bibliographystyle{abnt-alf}
-	\bibliographystyle{plain}
-%	\bibliography{3-taxonomia-flynn/taxonomia-flynn} 
 
-	%Gloss�rio (se necess�rio)
-	%\include{./glossario}
-	%\input{[5]_Referencia/Bibliografia}
-	%\bibliographystyle{abnt-alf}
-	%\bibliography{[5]_Referencia/Bibli} 
-	
-	%Ap�ndices (se necess�rio)
-	%\include{[6]_Apendice/Apendice_A}
-	%\include{[7]_Anexos/Anexo_A}
-	
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{3-taxonomia-flynn/taxonomia-flynn} 
+
 \end{document}

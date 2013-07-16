@@ -1,41 +1,41 @@
-% vim: set ai tw=80 fileencoding=latin1: 
+% vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
-\chapter{MemÛria}
+\chapter{Mem√≥ria}
 
-\noindent A mais simples maneira de se melhorar o desempenho de um sistema È
+A mais simples maneira de se melhorar o desempenho de um sistema √©
 replicar os computadores e criar uma forma destes trocarem dados.
-Desta forma consegue-se aumentar o desempenho sem que seja necess·rio alterar a
+Desta forma consegue-se aumentar o desempenho sem que seja necess√°rio alterar a
 \textit{CPU}.
 
-Com o aumento contÌnuo da necessidade de desempenho em aplicaÁıes cada vez mais
+Com o aumento cont√≠nuo da necessidade de desempenho em aplica√ß√µes cada vez mais
 custosas a maioria dos sistemas paralelos utilizam-se de uma entre duas
-tÈcnologias, memÛria distribuÌda ou memÛria compartilhada.
+t√©cnologias, mem√≥ria distribu√≠da ou mem√≥ria compartilhada.
 
 
 %-------------------------------------------------------------------------------
-\subsection{MemÛria DistribuÌda}
-\noindent
-MemÛria distribuÌda ou \textit{distributed memory} ou \textit{shared-nothing} È
-a mais simples abordagem do ponto de vista do \textit{hardware}. A premissa
-desta abordagem È utilizar v·rios computadores interligados atravÈz de uma rede.
+\section{Mem√≥ria Distribu√≠da}
 
-O modelo padr„o de programaÁ„o consiste de processos separados para cada
-computador que se comunicam atravÈz da troca de mensagem ou 
-\textit{message passing}, o que normalmente È feito atravÈz de bibliotecas
-desenvolvidas com esse propÛsito. Sendo este È o modelo mais cl·ssico de 
-computaÁ„o paralela. A forma moderna de sistemas com memÛria distribuÌda iniciou
+Mem√≥ria distribu√≠da ou \textit{distributed memory} ou \textit{shared-nothing} √©
+a mais simples abordagem do ponto de vista do \textit{hardware}. A premissa
+desta abordagem √© utilizar v√°rios computadores interligados atrav√©z de uma rede.
+
+O modelo padr√£o de programa√ß√£o consiste de processos separados para cada
+computador que se comunicam atrav√©z da troca de mensagem ou 
+\textit{message passing}, o que normalmente √© feito atrav√©z de bibliotecas
+desenvolvidas com esse prop√≥sito. Sendo este √© o modelo mais cl√°ssico de 
+computa√ß√£o paralela. A forma moderna de sistemas com mem√≥ria distribu√≠da iniciou
 apartir do trabalho de Seitz em 1985 \cite{Seitz:1985}.
 
-Devido ao baixo custo de processadores voltados ao mercado consumidor e da f·cil
-montagem, alguns grupos exploraram tais fatores comeÁaram a construir
-\textit{cluster} de computadores pessoais. Tais \textit{clusters} j· chamados de
+Devido ao baixo custo de processadores voltados ao mercado consumidor e da f√°cil
+montagem, alguns grupos exploraram tais fatores come√ßaram a construir
+\textit{cluster} de computadores pessoais. Tais \textit{clusters} j√° chamados de
 \textit{NOWs}, \textit{Network of Workstations}.
-Combinando todos estes fatores com o r·pido avanÁo de desempenho de computadores
-pessoais e o avanÁo do \textit{open-source} junto com  versıes de sistemas 
+Combinando todos estes fatores com o r√°pido avan√ßo de desempenho de computadores
+pessoais e o avan√ßo do \textit{open-source} junto com  vers√µes de sistemas 
 operacionais UNIX ajudaram a difundir sistemas com tais caracteristicas. Hoje
-estes sistemas s„o comumente conhecidos como \textit{Beowulfs} ou
+estes sistemas s√£o comumente conhecidos como \textit{Beowulfs} ou
 \textit{Beowulf Cluster} devido ao projeto de Thomas Sterling e Donald Becker
 realizado na NASA.
 
 %-------------------------------------------------------------------------------
-\subsection{MemÛria Compartilhada}
+\section{Mem√≥ria Compartilhada}

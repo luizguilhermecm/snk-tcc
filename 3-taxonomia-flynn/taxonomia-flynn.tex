@@ -1,32 +1,32 @@
-% vim: set ai tw=80 fileencoding=latin1: 
+% vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
 \chapter{Taxonomia de Flynn}
 
-\noindent Taxonomia de Flynn, proposta em 1966 \cite{Flynn:1966} por Michael 
-Flynn e expandida em 1972 \cite{Flynn:1972}, é uma das formas de classificar o 
-paralelismo disponível no processador.  
+Taxonomia de Flynn, proposta em 1966 \cite{Flynn:1966} por Michael 
+Flynn e expandida em 1972 \cite{Flynn:1972}, Ã© uma das formas de classificar o 
+paralelismo disponÃ­vel no processador.  
 
-Taxonomia de Flynn utiliza o conceito de sequência de objetos ou ações, que são
+Taxonomia de Flynn utiliza o conceito de sequÃªncia de objetos ou aÃ§Ãµes, que sÃ£o
 chamados de \textit{stream}.
 Flynn introduziu dois tipos de \textit{stream}, o 
-\textit{stream} de instrução e também o \textit{stream} de dados. 
+\textit{stream} de instruÃ§Ã£o e tambÃ©m o \textit{stream} de dados. 
 
-O \textit{stream} de instrução consiste em uma sequência de instruções. 
-Uma instrução ou \textit{instruction word (IW)} é uma cadeia de 0's e 1's que 
-representa a menor operação visível ao programador e que será executada pelo 
+O \textit{stream} de instruÃ§Ã£o consiste em uma sequÃªncia de instruÃ§Ãµes. 
+Uma instruÃ§Ã£o ou \textit{instruction word (IW)} Ã© uma cadeia de 0's e 1's que 
+representa a menor operaÃ§Ã£o visÃ­vel ao programador e que serÃ¡ executada pelo 
 processador. 
-Uma instrução pode conter uma ou mais operações, devido a isso
-alguns autores utilizam \textit{instruction} para instruções que contenham 
-apenas uma operação e \textit{instruction word} para instruções que contenham 
-mais de uma operação.
+Uma instruÃ§Ã£o pode conter uma ou mais operaÃ§Ãµes, devido a isso
+alguns autores utilizam \textit{instruction} para instruÃ§Ãµes que contenham 
+apenas uma operaÃ§Ã£o e \textit{instruction word} para instruÃ§Ãµes que contenham 
+mais de uma operaÃ§Ã£o.
 
 \begin{comment}
 Processadores escalares (\textit{scalar processors}) e processadores
 superescalares (\textit{superscalar processors}) executam uma ou mais
-\textit{instructions} por ciclo de \textit{clock} da máquina. 
+\textit{instructions} por ciclo de \textit{clock} da mÃ¡quina. 
 \end{comment}
 
-Existem no entanto quatro combinações de \textit{streams} que descrevem as 
+Existem no entanto quatro combinaÃ§Ãµes de \textit{streams} que descrevem as 
 arquiteturas de computadores mais comuns \cite{Flynn:1996}:
 
 \begin{enumerate}
@@ -36,232 +36,232 @@ arquiteturas de computadores mais comuns \cite{Flynn:1996}:
         \item \textbf{MIMD:} \textit{Multiple Instruction, Multiple Data}
 \end{enumerate}
 
-Cada combinação de \textit{stream} caracteriza uma classe de arquitetura 
+Cada combinaÃ§Ã£o de \textit{stream} caracteriza uma classe de arquitetura 
 e cada classe possui seus tipos de paralelismo.
 
 
 %-------------------------------------------------------------------------------
-\subsection{SISD: Single Instruction, Single Data}
+\section{SISD: Single Instruction, Single Data}
 
-\noindent A classe de arquiteturas de processadores \textit{SISD}, inclui a 
+A classe de arquiteturas de processadores \textit{SISD}, inclui a 
 maior parte dos processadores utilizados nos dias de hoje, os processadores 
-\textit{single-core}, embora os programadores não percebam o paralelismo 
-inerente destes processadores, muita concorrência pode estar presente.  
+\textit{single-core}, embora os programadores nÃ£o percebam o paralelismo 
+inerente destes processadores, muita concorrÃªncia pode estar presente.  
 
-Em 1966 Flynn cita o \textit{Pipeline} como uma forma de se obter concorrência 
-nos processadores \textit{SISD}, embora ele considere a decodificação das 
-inúmeras \textit{instructions} como sendo um \textit{bottleneck}, devido a 
-tecnologia da época. 
+Em 1966 Flynn cita o \textit{Pipeline} como uma forma de se obter concorrÃªncia 
+nos processadores \textit{SISD}, embora ele considere a decodificaÃ§Ã£o das 
+inÃºmeras \textit{instructions} como sendo um \textit{bottleneck}, devido a 
+tecnologia da Ã©poca. 
 Nos dias de hoje, grande parte dos dos processadores 
-utilizam-se de \textit{Pipeline} assim como também se aproveitam de alguma forma 
-de múltiplas \textit{instructions}.
+utilizam-se de \textit{Pipeline} assim como tambÃ©m se aproveitam de alguma forma 
+de mÃºltiplas \textit{instructions}.
 
-A concorrência em processadores \textit{SISD} são explorados durante a execução,
-realizando mais de uma operação por ciclo de \textit{clock} da máquina.
-%do \textit{stream} de instruções.
+A concorrÃªncia em processadores \textit{SISD} sÃ£o explorados durante a execuÃ§Ã£o,
+realizando mais de uma operaÃ§Ã£o por ciclo de \textit{clock} da mÃ¡quina.
+%do \textit{stream} de instruÃ§Ãµes.
 
-A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
-é determinada por quatro fatores principais:
+A quantidade e o tipo de paralelismo possÃ­vel em processadores \textit{SISD}
+Ã© determinada por quatro fatores principais:
 
 \begin{enumerate}
-        \item O número de operações que podem ser executadas concorrentemente.
-        \item A forma como as operações serão arranjadas para execução,
-                podendo ser estaticamente, dinamicamente ou até mesmo das duas
+        \item O nÃºmero de operaÃ§Ãµes que podem ser executadas concorrentemente.
+        \item A forma como as operaÃ§Ãµes serÃ£o arranjadas para execuÃ§Ã£o,
+                podendo ser estaticamente, dinamicamente ou atÃ© mesmo das duas
                 formas.
-        \item A ordem em que as operações são colocadas e retiradas em relação
+        \item A ordem em que as operaÃ§Ãµes sÃ£o colocadas e retiradas em relaÃ§Ã£o
                 a ordem original do programa.
-        \item A maneira em o processador irá tratar cada exceção, podendo ser 
+        \item A maneira em o processador irÃ¡ tratar cada exceÃ§Ã£o, podendo ser 
                 preciso, impreciso ou das duas maneiras.
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
-\subsubsection{Processadores Escalares}
+\subsection{Processadores Escalares}
 
-\noindent Processadores escalares são processadores simples, que executam no 
-máximo uma instrução e no máximo uma operação por ciclo de \textit{clock} de 
-máquina. 
-As instruções do \textit{stream} de instruções são executadas 
-sequencialmente, assim uma nova instrução não será executada até que a execução 
-da instrução em execução seja finalizada e seu resultado devidamente
+Processadores escalares sÃ£o processadores simples, que executam no 
+mÃ¡ximo uma instruÃ§Ã£o e no mÃ¡ximo uma operaÃ§Ã£o por ciclo de \textit{clock} de 
+mÃ¡quina. 
+As instruÃ§Ãµes do \textit{stream} de instruÃ§Ãµes sÃ£o executadas 
+sequencialmente, assim uma nova instruÃ§Ã£o nÃ£o serÃ¡ executada atÃ© que a execuÃ§Ã£o 
+da instruÃ§Ã£o em execuÃ§Ã£o seja finalizada e seu resultado devidamente
 armazenado.
-A semântica de instrução determina que uma sequência de ações devem ocorrer
-para que se objenha o resultado esperado, sendo: buscar a instrução,
-decodifica-la, acessar o dado ou registrador, execução da operação e armazenar o
+A semÃ¢ntica de instruÃ§Ã£o determina que uma sequÃªncia de aÃ§Ãµes devem ocorrer
+para que se objenha o resultado esperado, sendo: buscar a instruÃ§Ã£o,
+decodifica-la, acessar o dado ou registrador, execuÃ§Ã£o da operaÃ§Ã£o e armazenar o
 resultado. 
-Podendo ocorrer \textit{overlap} entre as ações mas o resultado deve
+Podendo ocorrer \textit{overlap} entre as aÃ§Ãµes mas o resultado deve
 aparecer na ordem especificada.
-Esse comportamento sequencial descreve o modelo de execução sequencial.
-No modelo de execução sequencial, a execução é dita \textit{instruction-precise}
-se encontrar as sequintes condições:
+Esse comportamento sequencial descreve o modelo de execuÃ§Ã£o sequencial.
+No modelo de execuÃ§Ã£o sequencial, a execuÃ§Ã£o Ã© dita \textit{instruction-precise}
+se encontrar as sequintes condiÃ§Ãµes:
 
 \begin{itemize}
-        \item Todas as instruções ou operações que precederam a instrução atual
-                ou operação atual já foram executadas e seus resultados
+        \item Todas as instruÃ§Ãµes ou operaÃ§Ãµes que precederam a instruÃ§Ã£o atual
+                ou operaÃ§Ã£o atual jÃ¡ foram executadas e seus resultados
                 armazenados.
-        \item Todas as instruções ou operações na fila de execução não foram
-                executadas ou seus resultados ainda não foram armazenados.
-        \item A instrução ou operação em execução no momento está em um dos
-                estados de execução, tendo ou não seu resultado já armazenado.
+        \item Todas as instruÃ§Ãµes ou operaÃ§Ãµes na fila de execuÃ§Ã£o nÃ£o foram
+                executadas ou seus resultados ainda nÃ£o foram armazenados.
+        \item A instruÃ§Ã£o ou operaÃ§Ã£o em execuÃ§Ã£o no momento estÃ¡ em um dos
+                estados de execuÃ§Ã£o, tendo ou nÃ£o seu resultado jÃ¡ armazenado.
 \end{itemize}
 
 A maioria dos processadores escalares implementam diretamente o modelo de
-execução sequencial.
+execuÃ§Ã£o sequencial.
 
 
 %-------------------------------------------------------------------------------
-\subsubsection{Processadores Superescalares}
+\subsection{Processadores Superescalares}
 
-Enquando processadores escalares estão limitados a executar uma única instrução 
-por ciclo de \textit{clock} de máquina os processadores superescalares decoficam
-várias instruções por ciclo de \textit{clock} de máquina, utilizando varios
-unidades funcionais e alocação dinâmica para executar várias instruções por
-ciclo de \textit{clock} de máquina. 
+Enquando processadores escalares estÃ£o limitados a executar uma Ãºnica instruÃ§Ã£o 
+por ciclo de \textit{clock} de mÃ¡quina os processadores superescalares decoficam
+vÃ¡rias instruÃ§Ãµes por ciclo de \textit{clock} de mÃ¡quina, utilizando varios
+unidades funcionais e alocaÃ§Ã£o dinÃ¢mica para executar vÃ¡rias instruÃ§Ãµes por
+ciclo de \textit{clock} de mÃ¡quina. 
 Processadores superescalares tem um comportamente similar ao \textit{pipeline}.
 
-A capacidade de executar múltiplas instruções implica em verificar se existe
-dependências entre as instruções, essa verificação tem que ser feita em nível de
+A capacidade de executar mÃºltiplas instruÃ§Ãµes implica em verificar se existe
+dependÃªncias entre as instruÃ§Ãµes, essa verificaÃ§Ã£o tem que ser feita em nÃ­vel de
 \textit{hardware}. 
-Processadores superescalares mais avançados geralmente incluem 
-\textit{hardwares} que preservam a ordem e precisamente lida com as exceções, 
-assim simplificando o modelo de programação.
+Processadores superescalares mais avanÃ§ados geralmente incluem 
+\textit{hardwares} que preservam a ordem e precisamente lida com as exceÃ§Ãµes, 
+assim simplificando o modelo de programaÃ§Ã£o.
 
-Devido a complexidade da lógica para alocação dinâmica das instruções,
-processadores superescalares de alto desempenho em geral estão limitados a
-executarem de quatro a oito instruções por ciclo de \textit{clock} de máquina.
+Devido a complexidade da lÃ³gica para alocaÃ§Ã£o dinÃ¢mica das instruÃ§Ãµes,
+processadores superescalares de alto desempenho em geral estÃ£o limitados a
+executarem de quatro a oito instruÃ§Ãµes por ciclo de \textit{clock} de mÃ¡quina.
 
 
 %-------------------------------------------------------------------------------
-\subsubsection{Processadores VLIW}
+\subsection{Processadores VLIW}
 
 Processadores VLIW (\textit{Very Long Instruction Word}) assim como os
-processadores superescalares decodificam inúmeras instruções por ciclo de
-\textit{clock} de máquina e utilizam várias unidades funcionais.
+processadores superescalares decodificam inÃºmeras instruÃ§Ãµes por ciclo de
+\textit{clock} de mÃ¡quina e utilizam vÃ¡rias unidades funcionais.
 
-Ao contrário dos processadores superescalares que utilizam \textit{hardware}
-para realizar alocação dinâmica das instruções os processadores VLIW executam as 
-intruções atravéz de alocação estática, essa alocação depende de uma análise do
+Ao contrÃ¡rio dos processadores superescalares que utilizam \textit{hardware}
+para realizar alocaÃ§Ã£o dinÃ¢mica das instruÃ§Ãµes os processadores VLIW executam as 
+intruÃ§Ãµes atravÃ©z de alocaÃ§Ã£o estÃ¡tica, essa alocaÃ§Ã£o depende de uma anÃ¡lise do
 compilador.
-Assim os processadores VLIW são menos complexos e apresentam desempenho 
+Assim os processadores VLIW sÃ£o menos complexos e apresentam desempenho 
 potencialmente maior.
 
-Para aplicações que podem ser efetivamente alocada de forma estática os
-processadores VLIW apresentam grande desempenho, embora nem todas as aplicações
-tenham esta caracterista assim a ordem de execução estática determinada pelo
-compilador não seja procedente. 
-Duas classes de execução podem ocorrer e afetar o comportamento da execução 
-estática:
+Para aplicaÃ§Ãµes que podem ser efetivamente alocada de forma estÃ¡tica os
+processadores VLIW apresentam grande desempenho, embora nem todas as aplicaÃ§Ãµes
+tenham esta caracterista assim a ordem de execuÃ§Ã£o estÃ¡tica determinada pelo
+compilador nÃ£o seja procedente. 
+Duas classes de execuÃ§Ã£o podem ocorrer e afetar o comportamento da execuÃ§Ã£o 
+estÃ¡tica:
 
 \begin{enumerate}
-        \item Atrasos de resultados de operações devido a diferença da latência
-                ocorrida com a latência considerada durante a alocação pelo
+        \item Atrasos de resultados de operaÃ§Ãµes devido a diferenÃ§a da latÃªncia
+                ocorrida com a latÃªncia considerada durante a alocaÃ§Ã£o pelo
                 compilador.
-        \item Exceções ou interrupções que colocam a ordem de execução em um
-                estado não antecipado pelo compilador.
+        \item ExceÃ§Ãµes ou interrupÃ§Ãµes que colocam a ordem de execuÃ§Ã£o em um
+                estado nÃ£o antecipado pelo compilador.
 \end{enumerate}
 
 O processador consegue lidar com os atrasos, embora isso tenha um impacto 
 significante no desempenho. 
-A causa mais comum de atrasos na execução devem ao dado não estar mais na 
-memória cache, esse fator é tratado considerando-se o pior caso de latência 
-possível e até evitando o uso da memória cache. 
-Na falta de paralelismo para cobrir as lacunas da latênica, resulta na 
-alocação de instruções com um número menor de operações que o processador 
+A causa mais comum de atrasos na execuÃ§Ã£o devem ao dado nÃ£o estar mais na 
+memÃ³ria cache, esse fator Ã© tratado considerando-se o pior caso de latÃªncia 
+possÃ­vel e atÃ© evitando o uso da memÃ³ria cache. 
+Na falta de paralelismo para cobrir as lacunas da latÃªnica, resulta na 
+alocaÃ§Ã£o de instruÃ§Ãµes com um nÃºmero menor de operaÃ§Ãµes que o processador 
 conseque executar, assim diminuindo o desempenho.
 
 
 %-------------------------------------------------------------------------------
-\subsection{SIMD: Single Instruction, Multiple Data}
+\section{SIMD: Single Instruction, Multiple Data}
 
-\noindent A classe de processadores \textit{SIMD} incluem dois tipos de
+A classe de processadores \textit{SIMD} incluem dois tipos de
 processadores, vetoriais e matriciais.
-Processadores \textit{SIMD} são projetados para utilizarem determinadas
+Processadores \textit{SIMD} sÃ£o projetados para utilizarem determinadas
 estruturas de dados, como vetores e matrizes. 
-Em nível de código de máquina, programar para processadores \textit{SIMD} é 
-bastante similar a processadores \textit{SISD}, a diferença é realizar operações
+Em nÃ­vel de cÃ³digo de mÃ¡quina, programar para processadores \textit{SIMD} Ã© 
+bastante similar a processadores \textit{SISD}, a diferenÃ§a Ã© realizar operaÃ§Ãµes
 nas estruturas de dados agregadas. Como no processamendo de algoritmos 
-científicos há um grande uso de vetores e matrizes, processadores \textit{SIMD}
-tem obtido grande desempenho na área.
+cientÃ­ficos hÃ¡ um grande uso de vetores e matrizes, processadores \textit{SIMD}
+tem obtido grande desempenho na Ã¡rea.
 
-Processadores vetoriais e matriciais apresentam diferenças tando na 
-implementação quando na organização dos dados.
+Processadores vetoriais e matriciais apresentam diferenÃ§as tando na 
+implementaÃ§Ã£o quando na organizaÃ§Ã£o dos dados.
 
 Processadores matriciais consistem em elementos de processos interconectados
-cada um tendo seu próprio espaço de memória. Processadores vetoriais consistem
-em um único processo que referencia a um espaço de memória global.
+cada um tendo seu prÃ³prio espaÃ§o de memÃ³ria. Processadores vetoriais consistem
+em um Ãºnico processo que referencia a um espaÃ§o de memÃ³ria global.
 
 %-------------------------------------------------------------------------------
-\subsubsection{Processadores Matriciais}
-
-
-%-------------------------------------------------------------------------------
-\subsubsection{Processadores Vetoriais}
+\subsection{Processadores Matriciais}
 
 
 %-------------------------------------------------------------------------------
-\subsection{MISD: Multiple Instruction, Single Data}
+\subsection{Processadores Vetoriais}
 
-\noindent A classe de processadores \textit{MISD} abstratamente é um
-\textit{pipeline} de múltiplas unidades funcionais operando independentemente
-sob um único \textit{stream} de dados. Em nível de micro-arquitetura é
+
+%-------------------------------------------------------------------------------
+\section{MISD: Multiple Instruction, Single Data}
+
+A classe de processadores \textit{MISD} abstratamente Ã© um
+\textit{pipeline} de mÃºltiplas unidades funcionais operando independentemente
+sob um Ãºnico \textit{stream} de dados. Em nÃ­vel de micro-arquitetura Ã©
 exatamente o que os processadores vetoriais fazem.
 
-Segundo \cite{Openshaw:1999} exceto no caso de um cientista da computação
-interssado em estranhas formas de computação a classe \textit{MISD} é uma forma
-restritiva e impraticável de paralelismo.
+Segundo \cite{Openshaw:1999} exceto no caso de um cientista da computaÃ§Ã£o
+interssado em estranhas formas de computaÃ§Ã£o a classe \textit{MISD} Ã© uma forma
+restritiva e impraticÃ¡vel de paralelismo.
 
 %-------------------------------------------------------------------------------
-\subsection{MIMD: Multiple Instruction, Multiple Data}
+\section{MIMD: Multiple Instruction, Multiple Data}
 
-\noindent Na classe de processadores \textit{MIMD} estão os multiprocessadores
-com alguma forma de interconexão entre os processadores. Do ponto de vista do
-programador, cada processo é executado independentemente e de forma cooperativa
-para solucionar um mesmo problema, embora alguma forma de sincronização entre os
-processos é necessária para que as informações e dados sejam trocados entre os
+Na classe de processadores \textit{MIMD} estÃ£o os multiprocessadores
+com alguma forma de interconexÃ£o entre os processadores. Do ponto de vista do
+programador, cada processo Ã© executado independentemente e de forma cooperativa
+para solucionar um mesmo problema, embora alguma forma de sincronizaÃ§Ã£o entre os
+processos Ã© necessÃ¡ria para que as informaÃ§Ãµes e dados sejam trocados entre os
 processadores.
 
-Não existe limitações em que todos os processadores sejam idênticos, embora a
-maioria das configurações \textit{MIMD} são homogênios, com processadores
-idênticos. Configurações heterogênias de processadores são geralmente utilizados
-para aplicações com propósitos espécificos.
+NÃ£o existe limitaÃ§Ãµes em que todos os processadores sejam idÃªnticos, embora a
+maioria das configuraÃ§Ãµes \textit{MIMD} sÃ£o homogÃªnios, com processadores
+idÃªnticos. ConfiguraÃ§Ãµes heterogÃªnias de processadores sÃ£o geralmente utilizados
+para aplicaÃ§Ãµes com propÃ³sitos espÃ©cificos.
 
 Da perspectiva de \textit{hardware} exitem dois tipos de \textit{MIMD}, sendo os
 processadores \textit{multi-cores} e processadores \textit{multi-threaded}.
 
 
 %-------------------------------------------------------------------------------
-\subsubsection{Processadores Multi-Threaded}
+\subsection{Processadores Multi-Threaded}
 
-\noindent Em \textit{multi-threaded} \textit{MIMD}, um processador base é
-extendido para incluir múltiplos conjuntos de registradores para dados e para o
+Em \textit{multi-threaded} \textit{MIMD}, um processador base Ã©
+extendido para incluir mÃºltiplos conjuntos de registradores para dados e para o
 programa.
-Com essa configuração, diferentes \textit{threads} ou programas ocupam cada
-conjunto de registrador. Assim que recursos se tornam disponíveis as
-\textit{threads} continuam sua execução.
+Com essa configuraÃ§Ã£o, diferentes \textit{threads} ou programas ocupam cada
+conjunto de registrador. Assim que recursos se tornam disponÃ­veis as
+\textit{threads} continuam sua execuÃ§Ã£o.
 
-Uma vez que cada \textit{thread} é independente, também o é no uso dos recursos
-disponíveis, assim múltiplas \textit{threads}, fazem melhor uso dos recursos e
-em consequência aumenta-se o números de instruções executadas por ciclo de
-\textit{clock} de máquina.
+Uma vez que cada \textit{thread} Ã© independente, tambÃ©m o Ã© no uso dos recursos
+disponÃ­veis, assim mÃºltiplas \textit{threads}, fazem melhor uso dos recursos e
+em consequÃªncia aumenta-se o nÃºmeros de instruÃ§Ãµes executadas por ciclo de
+\textit{clock} de mÃ¡quina.
 
-\textit{Threads} ditas críticas, podem ter prioridade na execução para garantir
-que sejam executadas em menor tempo, enquanto \textit{threads} não críticas se
+\textit{Threads} ditas crÃ­ticas, podem ter prioridade na execuÃ§Ã£o para garantir
+que sejam executadas em menor tempo, enquanto \textit{threads} nÃ£o crÃ­ticas se
 utilizam de recursos ociosos.
 
 
 %-------------------------------------------------------------------------------
-\subsubsection{Processadores Multi-Core}
+\subsection{Processadores Multi-Core}
 
-\noindent Os processadores \textit{multi-core} e também os múltiplos
-\textit{multi-core}, necessitam comunicar os resultados de suas execuções
-atravéz a uma rede de intercomunicação e do controle de tarefas.
-Assim sua implementação é significativamente mais complexa que processadores
+Os processadores \textit{multi-core} e tambÃ©m os mÃºltiplos
+\textit{multi-core}, necessitam comunicar os resultados de suas execuÃ§Ãµes
+atravÃ©z a uma rede de intercomunicaÃ§Ã£o e do controle de tarefas.
+Assim sua implementaÃ§Ã£o Ã© significativamente mais complexa que processadores
 \textit{multi-threaded}.
 
-A rede de intercomunicação de troca dados entre os processadores e realiza a
-sincronização das execuções independentes.
+A rede de intercomunicaÃ§Ã£o de troca dados entre os processadores e realiza a
+sincronizaÃ§Ã£o das execuÃ§Ãµes independentes.
 
-Quando a comunicação realizada entre os processadores atravéz de memória
-compartilhada surgem dois principais problemas, manter a consistência da memória
-e também a coerência de cache.
-A solução para ambos os problemas se dão em técnicas de \textit{software} e
+Quando a comunicaÃ§Ã£o realizada entre os processadores atravÃ©z de memÃ³ria
+compartilhada surgem dois principais problemas, manter a consistÃªncia da memÃ³ria
+e tambÃ©m a coerÃªncia de cache.
+A soluÃ§Ã£o para ambos os problemas se dÃ£o em tÃ©cnicas de \textit{software} e
 \textit{hardware}.
