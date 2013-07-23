@@ -1,0 +1,36 @@
+% vim: set ai tw=80 fileencoding=utf8: 
+%-------------------------------------------------------------------------------
+
+\chapter{Data Flow Graph}
+
+\textit{Data Flow Graph} (DFG) ou grafo de fluxo de dados, é um modelo para 
+programas que expressa a possibilidade de execução concorrênte de partes do
+programa. 
+Nos DFGs os nós representam operações (funções) e predicados a serem
+aplicados a objetos de dados e as arestas representam a ligação entre o nó que
+produz o dado ao nó que irá consumir aquele dado.
+Na literatura os nós também são chamados de atores.
+Assim, aspectos de controle e de dados de um programa podem ser representados 
+em um único modelo integrado.
+
+Embora muitas versões de DFGs tem sido estudadas na literatura, elas tem algumas
+características em comum:
+
+\begin{alineas}
+        \item DFG é um grafo orientado onde uma aresta é um caminho que um dado
+        percorre do nó produtor para o nó consumidor.
+        \item Dinamicamente, o nó de um DFG aceita um ou mais dado como entrada,
+        realizando computações e devolvendo os dados do retorno para suas
+        saídas.
+        \item Uma ação de um nó é ativada com a presença dos dados de entrada.
+\end{alineas}
+
+Os estudos em DFGs tem sido focado principalmente em três modelos bem definidos:
+DFGs estáticos, DFGs dinâmicos e DFGs síncronos.
+
+%eopc
+%-------------------------------------------------------------------------------
+%\section{Subcapítulo}
+
+
+Texto...
