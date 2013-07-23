@@ -1,0 +1,42 @@
+% vim: set ai tw=80 fileencoding=utf8: 
+%-------------------------------------------------------------------------------
+
+\chapter{Depêndencia}
+
+Quando um programador escreve um programa em uma linguagem sequêncial, o
+resultado esperado será obtido pela execução da primeira linha, depois a segundo
+e assim em diante, considerando exceções de controles de fluxos como
+\textit{loops} e ramificações. 
+Uma vez que o programador especificou a ordem que ele espera que as computações 
+sejam realizadas. 
+Obter parelelismo de um programa respeitando a estas especificações não é
+possível, uma vez que obter paralelismo implica em alterar a ordem das
+operações realizadas.
+
+Paralelizar um programa sequêncial significa encontrar uma ordem de execução
+diferente da especificada e que irá sempre computar o mesmo resultado.
+A programação sequêncial introduz restrições que podem ser críticas para o
+resultado esperado do programa, assim para transformar um programa em paralelo é
+importante encontrar as restrições menos críticas e realizar transformações para
+que o programa continue retornando o resultado correto para qualquer entrada.
+
+Neste capítudo serão apresentadas uma série de restrições, chamadas de
+dependências que serão necessárias para garantir que as transformações
+realizadas nos programas não afetem o resultado e o significado das computações
+realizadas pelo programa.
+
+Uma dependência é uma relação entre duas declarações no programa. Um par de
+declarações $<S_1,S_2>$ está em uma relação se $S_2$ é executada depois de $S_1$
+em um programa sequêncial, e deve ser executada após $S_1$ em qualquer
+reodenação válida do programa se a ordem de acesso a memória será preservada.
+
+\begin{verbatim}
+S1   PI = 3.14159
+S2   R = 5 
+S3   AREA = PI * R * R
+\end{verbatim}
+
+%referencia: ocfma
+%-------------------------------------------------------------------------------
+
+
