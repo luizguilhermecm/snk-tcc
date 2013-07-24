@@ -25,16 +25,59 @@ dependências que serão necessárias para garantir que as transformações
 realizadas nos programas não afetem o resultado e o significado das computações
 realizadas pelo programa.
 
-Uma dependência é uma relação entre duas declarações no programa. Um par de
-declarações $<S_1,S_2>$ está em uma relação se $S_2$ é executada depois de $S_1$
-em um programa sequêncial, e deve ser executada após $S_1$ em qualquer
-reodenação válida do programa se a ordem de acesso a memória será preservada.
+Uma dependência é uma relação entre duas declarações no programa. 
+Um par de declarações $<S_1,S_2>$ está em uma relação se $S_2$ é executada 
+depois de $S_1$ em um programa sequêncial, e deve ser executada após $S_1$ 
+em qualquer reodenação válida do programa se a ordem de acesso a 
+memória será preservada.
 
 \begin{verbatim}
 S1   PI = 3.14159
 S2   R = 5 
 S3   AREA = PI * R * R
 \end{verbatim}
+
+Os resultados obtidos por estas declarações são definidas por aqueles obtidos
+quando a ordem da execução realizada seja $<S_1,S_2,S_3>$. 
+No entando nada neste trecho de código torna obrigatório a execução de 
+$S_2$ depois de $S_1$, desta forma, os resultados obtidos pela ordem de execução 
+$<S_2,S_1,S_3>$ serão os mesmos para a variável $AREA$ seja qual for o valor 
+da entrada.
+Por outro lado, o momento de execução de $S_3$ é mais crítica, se $S_3$ for
+executada antes de $S_1$ ou de $S_2$, os resultados obtidos por esta execução
+diferenciariam dos resultados obtidos das computações realizadas na ordem
+original.
+Em termos de dependência pode-se observar que os pares $<S_1,S_3>$ e $<S_2,S_3>$
+estão em uma relação de dependência, embora o par $<S_1,S_2>$ não.
+
+Dependência em linhas de código sequêncial como visto anteriormente, é um
+conceito simples de entender.
+O problema é que examinar somente linhas de códigos sequênciais não garante 
+eficiência em termos de paralelismo. 
+Para se obter tal eficiência deve-se considerar os trechos de
+código que são mais executados, ou seja devemos expandir o conceito de
+dependência para \textit{loops} e vetores.
+O trecho de código a seguir ilustra a complexidade introduzida ao expandirmos o
+conceito de dependência.
+
+\begin{verbatim}
+        for (int I = 1; I < N; I++){
+S1          A[I]   = B[I] + 1;
+S2          B[I+1] = A[I] - 5;
+        }
+\end{verbatim}
+
+Este \textit{loop} mostra a dependência entre $<S_1,S_2>$, uma vez que o
+resultado computado de $A$ é imediatamente utilizando por $S_2$ em todas as
+iterações, e também a dependêndia entre $<S_2,S_1>$ exceto na primeira iteração,
+uma vez que o resultado obtido por $S_2$ será utilizado na iteração anterior.
+Detectar estas dependências é difícil, considerando que cada iteração acessa 
+diferentes elementos do vetor.
+
+\textit{Loops} e vetores são apenas parte do problema que envolve a análise de
+dependência, deve-se considerar também as estruturas condicionais, como as
+declarações $IF$.
+
 
 %referencia: ocfma
 %-------------------------------------------------------------------------------
