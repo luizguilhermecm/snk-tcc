@@ -49,6 +49,7 @@ diferenciariam dos resultados obtidos das computações realizadas na ordem
 original.
 Em termos de dependência pode-se observar que os pares $<S_1,S_3>$ e $<S_2,S_3>$
 estão em uma relação de dependência, embora o par $<S_1,S_2>$ não.
+Dependências desse tipo são ditas dependência de dados.
 
 Dependência em linhas de código sequêncial como visto anteriormente, é um
 conceito simples de entender.
@@ -77,6 +78,18 @@ diferentes elementos do vetor.
 \textit{Loops} e vetores são apenas parte do problema que envolve a análise de
 dependência, deve-se considerar também as estruturas condicionais, como as
 declarações $IF$.
+
+Deve-se no entando entender um outro tipo de dependência, dado o trecho de
+código a seguir:
+
+\begin{verbatim}
+S1     if(d != 0)
+S2           a = a / d;
+\end{verbatim}
+
+A declaração $S2$ não pode ser executada antes de $S1$, uma vez que essa
+transformação pode ocasionar em uma divisão por zero, o que não ocorreria no
+programa original. Essa dependência é chamada de dependência de controle.
 
 
 %referencia: ocfma
