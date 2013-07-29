@@ -2,7 +2,73 @@
 %-------------------------------------------------------------------------------
 \section{Dependência de Dados}
 
-Dependência de dados
+Em dependência de dados deve-se garantir que um dado seja produzido e consumido
+na ordem correta, assim, cuidando para que não se intercale a leitura e
+escrita em um mesmo local, desta forma, durante a leitura pode-se obter um valor 
+errado. Da mesma forma, duas escritas devem ocorrer na ordem correta para que na
+próxima leitura seja obtido o valor correto.
+Dependência de dados pode ser definida como:
+
+\begin{verbatim}
+Definição 1: Existe dependência de dados da declaração S1 para a declaração S2
+(declaração S2 depende da declaração S1) se e somente se:
+        1 -> Ambas as declarações acessam o mesmo local de memória e ao menos
+        umas delas escreverão na memória, e
+        2 -> Existe um caminho de execução viável de S1 para S2.
+\end{verbatim}
+
+Neste capítulo serão apresentadas várias propriedades em que as dependências 
+podem ser classificadas.
+
+
+\subsection{Classificação de Leitura-Escrita}
+
+Em termos da ordem de leitura-escrita, as dependências podem ocorrer de três
+maneiras em um programa:
+
+\begin{alineas}
+        \item \textit{True dependence.} Onde uma declaração escreve em um local
+        que será lido por uma segunda declaração.
+        \begin{verbatim}
+        S1    x = ...
+        S2    ... = x
+        \end{verbatim}
+        A dependência garante que $S_2$ irá ler exatamente o que foi computado
+        por $S_1$. Esse tipo de dependência é também conhecida por dependência de
+        fluxo e é denotada por $S_1 \delta S_2$ (lê-se, $S_2$ depende de $S_1$)
+
+        \item \textit{Antidependence.} Uma primeira declaração le de um local
+        onde uma segunda declaração irá escrever.
+        \begin{verbatim}
+        S1    ... = x
+        S2    x = ...
+        \end{verbatim}
+        Esta dependência previne que a troca entre $S_1$ e $S_2$, qual poderia
+        fazer com que $S_1$ utiliza-se o valor computado por $S_2$. Em essência
+        essa dependência existe para prevenir uma transformação que introduziria
+        uma nova dependência do tipo \textit{true dependence} que de fato não
+        existe no programa original. \textit{Antidependence} é denotado $S_1
+        \delta^- S_2$ ou $S_1 \delta^{-1} S_2$.
+
+        \item \textit{Output dependence.} Ocorre quando duas declaração escrevem
+        em um mesmo local.
+        \begin{verbatim}
+        S1    x = ...
+        S2    x = ...
+        \end{verbatim}
+        Essa dependência previne que ocorra uma troca em as declarações e faça com
+        que uma declaração que irá ler o valor computado não leia o valor
+        errado.
+        \begin{verbatim}
+        S1    x = 1
+        S2    ...
+        S3    x = 2 
+        S4    y = 2 * x
+        \end{verbatim}
+        \textit{Output dependence} é denotado $S_1 \delta^0 S_2$.
+\end{alineas}
+
+
 
 
 
