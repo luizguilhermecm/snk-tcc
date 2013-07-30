@@ -94,5 +94,42 @@ fazer com que a declaração tenha dependência de duas iterações anteriores.
 S1          a[i+2] = a[i] + b[i]
 \end{verbatim}
 
+Para melhor definir dependências em \textit{loops},  pode se fazer necessário o
+uso de alguma forma de parametrização das declarações, para que atravéz desta
+representação seja possível identificar em qual iteração as declarações ocorrem.
+Para isso faz-se necessário o uso de números inteiros auxiliares que irão
+representar o número da iteração de cada \textit{loop} onde as declaração estão
+aninhadas.
+Para um \textit{loop} simples
+
+\begin{verbatim}
+        for(int i = 1; i < N; i++)
+            ...
+\end{verbatim}
+
+o número da iteração é igual ao número do \textit{loop index}, neste caso o $i$.
+O \textit{index} inicia em 1 na primeira iteração, assumindo o valor 2 na
+segunda iteração e assim por diante.
+
+Considerando um \textit{loop} parametrizado
+
+\begin{verbatim}
+        for(int i = L; i < U; i = i + S)
+            ...
+\end{verbatim}
+
+o número da iteração será 1 quando $i$ é igual a $L$, será 2 quando $i$ for
+igual a $L+S$ e assim em diante. Pode-se formalizar esse conceito de
+parametrizar da seguinte forma:
+
+\begin{verbatim}
+        Definição 2: Para um loop arbitrário em que o index I do loop é
+        incrementado de L até U em incrementos de S, o número da iteração
+        (normarlizado) i de uma iteração qualquer terá o valor de 
+        (I - L + 1)/ S, onde I é o valor do index daquela iteração.
+\end{verbatim}
+
+
+
 %referencia: ocfma
 %-------------------------------------------------------------------------------
