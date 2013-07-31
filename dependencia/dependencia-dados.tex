@@ -97,9 +97,9 @@ S1          a[i+2] = a[i] + b[i]
 Para melhor definir dependências em \textit{loops},  pode se fazer necessário o
 uso de alguma forma de parametrização das declarações, para que atravéz desta
 representação seja possível identificar em qual iteração as declarações ocorrem.
-Para isso faz-se necessário o uso de números inteiros auxiliares que irão
-representar o número da iteração de cada \textit{loop} onde as declaração estão
-aninhadas.
+Para isso faz-se necessário o uso de números inteiros auxiliares (ou um vetor de
+números interos) os quais irão representar o número da iteração de cada 
+\textit{loop} onde as declaração estão aninhadas.
 Para um \textit{loop} simples
 
 \begin{verbatim}
@@ -118,9 +118,9 @@ Considerando um \textit{loop} parametrizado
             ...
 \end{verbatim}
 
-o número da iteração será 1 quando $i$ é igual a $L$, será 2 quando $i$ for
-igual a $L+S$ e assim em diante. Pode-se formalizar esse conceito de
-parametrizar da seguinte forma:
+o número da iteração será 1 quando $i$ é for a $L$, será 2 quando $i$ for
+igual a $L+S$ e assim em diante. 
+Formalizando-se o conceito de parametrização;
 
 \begin{verbatim}
         Definição 2: Para um loop arbitrário em que o index I do loop é
@@ -128,6 +128,31 @@ parametrizar da seguinte forma:
         (normarlizado) i de uma iteração qualquer terá o valor de 
         (I - L + 1)/ S, onde I é o valor do index daquela iteração.
 \end{verbatim}
+
+No caso de \textit{loops} aninhados, o nível de aninhamento de um determinado 
+\textit{loop} será igual ao número de \textit{loops} que estão iterando sobre
+ele somado de um. Em aninhamento de \textit{loops} os mesmo serão enumerados do
+mais externo para o mais interno, começando em 1. Formalizando-se este conceito
+tem-se;
+
+\begin{verbatim}
+        Definição 3: Para um aninhamento de n loops, o vetor de iteração i de
+        uma determinada iteração no loop mais interno é um vetor de inteiros que
+        contém o número da iteração de cada loop na ordem do aninhamento. O
+        vetor de iterações é dado pela seguinte equação
+                $i = {i_1, i_2, ..., i_n}$
+        onde i_k, 1 <= k <= n, representa o número da iteração do k-ésimo loop
+        aninhado.
+\end{verbatim}
+
+
+
+
+
+
+
+
+
 
 
 
