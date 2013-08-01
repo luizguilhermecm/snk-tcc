@@ -85,14 +85,14 @@ sequencialmente, assim uma nova instrução não será executada até que a exec
 da instrução em execução seja finalizada e seu resultado devidamente
 armazenado.
 A semântica de instrução determina que uma sequência de ações devem ocorrer
-para que se objenha o resultado esperado, sendo: buscar a instrução,
+para que se obtenha o resultado esperado, sendo: buscar a instrução,
 decodifica-la, acessar o dado ou registrador, execução da operação e armazenar o
 resultado. 
 Podendo ocorrer \textit{overlap} entre as ações mas o resultado deve
 aparecer na ordem especificada.
 Esse comportamento sequencial descreve o modelo de execução sequencial.
 No modelo de execução sequencial, a execução é dita \textit{instruction-precise}
-se encontrar as sequintes condições:
+se encontrar as seguintes condições:
 
 \begin{itemize}
         \item Todas as instruções ou operações que precederam a instrução atual
@@ -111,12 +111,12 @@ execução sequencial.
 %-------------------------------------------------------------------------------
 \subsection{Processadores Superescalares}
 
-Enquando processadores escalares estão limitados a executar uma única instrução 
+Enquanto processadores escalares estão limitados a executar uma única instrução 
 por ciclo de \textit{clock} de máquina os processadores superescalares decoficam
 várias instruções por ciclo de \textit{clock} de máquina, utilizando varios
 unidades funcionais e alocação dinâmica para executar várias instruções por
 ciclo de \textit{clock} de máquina. 
-Processadores superescalares tem um comportamente similar ao \textit{pipeline}.
+Processadores superescalares tem um comportamento similar ao \textit{pipeline}.
 
 A capacidade de executar múltiplas instruções implica em verificar se existe
 dependências entre as instruções, essa verificação tem que ser feita em nível de
@@ -139,14 +139,14 @@ processadores superescalares decodificam inúmeras instruções por ciclo de
 
 Ao contrário dos processadores superescalares que utilizam \textit{hardware}
 para realizar alocação dinâmica das instruções os processadores VLIW executam as 
-intruções atravéz de alocação estática, essa alocação depende de uma análise do
+instruções através de alocação estática, essa alocação depende de uma análise do
 compilador.
 Assim os processadores VLIW são menos complexos e apresentam desempenho 
 potencialmente maior.
 
 Para aplicações que podem ser efetivamente alocada de forma estática os
 processadores VLIW apresentam grande desempenho, embora nem todas as aplicações
-tenham esta caracterista assim a ordem de execução estática determinada pelo
+tenham esta característica assim a ordem de execução estática determinada pelo
 compilador não seja procedente. 
 Duas classes de execução podem ocorrer e afetar o comportamento da execução 
 estática:
@@ -166,7 +166,7 @@ memória cache, esse fator é tratado considerando-se o pior caso de latência
 possível e até evitando o uso da memória cache. 
 Na falta de paralelismo para cobrir as lacunas da latênica, resulta na 
 alocação de instruções com um número menor de operações que o processador 
-conseque executar, assim diminuindo o desempenho.
+consegue executar, assim diminuindo o desempenho.
 
 
 %-------------------------------------------------------------------------------
@@ -178,23 +178,23 @@ Processadores \textit{SIMD} são projetados para utilizarem determinadas
 estruturas de dados, como vetores e matrizes. 
 Em nível de código de máquina, programar para processadores \textit{SIMD} é 
 bastante similar a processadores \textit{SISD}, a diferença é realizar operações
-nas estruturas de dados agregadas. Como no processamendo de algoritmos 
+nas estruturas de dados agregadas. Como no processamento de algoritmos 
 científicos há um grande uso de vetores e matrizes, processadores \textit{SIMD}
 tem obtido grande desempenho na área.
 
-Processadores vetoriais e matriciais apresentam diferenças tando na 
-implementação quando na organização dos dados.
+Processadores vetoriais e matriciais apresentam diferenças tanto na 
+implementação quanto na organização dos dados.
 
 Processadores matriciais consistem em elementos de processos interconectados
 cada um tendo seu próprio espaço de memória. Processadores vetoriais consistem
 em um único processo que referencia a um espaço de memória global.
 
 %-------------------------------------------------------------------------------
-\subsection{Processadores Matriciais}
+%\subsection{Processadores Matriciais}
 
 
 %-------------------------------------------------------------------------------
-\subsection{Processadores Vetoriais}
+%\subsection{Processadores Vetoriais}
 
 
 %-------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ sob um único \textit{stream} de dados. Em nível de micro-arquitetura é
 exatamente o que os processadores vetoriais fazem.
 
 Segundo \cite{Openshaw:1999} exceto no caso de um cientista da computação
-interssado em estranhas formas de computação a classe \textit{MISD} é uma forma
+interessado em estranhas formas de computação a classe \textit{MISD} é uma forma
 restritiva e impraticável de paralelismo.
 
 %-------------------------------------------------------------------------------
@@ -220,11 +220,11 @@ processos é necessária para que as informações e dados sejam trocados entre 
 processadores.
 
 Não existe limitações em que todos os processadores sejam idênticos, embora a
-maioria das configurações \textit{MIMD} são homogênios, com processadores
+maioria das configurações \textit{MIMD} são homogêneos, com processadores
 idênticos. Configurações heterogênias de processadores são geralmente utilizados
-para aplicações com propósitos espécificos.
+para aplicações com propósitos específicos.
 
-Da perspectiva de \textit{hardware} exitem dois tipos de \textit{MIMD}, sendo os
+Da perspectiva de \textit{hardware} existem dois tipos de \textit{MIMD}, sendo os
 processadores \textit{multi-cores} e processadores \textit{multi-threaded}.
 
 
@@ -232,7 +232,7 @@ processadores \textit{multi-cores} e processadores \textit{multi-threaded}.
 \subsection{Processadores Multi-Threaded}
 
 Em \textit{multi-threaded} \textit{MIMD}, um processador base é
-extendido para incluir múltiplos conjuntos de registradores para dados e para o
+estendido para incluir múltiplos conjuntos de registradores para dados e para o
 programa.
 Com essa configuração, diferentes \textit{threads} ou programas ocupam cada
 conjunto de registrador. Assim que recursos se tornam disponíveis as
@@ -253,14 +253,14 @@ utilizam de recursos ociosos.
 
 Os processadores \textit{multi-core} e também os múltiplos
 \textit{multi-core}, necessitam comunicar os resultados de suas execuções
-atravéz a uma rede de intercomunicação e do controle de tarefas.
+através a uma rede de intercomunicação e do controle de tarefas.
 Assim sua implementação é significativamente mais complexa que processadores
 \textit{multi-threaded}.
 
 A rede de intercomunicação de troca dados entre os processadores e realiza a
 sincronização das execuções independentes.
 
-Quando a comunicação realizada entre os processadores atravéz de memória
+Quando a comunicação realizada entre os processadores através de memória
 compartilhada surgem dois principais problemas, manter a consistência da memória
 e também a coerência de cache.
 A solução para ambos os problemas se dão em técnicas de \textit{software} e

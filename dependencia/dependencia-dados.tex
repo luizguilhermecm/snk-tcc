@@ -13,7 +13,7 @@ Assim, dependência de dados pode ser definida como:
 \begin{verbatim}
 Definição 1: Existe dependência de dados da declaração $S_1$ para a declaração 
 $S_2$ (declaração $S_2$ depende da declaração $S_1$) se e somente se:
-        1 -> Ambas as declarações acessam o mesmo local de memória e ao menos
+        1 -> Ambas as declarações acessem o mesmo local de memória e ao menos
         umas delas realizará \textit{store} na memória, e
         2 -> Existe um caminho de execução viável de $S_1$ para $S_2$.
 \end{verbatim}
@@ -95,10 +95,10 @@ S1          a[i+2] = a[i] + b[i]
 \end{verbatim}
 
 Para melhor definir dependências em \textit{loops},  pode se fazer necessário o
-uso de alguma forma de parametrização das declarações, para que atravéz desta
+uso de alguma forma de parametrização das declarações, para que através desta
 representação seja possível identificar em qual iteração as declarações ocorrem.
 Para isso faz-se necessário o uso de números inteiros auxiliares (ou um vetor de
-números interos) os quais irão representar o número da iteração de cada 
+números inteiros) os quais irão representar o número da iteração de cada 
 \textit{loop} onde as declaração estão aninhadas.
 Para um \textit{loop} simples
 
@@ -125,7 +125,7 @@ Formalizando-se o conceito de parametrização;
 \begin{verbatim}
         Definição 2: Para um loop arbitrário em que o index I do loop é
         incrementado de L até U em incrementos de S, o número da iteração
-        (normarlizado) i de uma iteração qualquer terá o valor de 
+        (normalizado) i de uma iteração qualquer terá o valor de 
         (I - L + 1)/ S, onde I é o valor do index daquela iteração.
 \end{verbatim}
 
@@ -145,7 +145,16 @@ tem-se;
         aninhado.
 \end{verbatim}
 
+Considerando-se um aninhamento de dois \textit{loops} e o vetor de iteração
+$it\_array[2]$, onde $it\_array[0]$ contém o número da iteração do \textit{loop}
+mais externo e $it\_array[1]$ do loop mais interno. 
+O conjunto de todas as possibilidades do vetor de iteração é chamado de espaço 
+de iteração (\textit{iteration space}). 
+O espaço de iteração para este aninhamento seria $\{(1,1),(1,2),(2,1),(2,2)\}$.
 
+Devido a importância da ordem de execução para tratamento de dependência,
+vetor de iteração precisam ser precisos quanto a ordem dos seus elementos
+internos em relação a ordem de aninhamento dos \textit{loops}. 
 
 
 
