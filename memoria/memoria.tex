@@ -16,7 +16,7 @@ tecnologias, memória distribuída ou memória compartilhada.
 \section{Memória Distribuída}
 
 Memória distribuída ou \textit{distributed memory} ou \textit{shared-nothing} é
-a mais simples abordagem do ponto de vista do \textit{hardware}. 
+a mais simples abordagem do ponto de vista de \textit{hardware}. 
 A premissa desta abordagem é utilizar vários computadores interligados através 
 de uma rede.
 
@@ -24,18 +24,18 @@ O modelo padrão de programação consiste de processos separados para cada
 computador que se comunicam através da troca de mensagem ou 
 \textit{message passing}, o que normalmente é feito através de bibliotecas
 desenvolvidas com esse propósito. 
-Sendo este é o modelo mais clássico de computação paralela. 
+Sendo este o modelo mais clássico de computação paralela. 
 A forma moderna de sistemas com memória distribuída iniciou a partir do trabalho 
 de Seitz em 1985 \cite{Seitz:1985}.
 
 Devido ao baixo custo de processadores voltados ao mercado consumidor e da fácil
-montagem, alguns grupos exploraram tais fatores começaram a construir
+montagem, alguns grupos exploraram tais fatores e começaram a construir
 \textit{cluster} de computadores pessoais. 
 Tais \textit{clusters} já chamados de \textit{NOWs}, 
 \textit{Network of Workstations}.
 Combinando todos estes fatores com o rápido avanço de desempenho de computadores
 pessoais e o avanço do \textit{open-source} junto com  versões de sistemas 
-operacionais UNIX ajudaram a difundir sistemas com tais caracteristicas. 
+operacionais UNIX, ajudaram a difundir sistemas com tais caracteristicas. 
 Hoje estes sistemas são comumente conhecidos como \textit{Beowulfs} ou
 \textit{Beowulf Cluster} devido ao projeto de Thomas Sterling e Donald Becker
 realizado na NASA.
@@ -47,7 +47,7 @@ Memória compartilhada ou \textit{shared memory} é uma abordagem mais complexa,
 tornando a memória visível a todos os processadores, permitindo que 
 todos possam carregar e gravar do mesmo endereço de memória. 
 
-Entre as dificuldades desta abordagem os dois que chamam mais atenção são
+Entre as dificuldades desta abordagem, os dois que chamam mais atenção são
 coerência e consistência.
 Sendo a consistência o mais problemático para o programador.
 
