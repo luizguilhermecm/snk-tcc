@@ -67,49 +67,48 @@
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
 % ----------------------------------------------------------
-% \pretextual
+ \pretextual
 
 
-%  \input{1-capa/0-capa}
-%  \input{1-capa/1-folha-de-rosto}
-%  \input{1-capa/2-errata}
-%  \input{1-capa/3-folha-aprovacao}
-%  \input{1-capa/4-dedicatoria}
-%  \input{1-capa/5-agradecimentos}
-%  \input{1-capa/6-epigrafe}
-%  \input{1-capa/7-resumo}
-%  \input{1-capa/8-abstract}
-%
-%% ---
-%% inserir lista de ilustrações
-%% ---
-%\pdfbookmark[0]{\listfigurename}{lof}
-%\listoffigures*
-%\cleardoublepage
-%% ---
-%
-%% ---
-%% inserir lista de tabelas
-%% ---
-%\pdfbookmark[0]{\listtablename}{lot}
-%\listoftables*
-%\cleardoublepage
-%% ---
-%
- \input{1-listas/lista-siglas}
-%
-%\input{1-listas/lista-simbolos}
-%
-%
+  \input{1-capa/0-capa}
+  \input{1-capa/1-folha-de-rosto}
+  \input{1-capa/2-errata}
+  \input{1-capa/3-folha-aprovacao}
+  \input{1-capa/4-dedicatoria}
+  \input{1-capa/5-agradecimentos}
+  \input{1-capa/6-epigrafe}
+  \input{1-capa/7-resumo}
+  \input{1-capa/8-abstract}
+
 % ---
-% inserir o sumario
+% inserir lista de ilustrações
 % ---
- \pdfbookmark[0]{\contentsname}{toc}
- \tableofcontents*
- \cleardoublepage
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
 % ---
-%
-%\textual
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+\input{1-listas/lista-siglas}
+
+\input{1-listas/lista-simbolos}
+
+
+ % ---
+ %inserir o sumario
+ %---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+\textual
 
 \input{2-introducao/introducao}
 

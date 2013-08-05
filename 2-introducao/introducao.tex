@@ -2,14 +2,16 @@
 %-------------------------------------------------------------------------------
 \chapter*{Introdução}
 
-			%\noindent \begin{itemize}
-			%			\item \indent Objetivos
-			%			\item Objetivos secundários
-			%			\item Fale sobre os objetivos do Brasil em se tornar independente tecnologicamente no desenvolvimento de microprocessadores.
-			%\end{itemize}
-\section{Motivação}
-    \noindent texto.
-    
-\section{Objetivos e Contribuições}
+Diante da  dificuldade de se melhorar processadores \textit{single-core} devido ao alto consumo de energia e as altas
+temperaturas, a indústria de processadores adotou como solução à esses
+problemas, o desenvolvimento de processadores \textit{multi-core},
+além disso também considerou-se o poder de processamento quando se utilizam vários processadores \textit{single-core} 
+trabalhando simultaneamente, os quais oferecem grande desempenho, maior eficiência energética e menor custo.
+Porém as aplicações desenvolvidas para a arquitetura \textit{single-core} não utilizam-se do poder computacional dos processadores \textit{multi-core}.
+Para que as aplicações possam usufruir do alto desempenho que estes processadores oferecem, as aplicações devem ser 
+divididas em múltiplas partes para que possam ser executadas em paralelo.
 
-\section{Organização do trabalho}
+A paralelização de código permite ao programador resolver problemas com maior eficiência, porém projetar e codificar um 
+programa paralelo continua sendo uma tarefa difícil, uma vez que além de dividi-lo em pequenas tarefas, deve-se considerar a 
+concorrência entre elas, as dependências de dados, entre outros fatores que dificultam o trabalho de paralelização 
+
