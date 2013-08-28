@@ -1,0 +1,19 @@
+% vim: set ai tw=80 fileencoding=utf8: 
+%-------------------------------------------------------------------------------
+
+\section{Transformações Simples}
+
+Serão apresentadas algumas transformações simples em \textit{loops} que também
+serão utilizadas em outras técnicas apresentadas neste capítulo.
+
+\subsection{Reordenação das Declarações}
+
+A reordenação pode ser realizada sobre qualquer granularidade, operação,
+declaração ou sequência de declarações.
+
+Está técnica pode ser utilizada para vários propósitos. Sendo usada amortizar a
+latência da memória, melhorar o \textit{data locality} movendo declarações ou
+\textit{loops} que utilizam as mesmas variáveis próximas uma das outras e também
+pode ser utilizada para mover \textit{loops} que estão separados para perto um
+do outro; talvéz permitindo o uso da técnica \textit{loop fusion} ou outra 
+técnica.
