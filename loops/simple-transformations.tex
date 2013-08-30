@@ -6,14 +6,67 @@
 Serão apresentadas algumas transformações simples em \textit{loops} que também
 serão utilizadas em outras técnicas apresentadas neste capítulo.
 
+%-------------------------------------------------------------------------------
 \subsection{Reordenação das Declarações}
 
 A reordenação pode ser realizada sobre qualquer granularidade, operação,
 declaração ou sequência de declarações.
 
-Está técnica pode ser utilizada para vários propósitos. Sendo usada amortizar a
-latência da memória, melhorar o \textit{data locality} movendo declarações ou
-\textit{loops} que utilizam as mesmas variáveis próximas uma das outras e também
-pode ser utilizada para mover \textit{loops} que estão separados para perto um
-do outro; talvéz permitindo o uso da técnica \textit{loop fusion} ou outra 
-técnica.
+Está técnica pode ser utilizada para vários propósitos. Sendo utilizanda para 
+amortizar a latência da memória, melhorar o \textit{data locality} movendo 
+declarações ou \textit{loops} que utilizam as mesmas variáveis próximas uma das 
+outras e também pode ser utilizada para mover \textit{loops} que estão separados 
+para perto um do outro, talvéz permitindo o uso da técnica \textit{loop fusion} 
+ou outra técnica.
+
+
+
+
+%-------------------------------------------------------------------------------
+\subsection{Unswitching}
+
+\textit{Unswitching} é uma transformação simples que retira do \textit{loop} 
+a condição independe do \textit{loop}. 
+\textit{Unswitching} trata um \textit{loop} que contenha uma condição e faz com 
+que a condição envolva o \textit{loop}. 
+A condição deve obrigatoriamente ser independente do \textit{loop}.
+A vantagem do uso do textit{unswitching} é reduzir a frequência de execução da 
+condição, uma vez que fora retirada do \textit{loop}. 
+A desvantagem desta tranformação é o aumento da complexidade da estrutura do 
+\textit{loop}, um \textit{loop} contendo apenas um \textit{loop} mais interno,
+agora terá dois ou mais \textit{loops} internos. 
+Essa desvantagem pode afetar a aplicabilidade de outras técnicas ou
+transformações.
+
+
+
+
+%-------------------------------------------------------------------------------
+\subsection{Loop Peeling}
+
+\textit{Loop peeling} remove a primeira ou a ultima iteração do \textit{loop} 
+em código separado, podendo ser generalizado e realizado mais de uma vez. 
+Essa técnica depente de saber se a variável de controle da iteração é estritamente
+positiva, caso não o seja deve-se realizar os devidos cuidados. 
+\textit{Loop peeling} também pode ser utilizado para retirar partes de código 
+que não dependem do \textit{index} do \textit{loop}, assim, executando-os apenas
+uma vez.
+
+
+%-------------------------------------------------------------------------------
+\subsection{Index Set Splitting}
+
+\textit{Index set splitting} ou \textit{loop splitting} é uma generalização de 
+\textit{loop peeling}. Essa técnica divide o \textit{index set} de um
+\textit{loop} em duas partes, replicando o corpo do \textit{loop}
+apropriadamente. 
+Assim como em \textit{loop peeling} essa técnica é útil para ajudar o percurso
+do \textit{loop}, ou para remover condições que testam a variável que controla
+as iterações do \textit{loop}.
+
+
+
+%-------------------------------------------------------------------------------
+\subsection{Scalar Expansion} 
+
+\ldots
