@@ -268,13 +268,111 @@ possível seria o algoritmo ~\ref{peeling_ex2}.
 \textit{loop peeling}. Essa técnica divide o \textit{index set} de um
 \textit{loop} em duas partes, replicando o corpo do \textit{loop}
 apropriadamente. 
-Assim como em \textit{loop peeling} essa técnica é útil para ajudar o percurso
+Assim como em \textit{loop peeling} essa técnica é útil para ajustar o percurso
 do \textit{loop}, ou para remover condições que testam a variável que controla
 as iterações do \textit{loop}.
 
+Considerando o algoritmo ~\ref{iss_ex} com um \textit{loop} com percurso indo
+até $MAX$.
+
+\begin{algorithm}
+\caption{Algoritmo com um \textit{loop} de percurso até $MAX$}
+\label{iss_ex}
+\begin{algorithmic}[1]
+
+\STATE calcula MAX
+\FOR {I = 0 to MAX - 1}
+\STATE corpo do loop
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+Aplicando \textit{index set splitting} em ~\ref{iss_ex} na iteração $W$
+resultaria no algoritmo ~\ref{iss_ex2}.
+
+\begin{algorithm}
+\caption{Algoritmo ~\ref{iss_ex} depois de \textit{index set splitting}}
+\label{iss_ex2}
+\begin{algorithmic}[1]
+
+\STATE calcula MAX
+\FOR {I = 0 to W - 1}
+\STATE corpo do loop
+\ENDFOR
+\FOR {I = S to MAX - 1}
+\STATE corpo do loop
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
 
 
 %-------------------------------------------------------------------------------
 \subsection{Scalar Expansion} 
 
-\ldots
+Uma vez que escalares são atribuídos e depois utilizados no \textit{loop}, o 
+grafo de dependência irá incluir relações de dependência de fluxo da atribuição 
+para cada uso, o \textit{loop} terá relações de \textit{anti-dependence}.
+Esta dependência pode causar problemas ao tentar aplicar outras transformações.
+As relações de dependências podem ser quebradas através de \textit{expanding} ou 
+\textit{promoting}, colocando o escalar em um vetor.
+Considerando apenas \textit{loops} contáveis e com o escalar não tendo uso
+anterior ao loop. Neste caso alocando-se um vetor com o tamanho do percurso do
+\textit{loop} e trocando a referência de cada iteração para sua respectiva
+posição no vetor irá satisfazer as relações de dependências. Com cada iteração
+do \textit{loop} utilizando uma posição do vetor a \textit{anti-dependence} e 
+\textit{output dependence} são eliminadas.
+
+O uso de \textit{scalar expansion} em \textit{loops} aninhados é possível,
+embora o tamanho do percurso do \textit{loop} possa ser proibitivo.
+
+Após o final do \textit{loop} deve ser atribuído ao escalar o seu valor correto,
+ou se constatado que o escalar não mais será utilizado após o \textit{loop},
+então basta desconsidera-lo.
+Caso o valor do escalar seja determinado condicionalmente dentro do
+\textit{loop} invibializaria o uso de \textit{scalar expansion} exceto se o
+mesmo não será mais utilizado após o \textit{loop}.
+
+Tendo o algoritmo ~\ref{se_ex} com escalar $E$.
+
+
+\begin{algorithm}
+\caption{Algoritmo contendo um escalar}
+\label{se_ex}
+\begin{algorithmic}[1]
+
+\FOR {I = 0 to N}
+\STATE E = A(I) + B(I)
+\STATE C(I) = E + 1/E
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+Aplicando \textit{scalar expansion} no algoritmo ~\ref{se_ex} e protegendo-o com
+uma condição maior que zero, irá eliminar todas as relações de dependências, o
+resultado é o algoritmo ~\ref{se_ex2}
+
+\begin{algorithm}
+\caption{Algoritmo ~\ref{se_ex} após o \textit{scalar expansion}}
+\label{se_ex2}
+\begin{algorithmic}[1]
+
+\IF {N >= 0}
+\STATE alloc Ex(1:N)
+\FOR {I = 0 to N}
+\STATE Ex(I) = A(I) + B(I)
+\STATE C(I) = Ex(I) + 1/Ex(I)
+\ENDFOR
+\STATE E = Ex(N)
+\ENDIF
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+%-------------------------------------------------------------------------------
+
