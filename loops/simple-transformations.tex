@@ -7,50 +7,258 @@ Serão apresentadas algumas transformações simples em \textit{loops} que tamb�
 serão utilizadas em outras técnicas apresentadas neste capítulo.
 
 %-------------------------------------------------------------------------------
-\subsection{Reordenação das Declarações}
+\subsection{Reordenação de Declarações}
 
 A reordenação pode ser realizada sobre qualquer granularidade, operação,
-declaração ou sequência de declarações.
+declaração ou sequência de declarações. 
+Será utilizado um grafo de controle aciclico (CFG) ou grafo de dependência.
+Um nó do grafo pode representar uma declaração ou um \textit{loop} inteiro.
+A reordenação é considerada válida desde que respeite a dependência de dados, 
+ou seja, não altere o significado do programa.
 
-Está técnica pode ser utilizada para vários propósitos. Sendo utilizanda para 
+Está técnica pode ser utilizada para vários propósitos, para 
 amortizar a latência da memória, melhorar o \textit{data locality} movendo 
 declarações ou \textit{loops} que utilizam as mesmas variáveis próximas uma das 
-outras e também pode ser utilizada para mover \textit{loops} que estão separados 
-para perto um do outro, talvéz permitindo o uso da técnica \textit{loop fusion} 
-ou outra técnica.
+outras. 
+A reordenação de declarações é útil pois através dela é possível 
+a aplicação de outras técnicas. 
+
+Utilizando o algoritmo ~\ref{reordenacao} para exemplificar a reordenação. 
+
+\begin{algorithm}
+\caption{Exemplo de algoritmo a ser reordenado}
+\label{reordenacao}
+\begin{algorithmic}[1]
+
+\STATE A(1) = 0
+\STATE B(1) = 0
+\IF {C > 0}
+\STATE A(2) = 1
+\STATE B(2) = 9
+\ENDIF
+\FOR {I = 3 to 9}
+\STATE A(I) = A(I - 2) + A(I - 1) * 2
+\STATE B(I) = B(I - 2) * 2 + B(I - 1) 
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+O grafo de dependência do algoritmo ~\ref{reordenacao} pode ser visto na figura 
+\ref{graph_statement_reordering}. 
+Neste exemplo deseja-se que as declarações $1$ e $4$ fiquem o mais próximo 
+possível do \textit{loop}. 
+Uma forma de faze-lo é reornando as declarações para a seguinte ordem $2,\; 3,\; 5,
+\;1,\; 4\; e\; 7$, como resultado tem-se o algoritmo ~\ref{reordenado}.
 
 
+
+\begin{figure}
+\centering
+\label{graph_statement_reordering}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+  thick,main node/.style={circle,draw}]
+
+  \node[main node] (1) {1};
+  \node[main node] (2) [below of=1] {2};
+  \node[main node] (3) [below of=2] {3};
+  \node[main node] (4) [below of=3] {4};
+  \node[main node] (5) [below of=4] {5};
+  \node[main node] (7) [below of=5] {7};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge [bend right] node [above] {} (4)
+        edge [bend right] node [above] {} (7)
+    (2) edge [bend left] node [above] {} (5)
+        edge [bend left] node [above] {} (7)
+    (3) edge node [above] {} (4)
+        edge [bend right] node [above] {} (5)
+    (4) edge [bend left] node [above] {} (7)
+    (5) edge node [above] {} (7);
+
+\end{tikzpicture}
+\caption{Grafo de dependência do algoritmo ~\ref{reordenacao}}
+\end{figure}
+
+\begin{algorithm}
+\caption{Algoritmo ~\ref{reordenacao} após a reordenação}
+\label{reordenado}
+\begin{algorithmic}[1]
+
+\STATE B(1) = 0
+\STATE Test = C > 0
+\IF {Test} \STATE B(2) = 9 \ENDIF
+\STATE A(1) = 0
+\IF {Test} \STATE A(2) = 1 \ENDIF
+\FOR {I = 3 to 9}
+\STATE A(I) = A(I - 2) + A(I - 1) * 2
+\STATE B(I) = B(I - 2) * 2 + B(I - 1) 
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
 
 
 %-------------------------------------------------------------------------------
 \subsection{Unswitching}
 
 \textit{Unswitching} é uma transformação simples que retira do \textit{loop} 
-a condição independe do \textit{loop}. 
-\textit{Unswitching} trata um \textit{loop} que contenha uma condição e faz com 
-que a condição envolva o \textit{loop}. 
+uma condição que independe do \textit{loop}. 
+\textit{Unswitching} trata um \textit{loop} que tenha uma condição e faz com 
+que a condição envolva um ou dois \textit{loops}. 
 A condição deve obrigatoriamente ser independente do \textit{loop}.
-A vantagem do uso do textit{unswitching} é reduzir a frequência de execução da 
+A vantagem do uso do \textit{unswitching} é a redução da frequência de execução da 
 condição, uma vez que fora retirada do \textit{loop}. 
-A desvantagem desta tranformação é o aumento da complexidade da estrutura do 
-\textit{loop}, um \textit{loop} contendo apenas um \textit{loop} mais interno,
-agora terá dois ou mais \textit{loops} internos. 
+A desvantagem é o aumento da complexidade da estrutura do \textit{loop}, 
+um \textit{loop} contendo apenas um \textit{loop} mais interno,
+poderá ter dois ou mais \textit{loops} internos. 
 Essa desvantagem pode afetar a aplicabilidade de outras técnicas ou
 transformações.
 
+\textit{Unswitching} pode ser aplicado em um \textit{loop} semelhante ao 
+algoritmo ~\ref{unswitching_ex}, onde a condição é independente do \textit{loop}.
 
 
+\begin{algorithm}
+\caption{Algoritmo onde a condição independe do \textit{loop}}
+\label{unswitching_ex}
+\begin{algorithmic}[1]
+
+\LOOP
+\STATE declarações
+\IF {teste} 
+\STATE declarações de then
+\ELSE 
+\STATE declarações de else
+\ENDIF
+\STATE mais declarações
+\ENDLOOP
+
+\end{algorithmic}
+\end{algorithm}
+
+O algoritmo ~\ref{unswitching_ex} pode ser transformado no algoritmo
+~\ref{unswitching_ex2}.
+
+\begin{algorithm}
+\caption{Algoritmo ~\ref{unswitching_ex} depois de aplicar \textit{unswitching}}
+\label{unswitching_ex2}
+\begin{algorithmic}[1]
+
+\IF {teste} 
+\LOOP
+\STATE declarações
+\STATE declarações de then
+\STATE mais declarações
+\ENDLOOP
+\ELSE 
+\LOOP
+\STATE declarações
+\STATE declarações de else
+\STATE mais declarações
+\ENDLOOP
+\ENDIF
+
+\end{algorithmic}
+\end{algorithm}
+
+Considerando o algoritmo ~\ref{unswitching_inner} por apresentar um 
+\textit{loop} mais interno. 
+
+\begin{algorithm}
+\caption{Algoritmo com \textit{loops} aninhados}
+\label{unswitching_inner}
+\begin{algorithmic}[1]
+
+\FOR {I = 1 to N}
+\FOR {J = 2 to N}
+\IF {T(I) > 0} 
+\STATE A(I,J) = A(I, J - 1) * T(I) + B(J) 
+\ELSE
+\STATE A(I,J) = 0 0 
+\ENDIF
+\ENDFOR
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+Aplicando-se \textit{unswitching} no algoritmo ~\ref{unswitching_inner} será 
+removida a condição do \textit{loop} mais interno, ver algoritmo
+~\ref{unswitching_inner2}.
+
+\begin{algorithm}
+\caption{Algoritmo ~\ref{unswitching_inner} depois de \textit{unswitching}}
+\label{unswitching_inner2}
+\begin{algorithmic}[1]
+
+\FOR {I = 1 to N}
+\IF {T(I) > 0} 
+\FOR {J = 2 to N}
+\STATE A(I,J) = A(I, J - 1) * T(I) + B(J) 
+\ENDFOR
+\ELSE
+\FOR {J = 2 to N}
+\STATE A(I,J) = 0 0 
+\ENDFOR
+\ENDIF
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
 
 %-------------------------------------------------------------------------------
 \subsection{Loop Peeling}
 
 \textit{Loop peeling} remove a primeira ou a ultima iteração do \textit{loop} 
-em código separado, podendo ser generalizado e realizado mais de uma vez. 
-Essa técnica depente de saber se a variável de controle da iteração é estritamente
-positiva, caso não o seja deve-se realizar os devidos cuidados. 
+colocando-a em código separado, podendo ser generalizado e realizado mais 
+de uma vez se necessário. 
+Essa técnica depente de saber se a variável de controle da iteração
+(\textit{index}) é estritamente positiva, caso não o seja, deve-se proteger 
+o código com uma condição maior que zero.
 \textit{Loop peeling} também pode ser utilizado para retirar partes de código 
 que não dependem do \textit{index} do \textit{loop}, assim, executando-os apenas
 uma vez.
+
+\textit{Loop peeling} também pode ser utilizado para ajustar a variação do 
+\textit{index} do \textit{loop}, assim tornando possível a aplicação 
+do \textit{loop fusion}.
+
+Considerando o algoritmo ~\ref{peeling_ex} um \textit{loop} contável e 
+com \textit{index} tendo como máximo $MAX$.
+
+\begin{algorithm}
+\caption{Algoritmo com \textit{loop} contável}
+\label{peeling_ex}
+\begin{algorithmic}[1]
+
+\STATE calcula MAX
+\FOR {I = 0 to MAX - 1}
+\STATE corpo do loop
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+Aplicando \textit{loop peeling} no algoritmo ~\ref{peeling_ex} um resultado
+possível seria o algoritmo ~\ref{peeling_ex2}.
+
+\begin{algorithm}
+\caption{Algoritmo ~\ref{peeling_ex} depois de \textit{loop peeling}}
+\label{peeling_ex2}
+\begin{algorithmic}[1]
+
+\STATE calcula MAX
+\IF {MAX > 0}
+\STATE I = 0
+\STATE corpo do loop
+\FOR {I = 1 to MAX - 1}
+\STATE corpo do loop
+\ENDFOR
+\ENDIF
+
+\end{algorithmic}
+\end{algorithm}
 
 
 %-------------------------------------------------------------------------------
