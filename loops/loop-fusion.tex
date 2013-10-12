@@ -3,8 +3,8 @@
 
 \section{Loop Fusion}
 
-Se dois \textit{loops} são adjacentes e possuem o mesmo limite, estes podem
-ser agrupados em um \textit{loop} simples.
+Se dois \textit{loops} são adjacentes e possuem o mesmo limite, algumas vezes
+podem ser agrupados em um \textit{loop} simples.
 Originalmente, esta técnica fora desenvolvida como uma forma de reduzir os
 custos de testes e ramificações no código.
 
@@ -15,15 +15,122 @@ dados.
 O desenvolvimento de \textit{deep memory hierarchies} fez com que esta técnica
 fosse importante para aproveitar o \textit{memory locality}.
 Utilizando \textit{loop fusion} em \textit{loops} que referenciam os mesmos
-dados melhoram o \textit{temporal locality}, podendo impactar significativamente  
-o desempenho da memória \textit{cache} e da memória virtual.
-Outra vantagem do uso de \textit{loop fusion} seria tirar vantagem de otimizações 
+dados melhoram o \textit{temporal locality}, podendo assim impactar 
+significativamente o desempenho da memória \textit{cache} e da memória virtual.
+Outra vantagem do uso de \textit{loop fusion} é tirar vantagem de otimizações 
 escalares mais eficiêntes no corpo do \textit{loop}, uma vez que o mesmo ficou
-maior após o \textit{loop fusion}.
+maior após o seu uso.
 
-O uso desta técnica é legal se toda dependência de dados é preservada. Após a
-aplicação do \textit{loop fusion} todas as relações de dependências devem seguir
-o fluxo original.
+No algoritmo ~\ref{fusion_ex} tem-se dois \textit{loops} adjacentes com limites
+compatíveis. 
+O algoritmo ~\ref{fusion_ex2} mostra o resultado da aplicação do 
+\textit{loop fusion}.
 
+\begin{algorithm}
+\caption{Algoritmo com dois \textit{loops} adjacentes}
+\label{fusion_ex}
+\begin{algorithmic}[1]
+
+\FOR {I = 0 to N}
+\STATE corpo do loop 1
+\ENDFOR
+\FOR {I = 0 to N}
+\STATE corpo do loop 2
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Algoritmo ~\ref{fusion_ex} após \textit{loop fusion}}
+\label{fusion_ex2}
+\begin{algorithmic}[1]
+
+\FOR {I = 0 to N}
+\STATE corpo do loop 1
+\STATE corpo do loop 2
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+O seu uso é legal se toda dependência de dados for preservada. 
+Após a aplicação do \textit{loop fusion} todas as relações de dependências devem 
+seguir o fluxo original do "corpo do \textit{loop} 1" para o "corpo do loop
+2".
+
+Em alguns casos unir \textit{loops} adjacentes podem ocasionar em violação na
+dependência de dados, se um \textit{loop} tem dependência sobre os dados do
+outro. Considere os \textit{loops} do algoritmo ~\ref{fusion_dep}.
+
+\begin{algorithm}
+\caption{Algoritmo com três \textit{loops} adjacentes}
+\label{fusion_dep}
+\begin{algorithmic}[1]
+
+\FOR {I = 0 to N}
+\STATE A(I) = B(I) + 1
+\ENDFOR
+\FOR {I = 0 to N}
+\STATE C(I) = A(I) / 2
+\ENDFOR
+\FOR {I = 0 to N}
+\STATE D(I) = 1 / C(I + 1)
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+Uma aplicação ingênua do \textit{loop fusion} no algoritmo ~\ref{fusion_dep} 
+resultaria no algoritmo ~\ref{fusion_dep2} que viola as regras básicas de 
+dependência.
+Considerando o algoritmo ~\ref{fusion_dep} existem dois tipos dependência 
+de dados, sendo uma depêndencia do tipo \textit{true dependence} ou 
+\textit{flow dependence} na relação $2 \; \delta^f \; 5$ e outra entre 
+$5 \; \delta^f \; 8$, o segundo tipo de dependência é do tipo
+\textit{anti-dependence} na relação $8 \; \delta^a \; 5$, essa dependência
+fica mais evidente quando observado o algoritmo ~\ref{fusion_dep2}, 
+uma vez que a união dos \textit{loops} causa a violação desta dependência. 
+
+Pode-se então observar que o uso não adequado do \textit{loop fusion} violaria
+as regras de dependências e assim alterando o sentido do programa. 
+Uma aplicação correta da técnica no algoritmo ~\ref{fusion_dep} e seu 
+resultado pode ser observado no algoritmo ~\ref{fusion_dep3}.
+
+\begin{algorithm}
+\caption{Violação da dependência de dados do algoritmo ~\ref{fusion_dep} após
+        \textit{loop fusion}}
+\label{fusion_dep2}
+\begin{algorithmic}[1]
+
+\FOR {I = 0 to N}
+\STATE A(I) = B(I) + 1
+\STATE C(I) = A(I) / 2
+\STATE D(I) = 1 / C(I + 1)
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Resultado de uma correta aplicação de \textit{loop fusion} no 
+        algoritmo ~\ref{fusion_dep}} 
+\label{fusion_dep3}
+\begin{algorithmic}[1]
+
+\FOR {I = 0 to N}
+\STATE A(I) = B(I) + 1
+\STATE C(I) = A(I) / 2
+\ENDFOR
+\FOR {I = 0 to N}
+\STATE D(I) = 1 / C(I + 1)
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Array Assignments}
 
 

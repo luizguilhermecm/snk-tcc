@@ -30,7 +30,7 @@ Em termos da ordem de \textit{load-store}, as dependências podem ocorrer de
 três formas em um programa:
 
 \begin{alineas}
-        \item \textit{True dependence.} Onde uma declaração realiza 
+\item \textit{True dependence} ou \textit{flow dependence}. Onde uma declaração realiza 
         \textit{store} em um local da memória em que será realizado um 
         \textit{load} por uma segunda declaração.
         \begin{verbatim}
@@ -39,9 +39,10 @@ três formas em um programa:
         \end{verbatim}
         A dependência garante que $S_2$ irá ler exatamente o que foi computado
         por $S_1$. Esse tipo de dependência é também conhecida por dependência 
-        de fluxo e é denotada por $S_1 \delta S_2$ (lê-se, $S_2$ depende 
-        de $S_1$).
-        \item \textit{Antidependence.} Uma primeira declaração realiza
+        de fluxo e é denotada por  $S_1 \;\delta\; S_2$ ou $S_1 \;\delta^f \; S_2$ 
+        (lê-se, $S_2$ depende de $S_1$).
+
+        \item \textit{Anti-dependence.} Uma primeira declaração realiza
         \textit{load} de um local onde uma segunda declaração irá escrever.
         \begin{verbatim}
         S1    ... = x
@@ -53,8 +54,8 @@ três formas em um programa:
         Em essência essa dependência existe para prevenir uma transformação que 
         introduziria uma nova dependência do tipo \textit{true dependence} que 
         de fato não existe no programa original. 
-        \textit{Antidependence} é denotado $S_1 \delta^- S_2$ 
-        ou $S_1 \delta^{-1} S_2$.
+        \textit{Anti-dependence} é denotado $S_1 \;\delta^- \;S_2$, 
+        $S_1 \;\delta^{-1} \;S_2$ ou $S_1 \;\delta^{a} \;S_2$.
 
         \item \textit{Output dependence.} Ocorre quando duas declaração 
         realizam \textit{store} em um mesmo local.
@@ -71,7 +72,8 @@ três formas em um programa:
         S3    x = 2 
         S4    y = 2 * x
         \end{verbatim}
-        \textit{Output dependence} é denotado $S_1 \delta^0 S_2$.
+        \textit{Output dependence} é denotado  $S_1 \;\delta^0 \;S_2$
+        ou $S_1 \;\delta^o \;S_2$.
 \end{alineas}
 
 %-------------------------------------------------------------------------------
