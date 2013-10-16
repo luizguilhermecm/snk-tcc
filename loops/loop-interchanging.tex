@@ -1,0 +1,122 @@
+% vim: set ai tw=80 fileencoding=utf8: 
+%-------------------------------------------------------------------------------
+\section{Loop Interchanging}
+
+\textit{Loop interchanging} talvez seja a mais importante técnica de
+reestruturação de \textit{loops}.
+Esta técnica resume-se em \textit{loops} que estejam fortemente aninhados
+serem trocados de posição, o \textit{loop} mais externo é trocado pelo mais
+interno.
+No caso de apenas um \textit{loop} carregar todas as dependências, este pode ser
+trocado de posição e se tornar o \textit{loop} mais externo, assim, os outros
+\textit{loops} podem ser executados em paralelo.
+
+\textit{Loop interchanging} tem sido utilizado para melhorar o desempenho 
+de um programa.
+Um \textit{loop} mais externo com um número maior de iterações e o 
+\textit{loop} mais interno com apenas algumas iterações, em um cenário como este
+haverá \textit{loop startup overhead} sobre o \textit{loop} mais interno,
+trocando-os de posição, a ocorrência de \textit{loop startup overhead} será de
+apenas algumas vezes.
+
+%-------------------------------------------------------------------------------
+\subsection{Loops Fortemente Aninhados}
+
+Dois \textit{loops} estão fortemente aninhados quando o único código no corpo do
+\textit{loop} mais externo for o \textit{loop} mais interno.
+Para \textit{loops} contáveis, com percurso do \textit{loop} mais interno não
+dependendo da iteração do \textit{loop} mais externo, aplicar \textit{loop
+interchanging} será apenas troca-los de posição.
+Ao aplicar \textit{loop interchanging} no algoritmo~\ref{fortemente_ex1}
+seria obtido o algoritmo~\ref{fortemente_ex2} como resultado.
+
+\begin{algorithm}
+\caption{Dois \textit{loops} fortemente aninhados}
+\label{fortemente_ex1}
+\begin{algorithmic}[1]
+
+\FOR {I = }
+\FOR {J = }
+\STATE corpo do loop
+\ENDFOR
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{Resultado de \textit{loop interchanging} no
+        algoritmo~\ref{fortemente_ex1}}
+\label{fortemente_ex2}
+\begin{algorithmic}[1]
+
+\FOR {J = }
+\FOR {I = }
+\STATE corpo do loop
+\ENDFOR
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+Assim como em todas as técnicas de reestruturação de \textit{loops}, deve-se
+atentar em preservar as relações de dependência entre os \textit{loops}. 
+Se toda dependência for preservada e o sentido do programa se mantiver, então, o
+resultado do \textit{loop interchanging} será sempre válido.
+
+
+%-------------------------------------------------------------------------------
+\subsection{Loops Não Fortemente Aninhados}
+
+\textit{Loops} não fortemente aninhados, ao contrário do fortemente aninhado, o
+\textit{loop} mais externo tem mais declaração em seu corpo do que apenas o
+\textit{loop} interno.
+As vezes é  possível  transformar  \textit{loops} não fortemente aninhados em
+fortemente aninhados utilizando-se \textit{loop fission}.
+Algumas vezes isto pode não ser possível, então outra forma de faze-lo seria
+colocar estas declarações do \textit{loop} mais externo dentro do corpo do
+\textit{loop} mais interno, utilizando-se de declarações condicionais para
+ajustar em qual iteração devem ser executadas. 
+Um ajuste possível seria executa-las quando o \textit{index} dos \textit{loops}
+forem iguais, outro ajuste seria a criação de uma nova iteração no início ou fim
+para executa-las.
+
+Utilizando o ajuste condicional de igualdade  do \textit{index} com mesmo limite
+de percurso aplicada ao algoritmo~\ref{nf_1}, resultaria no
+algoritmo~\ref{nf_2}.
+
+\begin{algorithm}
+\caption{Dois \textit{loops} não fortemente aninhados}
+\label{nf_1}
+\begin{algorithmic}[1]
+
+\FOR {I = 1 to N}
+\STATE corpo do loop externo
+\FOR {J = 1 to N}
+\STATE corpo do loop interno
+\ENDFOR
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Resultado de \textit{loop interchanging} no algoritmo~\ref{nf_1}}
+\label{nf_2}
+\begin{algorithmic}[1]
+
+\FOR {J = 1 to N}
+\FOR {I = 1 to N}
+\IF {I == J}
+\STATE corpo do loop externo
+\ELSE
+\STATE corpo do loop interno
+\ENDIF
+\ENDFOR
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+

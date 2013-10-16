@@ -23,7 +23,7 @@ outras.
 A reordenação de declarações é útil pois através dela é possível 
 a aplicação de outras técnicas. 
 
-Utilizando o algoritmo ~\ref{reordenacao} para exemplificar a reordenação. 
+Utilizando o algoritmo~\ref{reordenacao} para exemplificar a reordenação. 
 
 \begin{algorithm}
 \caption{Exemplo de algoritmo a ser reordenado}
@@ -44,12 +44,12 @@ Utilizando o algoritmo ~\ref{reordenacao} para exemplificar a reordenação.
 \end{algorithmic}
 \end{algorithm}
 
-O grafo de dependência do algoritmo ~\ref{reordenacao} pode ser visto na figura 
-\ref{graph_statement_reordering}. 
+O grafo de dependência do algoritmo~\ref{reordenacao} pode ser visto na 
+figura~\ref{graph_statement_reordering}. 
 Neste exemplo deseja-se que as declarações $1$ e $4$ fiquem o mais próximo 
 possível do \textit{loop}. 
 Uma forma de faze-lo é reornando as declarações para a seguinte ordem $2,\; 3,\; 5,
-\;1,\; 4\; e\; 7$, como resultado tem-se o algoritmo ~\ref{reordenado}.
+\;1,\; 4\; e\; 7$, como resultado tem-se o algoritmo~\ref{reordenado}.
 
 
 
@@ -77,11 +77,11 @@ Uma forma de faze-lo é reornando as declarações para a seguinte ordem $2,\; 3
     (5) edge node [above] {} (7);
 
 \end{tikzpicture}
-\caption{Grafo de dependência do algoritmo ~\ref{reordenacao}}
+\caption{Grafo de dependência do algoritmo~\ref{reordenacao}}
 \end{figure}
 
 \begin{algorithm}
-\caption{Algoritmo ~\ref{reordenacao} após a reordenação}
+\caption{Algoritmo~\ref{reordenacao} após a reordenação}
 \label{reordenado}
 \begin{algorithmic}[1]
 
@@ -116,7 +116,7 @@ Essa desvantagem pode afetar a aplicabilidade de outras técnicas ou
 transformações.
 
 \textit{Unswitching} pode ser aplicado em um \textit{loop} semelhante ao 
-algoritmo ~\ref{unswitching_ex}, onde a condição é independente do \textit{loop}.
+algoritmo~\ref{unswitching_ex}, onde a condição é independente do \textit{loop}.
 
 
 \begin{algorithm}
@@ -137,11 +137,11 @@ algoritmo ~\ref{unswitching_ex}, onde a condição é independente do \textit{lo
 \end{algorithmic}
 \end{algorithm}
 
-O algoritmo ~\ref{unswitching_ex} pode ser transformado no algoritmo
-~\ref{unswitching_ex2}.
+O algoritmo~\ref{unswitching_ex} pode ser transformado no 
+algoritmo~\ref{unswitching_ex2}.
 
 \begin{algorithm}
-\caption{Algoritmo ~\ref{unswitching_ex} depois de aplicar \textit{unswitching}}
+\caption{Algoritmo~\ref{unswitching_ex} depois de aplicar \textit{unswitching}}
 \label{unswitching_ex2}
 \begin{algorithmic}[1]
 
@@ -162,7 +162,7 @@ O algoritmo ~\ref{unswitching_ex} pode ser transformado no algoritmo
 \end{algorithmic}
 \end{algorithm}
 
-Considerando o algoritmo ~\ref{unswitching_inner} por apresentar um 
+Considerando o algoritmo~\ref{unswitching_inner} por apresentar um 
 \textit{loop} mais interno. 
 
 \begin{algorithm}
@@ -183,12 +183,12 @@ Considerando o algoritmo ~\ref{unswitching_inner} por apresentar um
 \end{algorithmic}
 \end{algorithm}
 
-Aplicando-se \textit{unswitching} no algoritmo ~\ref{unswitching_inner} será 
-removida a condição do \textit{loop} mais interno, ver algoritmo
-~\ref{unswitching_inner2}.
+Aplicando-se \textit{unswitching} no algoritmo~\ref{unswitching_inner} será 
+removida a condição do \textit{loop} mais interno, ver 
+algoritmo~\ref{unswitching_inner2}.
 
 \begin{algorithm}
-\caption{Algoritmo ~\ref{unswitching_inner} depois de \textit{unswitching}}
+\caption{Algoritmo~\ref{unswitching_inner} depois de \textit{unswitching}}
 \label{unswitching_inner2}
 \begin{algorithmic}[1]
 
@@ -224,7 +224,7 @@ uma vez.
 \textit{index} do \textit{loop}, assim tornando possível a aplicação 
 do \textit{loop fusion}.
 
-Considerando o algoritmo ~\ref{peeling_ex} um \textit{loop} contável e 
+Considerando o algoritmo~\ref{peeling_ex} um \textit{loop} contável e 
 com \textit{index} tendo como máximo $MAX$.
 
 \begin{algorithm}
@@ -240,11 +240,11 @@ com \textit{index} tendo como máximo $MAX$.
 \end{algorithmic}
 \end{algorithm}
 
-Aplicando \textit{loop peeling} no algoritmo ~\ref{peeling_ex} um resultado
-possível seria o algoritmo ~\ref{peeling_ex2}.
+Aplicando \textit{loop peeling} no algoritmo~\ref{peeling_ex} um resultado
+possível seria o algoritmo~\ref{peeling_ex2}.
 
 \begin{algorithm}
-\caption{Algoritmo ~\ref{peeling_ex} depois de \textit{loop peeling}}
+\caption{Algoritmo~\ref{peeling_ex} depois de \textit{loop peeling}}
 \label{peeling_ex2}
 \begin{algorithmic}[1]
 
@@ -272,7 +272,7 @@ Assim como em \textit{loop peeling} essa técnica é útil para ajustar o percur
 do \textit{loop}, ou para remover condições que testam a variável que controla
 as iterações do \textit{loop}.
 
-Considerando o algoritmo ~\ref{iss_ex} com um \textit{loop} com percurso indo
+Considerando o algoritmo~\ref{iss_ex} com um \textit{loop} com percurso indo
 até $MAX$.
 
 \begin{algorithm}
@@ -288,11 +288,11 @@ até $MAX$.
 \end{algorithmic}
 \end{algorithm}
 
-Aplicando \textit{index set splitting} em ~\ref{iss_ex} na iteração $W$
-resultaria no algoritmo ~\ref{iss_ex2}.
+Aplicando \textit{index set splitting} em~\ref{iss_ex} na iteração $W$
+resultaria no algoritmo~\ref{iss_ex2}.
 
 \begin{algorithm}
-\caption{Algoritmo ~\ref{iss_ex} depois de \textit{index set splitting}}
+\caption{Algoritmo~\ref{iss_ex} depois de \textit{index set splitting}}
 \label{iss_ex2}
 \begin{algorithmic}[1]
 
@@ -334,7 +334,7 @@ Caso o valor do escalar seja determinado condicionalmente dentro do
 \textit{loop} invibializaria o uso de \textit{scalar expansion} exceto se o
 mesmo não será mais utilizado após o \textit{loop}.
 
-Tendo o algoritmo ~\ref{se_ex} com escalar $E$.
+Tendo o algoritmo~\ref{se_ex} com escalar $E$.
 
 
 \begin{algorithm}
@@ -350,12 +350,12 @@ Tendo o algoritmo ~\ref{se_ex} com escalar $E$.
 \end{algorithmic}
 \end{algorithm}
 
-Aplicando \textit{scalar expansion} no algoritmo ~\ref{se_ex} e protegendo-o com
+Aplicando \textit{scalar expansion} no algoritmo~\ref{se_ex} e protegendo-o com
 uma condição maior que zero, irá eliminar todas as relações de dependências, o
-resultado é o algoritmo ~\ref{se_ex2}
+resultado é o algoritmo~\ref{se_ex2}
 
 \begin{algorithm}
-\caption{Algoritmo ~\ref{se_ex} após o \textit{scalar expansion}}
+\caption{Algoritmo~\ref{se_ex} após o \textit{scalar expansion}}
 \label{se_ex2}
 \begin{algorithmic}[1]
 

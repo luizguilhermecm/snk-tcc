@@ -1,0 +1,32 @@
+% vim: set ai tw=80 fileencoding=utf8: 
+%-------------------------------------------------------------------------------
+\section{Loop Reversal}
+
+Algumas vezes pode-se desejar que um \textit{loop} intere de trás para frente,
+ou seja, do final do percurso do \textit{loop} para o início, e isso é chamado
+de \textit{loop reversal}.
+Caso existe uma relação de dependência, essa relação muda de sentido devido ao
+decrescimento do índice do \textit{loop}, com isso violando a relação de 
+dependência.
+
+Um uso para esta técnica é permitir o uso de \textit{loop fusion} onde antes não
+era permitido. 
+Considere o algoritmo~\ref{fusion_dep}, onde a fusão de três \textit{loops}
+resultou em dois \textit{loops}, ver algoritmo~\ref{fusion_dep3}. 
+Aplicando \textit{loop reversal} pode-se obter apenas um \textit{loop} como
+resultado, algoritmo~\ref{reversal_ex}.
+
+\begin{algorithm}
+\caption{Resultado da aplicação de \textit{loop reversal} e \textit{loop fusion}
+no algoritmo~\ref{fusion_dep3}}
+\label{reversal_ex}
+\begin{algorithmic}[1]
+
+\FOR {I = N downto 0}
+\STATE A(I) = B(I) + 1
+\STATE C(I) = A(I) / 2
+\STATE D(I) = 1 / C(I + 1)
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}

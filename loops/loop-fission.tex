@@ -1,0 +1,122 @@
+% vim: set ai tw=80 fileencoding=utf8: 
+%-------------------------------------------------------------------------------
+
+\section{Loop Fission}
+
+Um \textit{loop} simples pode ser quebrado em dois ou mais \textit{loops}
+menores, isso é o inverso de \textit{loop fusion}, essa técnica é chamada de
+\textit{loop fission} ou \textit{loop distribution}.
+\textit{Loop fission} é muito utilizada em máquinas com 
+\textit{instruction cache} menores, esta técnica pode ser utilizada para quebrar
+grandes \textit{loops} que não seriam suportados pela \textit{cache} em
+\textit{loops} menores que caibam na \textit{cache}.
+Podendo também melhorar a \textit{memory locality} em casos onde um único
+\textit{loop} utiliza vários vetores, assim dividindo estes vetores entre mains 
+de um \textit{loop}.
+
+Quando um \textit{loop} é dividido, o \textit{index} ou \textit{induction
+variable} será utilizado em cada parte do \textit{loop}. 
+Para evitar problemas em saber quando a \textit{induction variable} será
+atualizada, pode ser criada uma nova variável que a substitua, assim trocando
+todas as referências por esta nova variável.
+
+Antes de aplicar esta técnica, primeiro será construído um grafo de dependência em
+nível das declarações do \textit{loop}. 
+Caso não haja ciclos no grafo de dependência, então o \textit{loop} poderá ser
+divido em cada nó do grafo. 
+Em caso de ciclos no grafo, então a abordagem não poderá ser a mesma, pois
+violaria a dependência de dados, logo, se dois nós formam um ciclo no grafo,
+eles podem ser unidos em um único nó, pois não será possível separa-los.
+Se o grafo de dependência for fortemente conectado, então a não será possível a
+aplicação de \textit{loop fission}.
+
+A ordem correta dos \textit{loops} após o \textit{loop fission} pode ser
+encontrada através de um grafo acíclico condensado do grafo de dependência.
+Sendo cada nó no grafo condensado um \textit{loop}.
+
+Considerando o algoritmo~\ref{fission_ex1} com quatro declarações em seu corpo e
+quatro vetores. 
+O grafo de dependência pode ser visto na figura~\ref{graph_fission_ex1}. 
+Como pode-se observar no grafo de dependência, existe um ciclo entre as linhas
+$3$ e $4$, sendo assim, não será possível separa-las em diferentes
+\textit{loops}, também existe uma dependência entre a linha $2$ com a linha $3$
+e da linha $5$ com a $4$.
+O grafo condensado na figura~\ref{condensed_graph_fission_ex1} mostra a
+ordem em que os \textit{loops} devem estar.
+O algoritmo~\ref{fission_ex2} mostra o resultado de \textit{loop fission} sobre
+o algoritmo~\ref{fission_ex1}.
+
+\begin{algorithm}
+\caption{Algoritmo em que ser quer aplicar \textit{loop fission}}
+\label{fission_ex1}
+\begin{algorithmic}[1]
+
+\FOR {I = 1 to N} 
+\STATE A(I) = A(I) + B(I - 1)
+\STATE B(I) = C(I - 1) * X + C
+\STATE C(I) = 1 / B(I)
+\STATE D(I) = sqrt(C(I))
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{figure}
+\centering
+\label{graph_fission_ex1}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+  thick,main node/.style={circle,draw}]
+
+  \node[main node] (2) {2};
+  \node[main node] (3) [below of=2] {3};
+  \node[main node] (4) [below of=3] {4};
+  \node[main node] (5) [below of=4] {5};
+
+   \path[every node/.style={font=\sffamily\small}]
+    (3) edge [bend left] node [below] {} (2)
+        edge node [above] {} (4)
+    (4) edge [bend left] node [below] {} (3)
+        edge node [above] {} (5);
+
+\end{tikzpicture}
+\caption{Grafo de dependência do algoritmo~\ref{fission_ex1}}
+\end{figure}
+
+\begin{figure}
+\centering
+\label{condensed_graph_fission_ex1}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+  thick,main node/.style={circle,draw}]
+
+  \node[main node] (3) {3-4};
+  \node[main node] (2) [below left of=3] {2};
+  \node[main node] (5) [below right of=3] {5};
+
+   \path[every node/.style={font=\sffamily\small}]
+    (3) edge node [below left] {} (2)
+        edge node [below right] {} (5);
+
+\end{tikzpicture}
+\caption{Grafo condensado acíclico do grafo de dependência}
+\end{figure}
+
+\begin{algorithm}
+\caption{Resultado de \textit{loop fission} sobre o algoritmo~\ref{fission_ex1}}
+\label{fission_ex2}
+\begin{algorithmic}[1]
+
+\FOR {I = 0 to N - 1} 
+\STATE B(I + 1) = C(I) * X + C
+\STATE C(I + 1) = 1 / B(I + 1)
+\ENDFOR
+\FOR {I = 0 to N - 1} 
+\STATE A(I + 1) = A(I + 1) + B(I)
+\ENDFOR
+\FOR {I = 0 to N - 1} 
+\STATE D(I + 1) = sqrt(C(I + 1))
+\ENDFOR
+\STATE I = I + 1
+\end{algorithmic}
+\end{algorithm}
+
+
