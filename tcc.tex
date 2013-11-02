@@ -77,20 +77,20 @@
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
 % ----------------------------------------------------------
- \pretextual
-
-
-  \input{1-capa/0-capa}
-  \input{1-capa/1-folha-de-rosto}
-  \input{1-capa/2-errata}
-  \input{1-capa/3-folha-aprovacao}
-  \input{1-capa/4-dedicatoria}
-  \input{1-capa/5-agradecimentos}
-  \input{1-capa/6-epigrafe}
-  \input{1-capa/7-resumo}
-  \input{1-capa/8-abstract}
-
-% ---
+% \pretextual
+%
+%
+%  \input{1-capa/0-capa}
+%  \input{1-capa/1-folha-de-rosto}
+%  \input{1-capa/2-errata}
+%  \input{1-capa/3-folha-aprovacao}
+%  \input{1-capa/4-dedicatoria}
+%  \input{1-capa/5-agradecimentos}
+%  \input{1-capa/6-epigrafe}
+%  \input{1-capa/7-resumo}
+%  \input{1-capa/8-abstract}
+%
+%% ---
 % inserir lista de ilustrações
 % ---
 \pdfbookmark[0]{\listfigurename}{lof}
@@ -121,6 +121,7 @@
 \textual
 
 \input{2-introducao/introducao}
+\input{2-introducao/relacionados.tex}
 
 \input{taxonomia-flynn/taxonomia-flynn}
 	
@@ -149,6 +150,6 @@
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-\bibliography{taxonomia-flynn/taxonomia-flynn} 
+\bibliography{taxonomia-flynn/bib_taxonomia-flynn,2-introducao/bib_introducao}
 
 \end{document}

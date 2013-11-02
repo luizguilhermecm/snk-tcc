@@ -18,7 +18,12 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dc-uel}[2013/07/10 v1.0 Modelo da Departamento de Computação da UEL baseado em abnTeX2]
+\ProvidesClass{dc-uel}[2013/10/30 v1.0.1 Modelo da Departamento de Computação da UEL baseado em abnTeX2]
+
+\providecommand{\DCUEListccpreliminar}{false}
+\DeclareOption{tccpreliminar}{
+	\renewcommand{\DCUEListccpreliminar}{true}
+}
 
 \providecommand{\DCUEListcc}{false}
 \DeclareOption{tcc}{
@@ -37,7 +42,6 @@
 
 % Passa parâmetros do template DC para a classe abntex2
 \PassOptionsToClass{chapter=TITLE}{abntex2} % títulos de capítulos convertidos em letras maiúsculas
-\PassOptionsToClass{section=TITLE}{abntex2} % títulos de seções convertidos em letras maiúsculas
 \PassOptionsToPackage{english}{babel} % idioma adicional para hifenização/citação
 
 %
@@ -95,6 +99,10 @@
   % definindo o preambulo
   \ifthenelse{\equal{\DCUEListcc}{true}}
     {\preambulo{Trabalho de Conclus\~{a}o de Curso apresentado ao curso de Bacharelado em Ci\^{e}ncia
+      da Computa\c{c}\~{a}o da Universidade Estadual de Londrina para obten\c{c}\~{a}o do t\'{i}tulo de
+      Bacharel em Ci\^{e}ncia da Computa\c{c}\~{a}o.}}{}
+  \ifthenelse{\equal{\DCUEListccpreliminar}{true}}
+    {\preambulo{Vers\~{a}o Preliminar de Trabalho de Conclus\~{a}o de Curso apresentado ao curso de Bacharelado em Ci\^{e}ncia
       da Computa\c{c}\~{a}o da Universidade Estadual de Londrina para obten\c{c}\~{a}o do t\'{i}tulo de
       Bacharel em Ci\^{e}ncia da Computa\c{c}\~{a}o.}}{}
   \ifthenelse{\equal{\DCUELisdissertacao}{true}}
@@ -219,6 +227,7 @@
    \begin{minipage}{.875\textwidth}
      \expandafter\MakeUppercase{\imprimircitacaoautor}. {\bfseries\imprimirtitulo}. \pageref{LastPage} p. 
      \ifthenelse{\equal{\DCUEListcc}{true}}{Trabalho de Conclus\~{a}o de Curso (Gradua\c{c}\~{a}o). Bacharelado em Ci\^{e}ncia da Computa\c{c}\~{a}o}{}%
+     \ifthenelse{\equal{\DCUEListccpreliminar}{true}}{Trabalho de Conclus\~{a}o de Curso (Gradua\c{c}\~{a}o) -- Vers\~{a}o Preliminar. Bacharelado em Ci\^{e}ncia da Computa\c{c}\~{a}o}{}%
      \ifthenelse{\equal{\DCUELisdissertacao}{true}}{Disserta\c{c}\~{a}o (Mestrado). Mestrado em Ci\^{e}ncia da Computa\c{c}\~{a}o}{}%
      \ifthenelse{\equal{\DCUELisqualificacaoms}{true}}{Qualifica\c{c}\~{a}o (Mestrado). Mestrado em Ci\^{e}ncia da Computa\c{c}\~{a}o}{}%
      ~-- \imprimirinstituicao, \imprimirdata.
@@ -252,6 +261,7 @@
    \begin{minipage}{.875\textwidth}
      \expandafter\MakeUppercase{\imprimircitacaoautor}. {\bfseries\imprimirtituloingles}. \pageref{LastPage} p. 
      \ifthenelse{\equal{\DCUEListcc}{true}}{Final Project (Undergraduation). Bachelor of Science in Computer Science}{}%
+     \ifthenelse{\equal{\DCUEListccpreliminar}{true}}{Final Project (Undergraduation) -- Draft Version. Bachelor of Science in Computer Science}{}%
      \ifthenelse{\equal{\DCUELisdissertacao}{true}}{Thesis (Master). Master in Science in Computer Science}{}%
      \ifthenelse{\equal{\DCUELisqualificacaoms}{true}}{Qualification (Master). Master in Science in Computer Science}{}%
      ~-- State University of Londrina, \imprimirdata.
@@ -283,7 +293,7 @@
 
 \renewcommand{\ABNTEXchapterfont}{\bfseries} % altera a fonte do capitulo
 \renewcommand{\ABNTEXchapterfontsize}{\Large} % altera o tamanho da fonte de \chapter (inclusive dos elementos pré-textuais)
-\renewcommand{\ABNTEXsectionfontsize}{\large} % altera o tamanho da fonte de \section
+\renewcommand{\ABNTEXsectionfontsize}{\Large} % altera o tamanho da fonte de \section
 
 % ---
 % PACOTES

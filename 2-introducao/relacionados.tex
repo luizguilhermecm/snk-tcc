@@ -1,0 +1,63 @@
+% vim: set ai tw=80 fileencoding=utf8: 
+%-------------------------------------------------------------------------------
+
+\section{Trabalhos Relacionados}
+
+Nesta seção serão aprensentadas abordagens realizadas por outros autores que 
+desenvolveram estudo de técnicas relacionadas ao conteúdo deste trabalho.
+Todas as abordagens mencionadas têm como objetivo obter maior melhoria de 
+desempenho.
+
+
+
+%-------------------------------------------------------------------------------
+% Exploitation of parallelism to nested loops with dependence cycles
+%-------------------------------------------------------------------------------
+
+\chapter{Trabalhos Relacionados}
+Em \cite{Chang:2004} os autores estudam a exploração de paralelismo de
+\textit{loops} contendo ciclos de dependências, com foco na quebra das relações 
+de dependências para então extrair paralelismo destes \textit{loops} com menos
+ou nenhuma relação de dependência.
+
+Os autores partem realizando uma revisão teórica, apresentando os principais
+conceitos de dependência, assim como as principais relações de dependências, 
+\textit{true-dependence}, \textit{output-dependence} e \textit{anti-dependence}.  
+São também apresentados alguns conceitos como \textit{loop independent dependence}, 
+\textit{loop-carried dependence}, \textit{dependence distance vector}, 
+\textit{dependence distance matrix}, \textit{inter-statement} ou
+\textit{intra-statement} dependences e \textit{direction vector matrix} de
+\textit{loops} aninhados.
+
+É colocado pelos autores que os ciclos de relações \textit{anti-dependence} e
+\textit{true-dependence} podem ser quebradas embora \textit{true-dependence} ser
+inquebrável.
+
+A estratégia para quebrar a relação de dependência \textit{anti-dependence}
+apresentada se baseia no uso de uma técnica de renomeação de variáveis
+chamada \textit{sink}. 
+A partir da qual é criada um variável nova que será utilizada para manter os
+valores daquela envolvida na relação \textit{anti-dependence}.  
+Para \textit{output-dependence} o mesmo algoritmo é apresentado.
+
+Uma vez que os ciclos de relações de \textit{true-dependence} não pode ser
+quebrados, os autores apresentam várias técnicas que premitem amenizar as
+relações de dependências, o resultado deste ultimo algoritmo é especialmente
+voltado para a aplicação de vetorização.
+
+Os autores mostram que a aplicabilidade de seus algoritmos satisfizeram e
+mantiveram todas as relações de dependências iniciais, assim não alterando o 
+resultado final.
+
+
+
+
+
+
+
+%Em \cite{Behera:2006} os autores apresentam uma melhoria no algoritmo 
+%\textit{loop dead optimization}, este que tem por objetivo remover do corpo 
+%do \textit{loop}, códigos que não necessitam estar no corpo do \textit{loop}. 
+%Dentre os códigos removidos, é analisado se o mesmo deve ser executado antes ou 
+%depois do \textit{loop}, assim realizando uma reordenação das declarações e
+%gerando um código mais eficiente.
