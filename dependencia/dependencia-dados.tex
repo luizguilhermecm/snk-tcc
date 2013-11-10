@@ -1,6 +1,6 @@
 % vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
-\section{Dependência de Dados}
+\subsection{Dependência de Dados}
 
 Em dependência de dados deve-se garantir que um dado seja produzido e consumido
 na ordem correta, assim, cuidando para que não se intercale o \textit{load} e o
@@ -8,7 +8,7 @@ na ordem correta, assim, cuidando para que não se intercale o \textit{load} e o
 \textit{load} pode obter um valor errado. 
 Da mesma forma, dois \textit{stores} devem ocorrer na ordem correta para 
 que no próximo \textit{load} seja obtido o valor correto.
-Assim, dependência de dados pode ser definida como:
+Assim, dependência de dados pode ser definida como \cite[2.2]{ocfma}:
 
 \begin{description}
         \item [Definição 1:] Existe dependência de dados da declaração $1$ para a declaração 
@@ -24,10 +24,10 @@ Neste capítulo serão apresentadas várias propriedades onde as dependências
 podem ser classificadas.
 
 
-\subsection{Classificação de \textit{Load-Store}}
+\subsubsection{Classificação de \textit{Load-Store}}
 
 Em termos da ordem de \textit{load-store}, as dependências podem ocorrer de 
-três formas em um programa:
+três formas em um programa \cite{Chang:2004}:
 
 \begin{alineas}
 \item \textit{True dependence} ou \textit{flow dependence}. Onde uma declaração realiza 
@@ -77,7 +77,7 @@ três formas em um programa:
 \end{alineas}
 
 %-------------------------------------------------------------------------------
-\subsection{Dependência em Loops}
+\subsubsection{Dependência em Loops}
 
 Extendendo o conceito de dependência para \textit{loops} requer alguma forma de
 parametrizar as declarações pelas iterações do \textit{loop} que são
@@ -145,7 +145,7 @@ Considerando o \textit{loop} parametrizado do algoritmo~\ref{loop_param}
 
 o número da iteração será 1 quando $i$ for igual a $L$, será 2 quando $I$ for
 igual a $L+S$ e assim em diante. 
-Formalizando-se o conceito de parametrização;
+Formalizando-se o conceito de parametrização \cite[2.2]{ocfma};
 
 \begin{description}
         \item [Definição 2:] Para um loop arbitrário em que o index $I$ do loop é

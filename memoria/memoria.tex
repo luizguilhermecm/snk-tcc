@@ -1,11 +1,11 @@
 % vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
-\chapter{Memória}
+\section{Memória}
 
-A mais simples maneira de se melhorar o desempenho de um sistema é
+A forma mais simples de se melhorar o desempenho de um sistema é
 replicar os computadores e criar uma forma destes trocarem dados.
 Desta forma consegue-se aumentar o desempenho sem que seja necessário alterar a
-\textit{CPU}.
+\textit{CPU} \cite[2.2]{sopc}.
 
 Com o aumento contínuo da necessidade de desempenho em aplicações cada vez mais
 custosas a maioria dos sistemas paralelos utilizam-se de uma entre duas
@@ -13,7 +13,7 @@ tecnologias, memória distribuída ou memória compartilhada.
 
 
 %-------------------------------------------------------------------------------
-\section{Memória Distribuída}
+\subsection{Memória Distribuída}
 
 Memória distribuída ou \textit{distributed memory} ou \textit{shared-nothing} é
 a mais simples abordagem do ponto de vista de \textit{hardware}. 
@@ -41,11 +41,11 @@ Hoje estes sistemas são comumente conhecidos como \textit{Beowulfs} ou
 realizado na NASA.
 
 %-------------------------------------------------------------------------------
-\section{Memória Compartilhada}
+\subsection{Memória Compartilhada}
 
 Memória compartilhada ou \textit{shared memory} é uma abordagem mais complexa, 
 tornando a memória visível a todos os processadores, permitindo que 
-todos possam carregar e gravar do mesmo endereço de memória. 
+todos possam carregar e gravar do mesmo endereço de memória \cite[2.2]{sopc}. 
 
 Entre as dificuldades desta abordagem, os dois que chamam mais atenção são
 coerência e consistência.

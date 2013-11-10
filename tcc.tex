@@ -15,6 +15,28 @@
 % ---
 % PACOTES
 % ---
+\usepackage{listings}
+\usepackage{color}
+\definecolor{red}{rgb}{0.6,0,0} % for keywords
+\definecolor{green}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{purple}{rgb}{0.5,0,0.35} % strings
+\definecolor{blue}{rgb}{0.25,0.35,0.75} % doc
+ 
+\lstset{language=c,
+basicstyle=\ttfamily,
+keywordstyle=\color{red}\bfseries,
+stringstyle=\color{purple},
+commentstyle=\color{green},
+morecomment=[s][\color{blue}]{/**}{*/},
+numbers=left,
+numberstyle=\tiny\color{black},
+stepnumber=1,
+numbersep=7pt,
+tabsize=2,
+showspaces=false,
+showstringspaces=false}
+
+
 
 % ---
 % Pacotes fundamentais 
@@ -76,31 +98,31 @@
 
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
-% ----------------------------------------------------------
-% \pretextual
-%
-%
-%  \input{1-capa/0-capa}
-%  \input{1-capa/1-folha-de-rosto}
-%  \input{1-capa/2-errata}
-%  \input{1-capa/3-folha-aprovacao}
-%  \input{1-capa/4-dedicatoria}
-%  \input{1-capa/5-agradecimentos}
-%  \input{1-capa/6-epigrafe}
-%  \input{1-capa/7-resumo}
-%  \input{1-capa/8-abstract}
-%
-%% ---
+ ----------------------------------------------------------
+ \pretextual
+
+
+  \input{1-capa/0-capa}
+  \input{1-capa/1-folha-de-rosto}
+  \input{1-capa/2-errata}
+  \input{1-capa/3-folha-aprovacao}
+  \input{1-capa/4-dedicatoria}
+  \input{1-capa/5-agradecimentos}
+  \input{1-capa/6-epigrafe}
+  \input{1-capa/7-resumo}
+  \input{1-capa/8-abstract}
+
+% ---
 % inserir lista de ilustrações
 % ---
 \pdfbookmark[0]{\listfigurename}{lof}
 \listoffigures*
 \cleardoublepage
-% ---
+ ---
 
-% ---
-% inserir lista de tabelas
-% ---
+%---
+%inserir lista de tabelas
+%---
 \pdfbookmark[0]{\listtablename}{lot}
 \listoftables*
 \cleardoublepage
@@ -108,7 +130,7 @@
 
 \input{1-listas/lista-siglas}
 
-\input{1-listas/lista-simbolos}
+%\input{1-listas/lista-simbolos}
 
 
  % ---
@@ -123,6 +145,7 @@
 \input{2-introducao/introducao}
 \input{2-introducao/relacionados.tex}
 
+\chapter{Fundamentação Teórica}
 \input{taxonomia-flynn/taxonomia-flynn}
 	
 \input{memoria/memoria}
@@ -141,6 +164,8 @@
 \input{loops/loop-reversal.tex}
 \input{loops/loop-interchanging.tex}
 
+\input{resultados/resultados.tex}
+
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
 % ----------------------------------------------------------
@@ -150,6 +175,6 @@
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-\bibliography{taxonomia-flynn/bib_taxonomia-flynn,2-introducao/bib_introducao}
+\bibliography{taxonomia-flynn/bib_taxonomia-flynn,2-introducao/bib_introducao,books,memoria/memoria}
 
 \end{document}

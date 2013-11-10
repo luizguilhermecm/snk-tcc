@@ -1,13 +1,13 @@
 % vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
 
-\section{Transformações Simples}
+\subsection{Transformações Simples}
 
 Serão apresentadas algumas transformações simples em \textit{loops} que também
 serão utilizadas em outras técnicas apresentadas neste capítulo.
 
 %-------------------------------------------------------------------------------
-\subsection{Reordenação de Declarações}
+\subsubsection{Reordenação de Declarações}
 
 A reordenação pode ser realizada sobre qualquer granularidade, operação,
 declaração ou sequência de declarações. 
@@ -100,7 +100,7 @@ Uma forma de faze-lo é reornando as declarações para a seguinte ordem $2,\; 3
 
 
 %-------------------------------------------------------------------------------
-\subsection{Unswitching}
+\subsubsection{Unswitching}
 
 \textit{Unswitching} é uma transformação simples que retira do \textit{loop} 
 uma condição que independe do \textit{loop}. 
@@ -208,7 +208,7 @@ algoritmo~\ref{unswitching_inner2}.
 \end{algorithm}
 
 %-------------------------------------------------------------------------------
-\subsection{Loop Peeling}
+\subsubsection{Loop Peeling}
 
 \textit{Loop peeling} remove a primeira ou a ultima iteração do \textit{loop} 
 colocando-a em código separado, podendo ser generalizado e realizado mais 
@@ -262,7 +262,7 @@ possível seria o algoritmo~\ref{peeling_ex2}.
 
 
 %-------------------------------------------------------------------------------
-\subsection{Index Set Splitting}
+\subsubsection{Index Set Splitting}
 
 \textit{Index set splitting} ou \textit{loop splitting} é uma generalização de 
 \textit{loop peeling}. Essa técnica divide o \textit{index set} de um
@@ -309,7 +309,7 @@ resultaria no algoritmo~\ref{iss_ex2}.
 
 
 %-------------------------------------------------------------------------------
-\subsection{Scalar Expansion} 
+\subsubsection{Scalar Expansion} 
 
 Uma vez que escalares são atribuídos e depois utilizados no \textit{loop}, o 
 grafo de dependência irá incluir relações de dependência de fluxo da atribuição 

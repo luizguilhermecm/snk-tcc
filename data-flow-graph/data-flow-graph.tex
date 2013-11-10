@@ -1,7 +1,7 @@
 % vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
 
-\chapter{Data Flow Graph}
+\section{Data Flow Graph}
 
 \textit{Data Flow Graph} (DFG) ou grafo de fluxo de dados, é um modelo para 
 programas que expressa a possibilidade de execução concorrente de partes do
@@ -11,7 +11,7 @@ aplicados a objetos de dados e as arestas representam a ligação entre o nó qu
 produz o dado e o nó que irá consumir aquele dado.
 Na literatura os nós também são chamados de atores.
 Assim, aspectos de controle e de dados de um programa podem ser representados 
-em um único modelo integrado.
+em um único modelo integrado \cite{eopc}.
 
 Embora muitas versões de DFGs tenham sido estudadas na literatura, elas possuem 
 algumas características em comum:
@@ -27,6 +27,32 @@ algumas características em comum:
 
 Os estudos em DFGs tem sido focado principalmente em três modelos bem definidos:
 DFGs estáticos, DFGs dinâmicos e DFGs síncronos.
+
+Um exemplo de DFG pode ser visto na figura~\ref{dfg_ex}.
+
+\begin{figure}
+\centering
+\label{dfg_ex}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+  thick,main node/.style={circle,draw}]
+
+  \node[main node] (1) {1};
+  \node[main node] (2) [below of=1] {2};
+  \node[main node] (3) [below of=2] {3};
+  \node[main node] (4) [below of=3] {4};
+  \node[main node] (5) [below of=4] {5};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge [bend right] node [above] {} (4)
+        edge [bend right] node [above] {} (2)
+    (2) edge [bend left] node [above] {} (5)
+    (3) edge node [above] {} (4)
+        edge [bend right] node [above] {} (5);
+
+\end{tikzpicture}
+\caption{Exemplo de DFG}
+\end{figure}
+
 
 %eopc
 %-------------------------------------------------------------------------------

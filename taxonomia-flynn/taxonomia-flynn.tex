@@ -1,6 +1,6 @@
 % vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
-\chapter{Taxonomia de Flynn}
+\section{Taxonomia de Flynn}
 
 Taxonomia de Flynn, proposta em 1966 \cite{Flynn:1966} por Michael 
 Flynn e expandida em 1972 \cite{Flynn:1972}, é uma das formas de classificar o 
@@ -41,18 +41,20 @@ e cada uma destas classes possui seus tipos de paralelismo específicos.
 
 
 %-------------------------------------------------------------------------------
-\section{SISD: Single Instruction, Single Data}
+\subsection{SISD: Single Instruction, Single Data}
 
 A classe de arquiteturas de processadores \textit{SISD}, inclui a 
-maior parte dos processadores ainda em uso em 2013, os processadores 
+maior parte dos processadores ainda em uso na data da publicação deste trabalho, 
+os processadores 
 \textit{single-core}, embora os programadores não percebam o paralelismo 
 inerente destes, muita concorrência pode estar presente.  
 
-Em 1966 Flynn cita o \textit{pipeline} como uma forma de se obter concorrência 
+Em 1966 Flynn cita em \cite{Flynn:1996} o \textit{pipeline} como uma forma de 
+se obter concorrência 
 nos processadores \textit{SISD}, embora Flynn considere a decodificação das 
 inúmeras \textit{instructions} como sendo um \textit{bottleneck}, devido a 
 tecnologia da época. 
-Em 2013, grande parte dos dos processadores 
+Na data de publicação deste trabalho, grande parte dos dos processadores 
 utilizam-se de \textit{pipeline} assim como também se aproveitam de alguma forma 
 de múltiplas \textit{instructions}.
 
@@ -75,7 +77,7 @@ A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
-\subsection{Processadores Escalares}
+\subsubsection{Processadores Escalares}
 
 Processadores escalares são processadores simples, que executam no 
 máximo uma instrução e no máximo uma operação por ciclo de \textit{clock} de 
@@ -109,7 +111,7 @@ execução sequencial.
 
 
 %-------------------------------------------------------------------------------
-\subsection{Processadores Superescalares}
+\subsubsection{Processadores Superescalares}
 
 Enquanto processadores escalares estão limitados a executar uma única instrução 
 por ciclo de \textit{clock} de máquina os processadores superescalares decoficam
@@ -131,7 +133,7 @@ executarem de quatro a oito instruções por ciclo de \textit{clock} de máquina
 
 
 %-------------------------------------------------------------------------------
-\subsection{Processadores VLIW}
+\subsubsection{Processadores VLIW}
 
 Processadores VLIW (\textit{Very Long Instruction Word}) assim como os
 processadores superescalares decodificam inúmeras instruções por ciclo de
@@ -170,7 +172,7 @@ consegue executar, assim diminuindo o desempenho.
 
 
 %-------------------------------------------------------------------------------
-\section{SIMD: Single Instruction, Multiple Data}
+\subsection{SIMD: Single Instruction, Multiple Data}
 
 A classe de processadores \textit{SIMD} incluem dois tipos de
 processadores, vetoriais e matriciais.
@@ -190,15 +192,15 @@ cada um tendo seu próprio espaço de memória. Processadores vetoriais consiste
 em um único processo que referencia a um espaço de memória global.
 
 %-------------------------------------------------------------------------------
-%\subsection{Processadores Matriciais}
+%\subsubsection{Processadores Matriciais}
 
 
 %-------------------------------------------------------------------------------
-%\subsection{Processadores Vetoriais}
+%\subsubsection{Processadores Vetoriais}
 
 
 %-------------------------------------------------------------------------------
-\section{MISD: Multiple Instruction, Single Data}
+\subsection{MISD: Multiple Instruction, Single Data}
 
 A classe de processadores \textit{MISD} abstratamente é um
 \textit{pipeline} de múltiplas unidades funcionais operando independentemente
@@ -210,7 +212,7 @@ interessado em estranhas formas de computação a classe \textit{MISD} é uma fo
 restritiva e impraticável de paralelismo.
 
 %-------------------------------------------------------------------------------
-\section{MIMD: Multiple Instruction, Multiple Data}
+\subsection{MIMD: Multiple Instruction, Multiple Data}
 
 Na classe de processadores \textit{MIMD} estão os multiprocessadores
 com alguma forma de interconexão entre os processadores. Do ponto de vista do
@@ -229,7 +231,7 @@ processadores \textit{multi-cores} e processadores \textit{multi-threaded}.
 
 
 %-------------------------------------------------------------------------------
-\subsection{Processadores Multi-Threaded}
+\subsubsection{Processadores Multi-Threaded}
 
 Em \textit{multi-threaded} \textit{MIMD}, um processador base é
 estendido para incluir múltiplos conjuntos de registradores para dados e para o
@@ -249,7 +251,7 @@ utilizam de recursos ociosos.
 
 
 %-------------------------------------------------------------------------------
-\subsection{Processadores Multi-Core}
+\subsubsection{Processadores Multi-Core}
 
 Os processadores \textit{multi-core} e também os múltiplos
 \textit{multi-core}, necessitam comunicar os resultados de suas execuções
