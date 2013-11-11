@@ -3,7 +3,22 @@
 
 \chapter{Resultados Experimentais}
 
-\subsection{Teste}
+Este capítulo apresenta os resultado obtidos na aplicação das técnicas e também
+os experimentos feitos que obtiveram ou não resultados positivos.
+
+Para a realização dos experimentos foi escolhido o programa
+\textit{wat\footnote{https://github.com/luizguilhermecm/wat}}, que é um
+equalizador de áudio de 1 e 2 canais.
+
+A escolha de \textit{wat} foi motivado pela fato deste trabalhar com árquivos de
+áudio, ou seja, grandes vetores de dados e \textit{loops} que iterem sobre estes
+dados. 
+Estes \textit{loops} oferecem uma grande chance de ganho de desempenho por
+iterarem um grande número de vezes.
+Ganho de desempenho sobre \textit{wat} resultaria em uma equalização mais rápida.
+
+%-------------------------------------------------------------------------------
+\subsection{Experimentos}
 Analisando o \textit{loop} do algoritmo~\ref{read_data_1} que 
 transforma dois \textit{bytes} em um \textit{double}.
 
@@ -40,7 +55,7 @@ Analisando o \textit{loop} do algoritmo~\ref{fix_data_1} que rearranja os dados
 para computação da FFT. 
 
 O algoritmo~\ref{fix_data_1} é parecido com o algoritmo~\ref{read_data_1}, uma
-vez que ambos contêm declaração \textit{if} independente do \textit{loop} em seu corpo. 
+vez que ambos contêm uma declaração \textit{if} independente do \textit{loop} em seu corpo. 
 Assim, também foi aplicado a técnica \textit{loop unswitching} no
 algoritmo~\ref{fix_data_1}.
 
@@ -67,8 +82,8 @@ realizada a computação da declaração \textit{if} a cada iteração do
 
 %-------------------------------------------------------------------------------
 
-Analisando o algoritmo~\ref{equalize_1} que multiplica um dado vetor por um
-11 fatores de equalização.
+Analisando o \textit{loop} do algoritmo~\ref{equalize_1} o qual multiplica um dado 
+vetor por 11 fatores de equalização.
 
 Assim como os algoritmos~\ref{read_data_1} e~\ref{fix_data_1} o
 algoritmo~\ref{equalize_1} também possui declaração de comparação no corpo do
@@ -80,8 +95,7 @@ Para otimizar este \textit{loop} será aplicado a técnica \textit{index set
 splitting}, uma vez que os limites do \textit{loop} e também o valor de cada
 comparação realizada ser fixo no programa, o \textit{index set splitting} irá
 dividir o \textit{loop} em 11 \textit{loops} com o espaço de iteração variando
-em vez de \textit{BAND\_MIN} até \textit{BAND\_MAX}, variando de
-\textit{BAND\_MIN} até \textit{BAND\_0}, \textit{BAND\_0} até \textit{BAND\_1} e
+de \textit{BAND\_MIN} até \textit{BAND\_0}, \textit{BAND\_0} até \textit{BAND\_1} e
 assim até o ultimo \textit{loop} que irá iterar de \textit{BAND\_9} até
 \textit{BAND\_MAX}. Com isso será eliminado todas as declarações de comparação e
 continuará iterando o mesmo número de vezes.
@@ -108,8 +122,8 @@ mesmo.
 
 %-------------------------------------------------------------------------------
 
-Analisando o algoritmo~\ref{back_data_1} que transforma os dados após a
-aplicação da FFT.
+Analisando o \textit{loop} do algoritmo~\ref{back_data_1} que transforma os 
+dados após a aplicação da FFT.
 
 Como já visto anteriormente nos algoritmos~\ref{read_data_1} e~\ref{fix_data_1}
 o algoritmo~\ref{back_data_1} contém uma declaração \textit{if} no corpo do
@@ -138,17 +152,33 @@ realizada a computação da declaração \textit{if} a cada iteração do
 
 %-------------------------------------------------------------------------------
 
-Analisando o algoritmo~\ref{convert_double_1} que apresenta dois \textit{loops},
-sendo o primeiro converte um vetor \textit{double} em um vetor 
+Analisando os \textit{loops} do  algoritmo~\ref{convert_double_1} que apresenta 
+dois \textit{loops},
+sendo que o primeiro converte um vetor \textit{double} em um vetor 
 \textit{short int} e o segundo \textit{loop} combina os \textit{bytes} do vetor
 \textit{short} em um vetor \textit{unsigned char}.
+
+\begin{algorithm}
+\caption{Loop com declaração if }
+\label{convert_double_1}
+\lstinputlisting[language=c]{resultados/src/convert_double_1.c}
+\end{algorithm}
+
 
 Como já visto anteriormente nos algoritmos~\ref{read_data_1},~\ref{fix_data_1} 
 e~\ref{back_data_1} 
 o algoritmo~\ref{convert_double_1} contém uma declaração \textit{if} no corpo de
-cada \textit{loop} que também são independentes do respectivo \textit{loop}. 
-Assim, será também aplicada a técnica \textit{loop unswitching} em cada um dos
-\textit{loops} do algoritmo~\ref{convert_double_1}.
+cada um dos \textit{loops}, onde ambos são independentes do respectivo \textit{loop}. 
+Sendo assim, foi aplicada a técnica \textit{loop unswitching} em cada um dos
+\textit{loops} do algoritmo~\ref{convert_double_1} e resultando no
+algoritmo~\ref{convert_double_2}.
+
+\begin{algorithm}
+\caption{Loops sem declaração if}
+\label{convert_double_2}
+\lstinputlisting[language=c]{resultados/src/convert_double_2.c}
+\end{algorithm}
+
 
 
 Analisando o algoritmo~\ref{convert_double_2}, nota-se que os 
@@ -158,7 +188,7 @@ espaço de iteração o valor de \textit{wi->nb\_samples}, embora o segundo
 a técnica \textit{loop fusion} nos \textit{loops}, assim unindo-os em um
 único \textit{loop}, sendo necessário ajustar o espaço de iteração. 
 Devido ao
-segundo \textit{loop} utiliza os dados computados pelo primeiro \textit{loop},
+segundo \textit{loop} utilizar os dados computados pelo primeiro \textit{loop},
 será necessário garantir que essa dependência seja mantida.
 
 A aplicação do \textit{loop fusion} sobre o
@@ -167,28 +197,11 @@ algoritmo~\ref{convert_double_2} pode se tornar confusa devido a aplicação do
 algoritmo~\ref{convert_double_3} mostra o 
 resultado de \textit{loop fusion} no algoritmo~\ref{convert_double_2}. 
 
-
-\begin{algorithm}
-\caption{Loop com declaração if }
-\label{convert_double_1}
-\lstinputlisting[language=c]{resultados/src/convert_double_1.c}
-\end{algorithm}
-
-O algoritmo~\ref{convert_double_2} mostra o resultado de \textit{loop
-unswitching} no algoritmo~\ref{convert_double_2}.
-
-\begin{algorithm}
-\caption{Loops sem declaração if}
-\label{convert_double_2}
-\lstinputlisting[language=c]{resultados/src/convert_double_2.c}
-\end{algorithm}
-
 \begin{algorithm}
 \caption{Loop com declaração if }
 \label{convert_double_3}
 \lstinputlisting[language=c]{resultados/src/convert_double_3.c}
 \end{algorithm}
-
 
 
 Com o uso de \textit{loop unswitching} o tempo médio gasto na computação passou
@@ -197,6 +210,32 @@ realizada a computação da declaração \textit{if} a cada iteração do
 \textit{loop}.
 
 
+%-------------------------------------------------------------------------------
+
+Analisando o \textit{loop} do algoritmo~\ref{save_file_1} que salva em arquivo o 
+vetor \textit{buffer}.
+
+Como já visto anteriormente nos algoritmos~\ref{read_data_1},~\ref{fix_data_1} 
+,~\ref{back_data_1} e~\ref{convert_double_1} o algoritmo~\ref{save_file_1}
+também possui uma declaração \textit{if} independente do \textit{loop} em seu
+corpo. Sendo assim foi aplicado a técnica \textit{loop unswitching}.
+Pode também ser observado que o incremento de cada iteração do \textit{loop}
+depende do resultado do \textit{if}, uma vez que este agora determina qual
+\textit{loop} será computado, o valor de incremento de iteração foi alterado
+para o valor de comparação utilizado no \textit{if}. O
+algoritmo~\ref{save_file_2} foi obtido como resultado.
+
+\begin{algorithm}
+\caption{Loops sem declaração if}
+\label{save_file_1}
+\lstinputlisting[language=c]{resultados/src/save_file_1.c}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Loop com declaração if }
+\label{save_file_2}
+\lstinputlisting[language=c]{resultados/src/save_file_2.c}
+\end{algorithm}
 
 
 %\begin{algorithm}

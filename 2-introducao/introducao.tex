@@ -5,12 +5,13 @@
 Diante da  dificuldade de se melhorar processadores \textit{single-core} devido 
 ao alto consumo de energia e as altas temperaturas, a indústria de processadores 
 adotou como solução à esses problemas, o desenvolvimento de processadores 
-\textit{multi-core}, além disso também considerou-se o poder de processamento 
+\textit{multi-core}, ou seja, processadores com mais de um núcleo \cite{aapc}, 
+além disso também considerou-se o poder de processamento 
 quando se utilizam vários processadores \textit{single-core} trabalhando 
 simultaneamente, os quais oferecem grande desempenho, maior eficiência energética 
 e menor custo.
-Porém as aplicações desenvolvidas para a arquitetura \textit{single-core} não 
-utilizam-se do poder computacional dos processadores \textit{multi-core}.
+Porém, as aplicações desenvolvidas para a arquitetura \textit{single-core} não 
+se utilizam do poder computacional dos processadores \textit{multi-core}.
 Para que as aplicações possam usufruir do alto desempenho que estes processadores 
 oferecem, as aplicações devem ser divididas em múltiplas partes para que possam 
 ser executadas em paralelo.
@@ -19,22 +20,22 @@ A paralelização de código permite ao programador resolver problemas com maior
 eficiência, porém projetar e codificar um programa paralelo continua sendo uma 
 tarefa difícil, uma vez que além de dividi-lo em pequenas tarefas, deve-se 
 considerar a concorrência entre elas, as dependências de dados, entre outros 
-fatores que dificultam o trabalho de paralelização 
+fatores que dificultam o trabalho de paralelização \cite{aipp}.
 
 Programas computacionalmente custosos, no geral gastam a maior parte do esforço 
 na execução de \textit{loops}, assim, a maior parte do ganho de eficiência será
 obtido otimizando as partes do software onde há maior esforço computacional.
 As técnicas de reestruturação de \textit{loops} como \textit{loop 
-fusion, loop fission, loop peeling}, entre outras podem ser utilizadas para
+fusion, loop fission, loop peeling}, entre outras, podem ser utilizadas para
 otimizar \textit{loops} e obter ganho de eficiência, melhorar o \textit{data
 locality} e até o consumo energético pode ser diminuído \cite{Liu:2004}.
 
-Neste contexto o objetivo deste trabalho será obter ganho de eficiência atravez da 
+Neste contexto o objetivo deste trabalho será obter ganho de eficiência através da 
 utilização de técnicas de reestruturação de \textit{loops} e de dependências de 
 dados aplicados a um software de equalização de áudio.
 
 O restante deste trabalho está dividido da seguinte forma: O capítulo 2,
   apresenta a fundamentação teória de arquiteturas paralelas, dependência de
-  dados e as técnicas de transformações de \textit{loops}; O capítulo 3, são
-  apresentados os resultados experimentais; O capítulo 4, a conclusão sobre o
-  trablaho.
+  dados e das técnicas de transformações de \textit{loops}; O capítulo 3, é  
+  apresentado os resultados experimentais; O capítulo 4, a conclusão sobre o
+  trabalho.

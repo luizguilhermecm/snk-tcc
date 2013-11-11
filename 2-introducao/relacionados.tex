@@ -20,7 +20,7 @@ cyles"} \cite{Chang:2004}, os autores estudam a exploração de paralelismo de
 de dependências para então extrair paralelismo destes \textit{loops} com menos
 ou nenhuma relação de dependência.
 
-Os autores partem realizando uma revisão teórica, apresentando os principais
+Os autores começam realizando uma revisão teórica, apresentando os principais
 conceitos de dependência, assim como as principais relações de dependências, 
 \textit{true-dependence}, \textit{output-dependence} e \textit{anti-dependence}.  
 São também apresentados alguns conceitos como \textit{loop independent dependence}, 
@@ -29,20 +29,20 @@ São também apresentados alguns conceitos como \textit{loop independent depende
 \textit{intra-statement} dependences e \textit{direction vector matrix} de
 \textit{loops} aninhados.
 
-É colocado pelos autores que os ciclos de relações \textit{anti-dependence} e
-\textit{true-dependence} podem ser quebradas embora \textit{true-dependence} ser
+De acordo com os autores os ciclos de relações \textit{anti-dependence} e
+\textit{true-dependence} podem ser quebradas embora \textit{true-dependence} é 
 inquebrável.
 
 A estratégia para quebrar a relação de dependência \textit{anti-dependence}
 apresentada se baseia no uso de uma técnica de renomeação de variáveis
 chamada \textit{sink}. 
-A partir da qual é criada um variável nova que será utilizada para manter os
+A partir da qual é criada uma variável nova que será utilizada para manter os
 valores daquela envolvida na relação \textit{anti-dependence}.  
 Para \textit{output-dependence} o mesmo algoritmo é apresentado.
 
-Uma vez que os ciclos de relações de \textit{true-dependence} não pode ser
-quebrados, os autores apresentam várias técnicas que premitem amenizar as
-relações de dependências, o resultado deste ultimo algoritmo é especialmente
+Visto que os que os ciclos de relações de \textit{true-dependence} não pode ser
+quebrados, os autores apresentam várias técnicas que permitem amenizar as
+relações de dependências, o resultado deste último algoritmo é especialmente
 voltado para a aplicação de vetorização.
 
 Os autores mostram que a aplicabilidade de seus algoritmos satisfizeram e
@@ -50,8 +50,8 @@ mantiveram todas as relações de dependências iniciais, assim não alterando o
 resultado final.
 
 Os resultados obtidos utilizando \textit{vector loops} mostraram que as técnicas
-propóstas é muito significativa em termos de \textit{speed-up}, a execução dos 
-programas tranformados foram de 41 a 69 vezes rápidos em comparação a execução
+propostas são muito significativa em termos de \textit{speed-up}, a execução dos 
+programas tranformados foram de 41 a 69 vezes mais rápidos em comparação a execução
 dos programas originais.
 
 

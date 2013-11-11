@@ -9,7 +9,7 @@ serem trocados de posição, o \textit{loop} mais externo é trocado pelo mais
 interno.
 No caso de apenas um \textit{loop} carregar todas as dependências, este pode ser
 trocado de posição e se tornar o \textit{loop} mais externo, assim, os outros
-\textit{loops} podem ser executados em paralelo.
+\textit{loops} podem ser executados em paralelo \cite{hpcfpc}.
 
 \textit{Loop interchanging} tem sido utilizado para melhorar o desempenho 
 de um programa.
@@ -80,7 +80,7 @@ colocar estas declarações do \textit{loop} mais externo dentro do corpo do
 ajustar em qual iteração devem ser executadas. 
 Um ajuste possível seria executa-las quando o \textit{index} dos \textit{loops}
 forem iguais, outro ajuste seria a criação de uma nova iteração no início ou fim
-para executa-las.
+para executa-las \cite{hpcfpc}.
 
 Utilizando o ajuste condicional de igualdade  do \textit{index} com mesmo limite
 de percurso aplicada ao algoritmo~\ref{nf_1}, resultaria no

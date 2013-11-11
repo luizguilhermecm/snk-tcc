@@ -26,7 +26,7 @@ superescalares (\textit{superscalar processors}) executam uma ou mais
 \textit{instructions} por ciclo de \textit{clock} da máquina. 
 \end{comment}
 
-Existem no entanto quatro combinações de \textit{streams} que descrevem as 
+Existem, no entanto, quatro combinações de \textit{streams} que descrevem as 
 arquiteturas de computadores mais comuns \cite{Flynn:1996}:
 
 \begin{enumerate}
@@ -52,13 +52,13 @@ inerente destes, muita concorrência pode estar presente.
 Em 1966 Flynn cita em \cite{Flynn:1996} o \textit{pipeline} como uma forma de 
 se obter concorrência 
 nos processadores \textit{SISD}, embora Flynn considere a decodificação das 
-inúmeras \textit{instructions} como sendo um \textit{bottleneck}, devido a 
+inúmeras \textit{instructions} como sendo um \textit{bottleneck}, devido à 
 tecnologia da época. 
-Na data de publicação deste trabalho, grande parte dos dos processadores 
+Na data de publicação deste trabalho, grande parte dos processadores 
 utilizam-se de \textit{pipeline} assim como também se aproveitam de alguma forma 
 de múltiplas \textit{instructions}.
 
-A concorrência em processadores \textit{SISD} são explorados em tempo de execução,
+A concorrência em processadores \textit{SISD} é explorada em tempo de execução,
 realizando mais de uma operação por ciclo de \textit{clock} da máquina.
 %do \textit{stream} de instruções.
 
@@ -72,8 +72,8 @@ A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
                 ambas.
         \item A ordem em que as operações são colocadas e retiradas em relação
                 a ordem original do programa.
-        \item A maneira como o processador irá tratar cada exceção, podendo ser; 
-                preciso, impreciso ou ambos.
+        \item A maneira como o processador irá tratar cada exceção, podendo ser: 
+                preciso impreciso ou ambos.
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
 
 Processadores escalares são processadores simples, que executam no 
 máximo uma instrução e no máximo uma operação por ciclo de \textit{clock} de 
-máquina. 
+máquina \cite[3.5]{aapc}. 
 As instruções do \textit{stream} de instruções são executadas 
 sequencialmente, assim uma nova instrução não será executada até que a execução 
 da instrução em execução seja finalizada e seu resultado devidamente
@@ -90,11 +90,11 @@ A semântica de instrução determina que uma sequência de ações devem ocorre
 para que se obtenha o resultado esperado, sendo: buscar a instrução,
 decodifica-la, acessar o dado ou registrador, execução da operação e armazenar o
 resultado. 
-Podendo ocorrer \textit{overlap} entre as ações mas o resultado deve
+Podendo ocorrer \textit{overlap} entre as ações, mas o resultado deve
 aparecer na ordem especificada.
 Esse comportamento sequencial descreve o modelo de execução sequencial.
 No modelo de execução sequencial, a execução é dita \textit{instruction-precise}
-se encontrar as seguintes condições:
+se encontrar as seguintes condições \cite{eopc}:
 
 \begin{itemize}
         \item Todas as instruções ou operações que precederam a instrução atual
@@ -118,7 +118,8 @@ por ciclo de \textit{clock} de máquina os processadores superescalares decofica
 várias instruções por ciclo de \textit{clock} de máquina, utilizando várias
 unidades funcionais e alocação dinâmica para executar várias instruções por
 ciclo de \textit{clock} de máquina. 
-Processadores superescalares tem um comportamento similar ao \textit{pipeline}.
+Processadores superescalares têm um comportamento similar ao \textit{pipeline}
+\cite{eopc}.
 
 A capacidade de executar múltiplas instruções implica em verificar se existe
 dependências entre as instruções, essa verificação tem que ser feita em nível de
@@ -128,7 +129,7 @@ Processadores superescalares mais avançados geralmente incluem
 assim simplificando o modelo de programação.
 
 Devido a complexidade da lógica para alocação dinâmica das instruções,
-processadores superescalares de alto desempenho em geral estão limitados a
+processadores superescalares de alto desempenho, em geral estão limitados a
 executarem de quatro a oito instruções por ciclo de \textit{clock} de máquina.
 
 
@@ -143,8 +144,8 @@ Ao contrário dos processadores superescalares que utilizam \textit{hardware}
 para realizar alocação dinâmica das instruções, os processadores VLIW executam as 
 instruções através de alocação estática, esta alocação depende de uma análise do
 compilador.
-Assim os processadores VLIW são menos complexos e apresentam desempenho 
-potencialmente maior.
+Assim, os processadores VLIW são menos complexos e apresentam desempenho 
+potencialmente maior \cite{eopc}.
 
 Processadores VLIW apresentam grande desempenho em aplicações que podem ser 
 efetivamente alocadas de forma estática, embora nem todas as aplicações
@@ -154,7 +155,7 @@ Duas classes de execução podem ocorrer e afetar o comportamento da execução
 estática:
 
 \begin{enumerate}
-        \item Atrasos de resultados das operações, devido a diferença da latência
+        \item Atrasos de resultados das operações, devido à diferença da latência
                 ocorrida com a latência considerada durante a alocação pelo
                 compilador.
         \item Exceções ou interrupções que colocam a ordem de execução em um
@@ -168,7 +169,7 @@ memória cache, esse fator é tratado considerando-se o pior caso de latência
 possível e até evitando o uso da memória cache. 
 Na falta de paralelismo para cobrir as lacunas da latênica, resulta na 
 alocação de instruções com um número menor de operações que o processador 
-consegue executar, assim diminuindo o desempenho.
+consegue executar, assim diminuindo o desempenho \cite{ocfma}.
 
 
 %-------------------------------------------------------------------------------
@@ -182,7 +183,7 @@ Em nível de código de máquina, programar para processadores \textit{SIMD} é
 bastante similar a processadores \textit{SISD}, a diferença é realizar operações
 nas estruturas de dados agregadas. Como no processamento de algoritmos 
 científicos há um grande uso de vetores e matrizes, processadores \textit{SIMD}
-tem obtido grande desempenho na área.
+têm obtido grande desempenho na área \cite{eopc}.
 
 Processadores vetoriais e matriciais apresentam diferenças tanto na 
 implementação quanto na organização dos dados.
@@ -205,7 +206,7 @@ em um único processo que referencia a um espaço de memória global.
 A classe de processadores \textit{MISD} abstratamente é um
 \textit{pipeline} de múltiplas unidades funcionais operando independentemente
 sob um único \textit{stream} de dados. Em nível de micro-arquitetura é
-exatamente o que os processadores vetoriais fazem.
+exatamente o que os processadores vetoriais fazem \cite[2.3]{aipp}.
 
 Segundo \cite{Openshaw:1999} exceto no caso de um cientista da computação
 interessado em estranhas formas de computação a classe \textit{MISD} é uma forma
@@ -219,14 +220,14 @@ com alguma forma de interconexão entre os processadores. Do ponto de vista do
 programador, cada processo é executado independentemente e de forma cooperativa
 para solucionar um mesmo problema, embora alguma forma de sincronização entre os
 processos é necessária para que as informações e dados sejam trocados entre os
-processadores.
+processadores \cite{eopc}.
 
-Não existe limitações em que todos os processadores sejam idênticos, embora a
-maioria das configurações \textit{MIMD} sejam homogêneas, com processadores
-idênticos. Configurações heterogênias de processadores são geralmente utilizados
+Não existem limitações em que todos os processadores sejam idênticos, embora a
+maioria das configurações \textit{MIMD} sejam homogêneas com processadores
+idênticos. Configurações heterogêneas de processadores são geralmente utilizados
 para aplicações com propósitos específicos.
 
-Da perspectiva de \textit{hardware} existem dois tipos de \textit{MIMD}, sendo os
+Da perspectiva do \textit{hardware} existem dois tipos de \textit{MIMD}, sendo os
 processadores \textit{multi-cores} e processadores \textit{multi-threaded}.
 
 
@@ -238,14 +239,14 @@ estendido para incluir múltiplos conjuntos de registradores para dados e para o
 programa.
 Com essa configuração, diferentes \textit{threads} ou programas ocupam cada
 conjunto de registrador. Assim que recursos se tornam disponíveis as
-\textit{threads} continuam sua execução.
+\textit{threads} continuam sua execução \cite{Flynn:1996}.
 
 Uma vez que cada \textit{thread} é independente, também o é no uso dos recursos
 disponíveis, assim múltiplas \textit{threads}, fazem melhor uso dos recursos e
-em consequência aumenta-se o números de instruções executadas por ciclo de
+em consequência aumenta-se o número de instruções executadas por ciclo de
 \textit{clock} de máquina.
 
-\textit{Threads} ditas críticas, podem ter prioridade na execução para garantir
+\textit{Threads} ditas críticas podem ter prioridade na execução para garantir
 que sejam executadas em menor tempo, enquanto \textit{threads} não críticas se
 utilizam de recursos ociosos.
 
@@ -254,16 +255,16 @@ utilizam de recursos ociosos.
 \subsubsection{Processadores Multi-Core}
 
 Os processadores \textit{multi-core} e também os múltiplos
-\textit{multi-core}, necessitam comunicar os resultados de suas execuções
+\textit{multi-core} necessitam comunicar os resultados de suas execuções
 através de uma rede de intercomunicação e de controle de tarefas.
 Assim sua implementação é significativamente mais complexa que processadores
 \textit{multi-threaded}.
 
-A rede de intercomunicação de troca dados entre os processadores realiza a
+A rede de intercomunicação de troca de dados entre os processadores realiza a
 sincronização das execuções independentes.
 
 Quanto a comunicação realizada entre os processadores através de memória
 compartilhada surgem dois principais problemas, manter a consistência da memória
 e também a coerência de cache.
 A solução para ambos os problemas se dão em técnicas de \textit{software} e
-\textit{hardware}.
+\textit{hardware} \cite{eopc}.
