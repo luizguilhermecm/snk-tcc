@@ -10,19 +10,20 @@ Para a realização dos experimentos foi escolhido o programa
 \textit{wat\footnote{https://github.com/luizguilhermecm/wat}}, que é um
 equalizador de áudio de 1 e 2 canais.
 
-%A escolha de \textit{wat} foi motivado pela fato deste trabalhar com árquivos de
-%áudio, ou seja, grandes vetores de dados e \textit{loops} que iterem sobre estes
-%dados. 
-%Estes \textit{loops} oferecem uma grande chance de ganho de desempenho por
-%iterarem um grande número de vezes.
-%Ganho de desempenho sobre \textit{wat} resultaria em uma equalização mais rápida.
-
 Á escolha do \textit{wat} foi motivada pelo fato de ser compatível com arquivos 
 compostos de grandes vetores de dados. 
 Arquivos de áudio apresentam essa composição. 
 Sobre esses vetores são iterados \textit{loops} uma grande quantidade de vezes. 
 Isso permite que se ganhe desempenho aplicando modificações sobre os loops do 
 \textit{wat}. Tal ganho de desempenho resulta em uma equalização mais rápida.
+
+Os experimentos realizados foram executados em uma máquina com as seguintes
+configuração: processador, \textit{Intel Core 2 Duo, 2.4 GHz}, 
+memória \textit{4 GB 1064 MHz DD3} e 
+\textit{HD 256 GB Solid State SATA Drive}.
+
+Para compilação dos resultados, foram realizados dez medições de tempo e então
+feita a média geométrica destes tempos.
 
 %-------------------------------------------------------------------------------
 \section{Experimentos}
@@ -73,7 +74,25 @@ O algoritmo~\ref{read_data_unrofis} mostra o resultado de \textit{loop
 unrolling} no algoritmo~\ref{read_data_fission}.
 
 A tabela~\ref{tabela_read_data} apresenta os resultados obtidos sobre o
-algoritmo~\ref{read_data_orig}.
+algoritmo~\ref{read_data_orig}. 
+O algoritmo~\ref{read_data_unroll} obteve o melhor desempenho, embora a melhora
+do algoritmo~\ref{read_data_opt} seja semelhante. 
+Logo, o custo de computação da função \textit{bytes\_to\_double} é o mais
+significativo deste \textit{loop}, fazendo com que a diminuição das comparações
+não obtivesse resultado significativo, apenas aumentando a quantidade de dados a
+ser acessada a cada iteração. 
+Uma solução é apresentada em \cite{Miniskar:2012}, 
+onde o autor propõe utilizar funções \textit{inline} com o intuito de diminuir o custo
+de acesso à função.
+
+O algoritmo~\ref{read_data_fission} obteve resultado negativo em seu desempenho,
+aumentando em 31 \textit{ms} no tempo da computação, este é um indício de que a
+quantidade de dados acessados a cada iteração não é o suficiente para suprir a
+quantidade de dados suportada pela memoria \textit{cache} e \textit{instruction
+cache}. 
+O uso de \textit{loop unrolling} no algoritmo~\ref{read_data_fission} fez com
+que aumentasse a quantidade de dados acessados por iteração, assim, melhorando seu
+desempenho, mas ainda sendo maior que o algoritmo retirado de \textit{wat}.
 
 \begin{table}[H]
   \caption{Resultados das técnicas sobre o algoritmo~\ref{read_data_orig}.}
@@ -82,15 +101,15 @@ algoritmo~\ref{read_data_orig}.
   \begin{tabular}{c|c|c}
     Algoritmo & Técnicas aplicadas & Tempo de execução\\
     \hline
-    Algoritmo~\ref{read_data_orig} & nenhuma & 111 \textit{ms} \\
+    Algoritmo~\ref{read_data_orig} & nenhuma & 470 \textit{ms} \\
     \hline
-    Algoritmo~\ref{read_data_opt} & \textit{loop unswitching} & 111 \textit{ms} \\
+    Algoritmo~\ref{read_data_opt} & \textit{loop unswitching} & 448 \textit{ms} \\
     \hline
-    Algoritmo~\ref{read_data_unroll} & \textit{loop unswitching, loop unroll} & 221 \textit{ms} \\
+    Algoritmo~\ref{read_data_unroll} & \textit{loop unswitching, loop unroll} & 444 \textit{ms} \\
     \hline
-    Algoritmo~\ref{read_data_fission} & \textit{loop unswitching, loop fission} & 111 \textit{ms} \\
+    Algoritmo~\ref{read_data_fission} & \textit{loop unswitching, loop fission} & 501 \textit{ms} \\
     \hline
-  Algoritmo~\ref{read_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} & 111 \textit{ms} \\
+  Algoritmo~\ref{read_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} &  480 \textit{ms} \\
     \hline
   \end{tabular}
 \end{center}
@@ -153,12 +172,21 @@ no algoritmo~\ref{fix_data_opt}.
 
 Com algoritmo~\ref{fix_data_fission} agora com três \textit{loops}. Será
 aplicado \textit{loop unrolling} neste para que o número de iterações em cada
-\textit{loop} seja dividido por dois. 
+\textit{loop} seja dividido por quatro. 
 O algoritmo~\ref{fix_data_unrofis} mostra o resultado de \textit{loop unrolling}
 no algoritmo~\ref{fix_data_fission}.
 
 A tabela~\ref{tabela_fix_data} apresenta os resultados obtidos sobre o
 algoritmo~\ref{fix_data_orig}.
+O algoritmo~\ref{fix_data_unrofis} obteve o melhor desempenho, utilizando as
+técnicas \textit{loop unswitching, loop fission} e \textit{loop unrolling}.
+O algoritmo~\ref{fix_data_fission} obteve o pior desempenho devido a iteração
+sobre uma quantidade pequena de dados, assim não utilizando os benefícios da 
+memória \textit{cache} e \textit{memory locality}.
+A melhora do algoritmo~\ref{fix_data_unrofis} sobre o
+algoritmo~\ref{fix_data_unroll} deve-se ao fato do
+algoritmo~\ref{fix_data_unrofis} iterar sobre um mesmo conjunto de vetores,
+assim, desfrutando dos benefícios de \textit{memory locality}.
 
 \begin{table}[H]
   \caption{Resultados das técnicas sobre o algoritmo~\ref{fix_data_orig}.}
@@ -167,15 +195,16 @@ algoritmo~\ref{fix_data_orig}.
   \begin{tabular}{c|c|c}
     Algoritmo & Técnicas aplicadas & Tempo de execução\\
     \hline
-    Algoritmo~\ref{fix_data_orig} & nenhuma & 111 \textit{ms} \\
+    Algoritmo~\ref{fix_data_orig} & nenhuma & 485 \textit{ms} \\
     \hline
-    Algoritmo~\ref{fix_data_opt} & \textit{loop unswitching} & 111 \textit{ms} \\
+    Algoritmo~\ref{fix_data_opt} & \textit{loop unswitching} & 462 \textit{ms} \\
     \hline
-    Algoritmo~\ref{fix_data_unroll} & \textit{loop unswitching, loop unroll} & 221 \textit{ms} \\
+    Algoritmo~\ref{fix_data_unroll} & \textit{loop unswitching, loop unroll} & 443 \textit{ms} \\
     \hline
-    Algoritmo~\ref{fix_data_fission} & \textit{loop unswitching, loop fission} & 111 \textit{ms} \\
+    Algoritmo~\ref{fix_data_fission} & \textit{loop unswitching, loop fission} & 485 \textit{ms} \\
     \hline
-  Algoritmo~\ref{fix_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} & 111 \textit{ms} \\
+    Algoritmo~\ref{fix_data_unrofis} & \textit{loop unswitching, loop fisson,
+                        loop unroll} & 435 \textit{ms} \\
     \hline
   \end{tabular}
 \end{center}
@@ -242,7 +271,11 @@ O algoritmo~\ref{equalize_unroll} mostra o resultado de \textit{loop unrolling}
 no algoritmo~\ref{equalize_opt}.
 
 A tabela~\ref{tabela_equalize} apresenta os resultados obtidos sobre o
-algoritmo~\ref{equalize_orig}.
+algoritmo~\ref{equalize_orig}. O algoritmo~\ref{equalize_unroll} obteve o melhor
+desempenho, onde fora aplicado \textit{index set splitting} dividindo o
+\textit{loop} em onze novos \textit{loops} sem declarações de comparações
+aninhadas. A técnica \textit{loop unrolling} dividiu por dois a quantidade de
+iterações dos onze \textit{loops}.
 
 \begin{table}[H]
   \caption{Resultados das técnicas sobre o algoritmo~\ref{equalize_orig}.}
@@ -251,11 +284,12 @@ algoritmo~\ref{equalize_orig}.
   \begin{tabular}{c|c|c}
     Algoritmo & Técnicas aplicadas & Tempo de execução\\
     \hline
-    Algoritmo~\ref{equalize_orig} & nenhuma & 111 \textit{ms} \\
+    Algoritmo~\ref{equalize_orig} & nenhuma & 240 \textit{ms} \\
     \hline
-    Algoritmo~\ref{equalize_opt} & \textit{index set splitting} & 111 \textit{ms} \\
+    Algoritmo~\ref{equalize_opt} & \textit{index set splitting} & 145 \textit{ms} \\
     \hline
-    Algoritmo~\ref{equalize_unroll} & \textit{index set splitting, loop unroll} & 221 \textit{ms} \\
+    Algoritmo~\ref{equalize_unroll} & \textit{index set splitting, loop unroll}
+                                    & 75 \textit{ms} \\
     \hline
   \end{tabular}
 \end{center}
@@ -311,6 +345,15 @@ dos \textit{loops}. O algoritmo~\ref{back_data_unrofis} mostra o resultado de
 
 A tabela~\ref{tabela_back_data} apresenta os resultados obtidos sobre o
 algoritmo~\ref{back_data_orig}.
+O algoritmo~\ref{back_data_unrofis} apresentou o melhor desempenho, a melhora no
+desempenho seguiu de acordo com a ordem em que as técnicas foram sendo aplicadas, 
+removendo-se
+declarações de comparação do corpo do \textit{loop} com \textit{loop
+unswitching} e então dividindo em dois
+\textit{loops} com \textit{loop fission}, iterando sobre um conjunto de dados único 
+e então multiplicando o
+corpo do \textit{loop} com \textit{loop unrolling} diminuindo o número de iterações, 
+desta forma, aproveitando os benefícios de \textit{memory locality}.
 
 \begin{table}[H]
   \caption{Resultados das técnicas sobre o algoritmo~\ref{back_data_orig}.}
@@ -319,15 +362,15 @@ algoritmo~\ref{back_data_orig}.
   \begin{tabular}{c|c|c}
     Algoritmo & Técnicas aplicadas & Tempo de execução\\
     \hline
-    Algoritmo~\ref{back_data_orig} & nenhuma & 111 \textit{ms} \\
+    Algoritmo~\ref{back_data_orig} & nenhuma & 150 \textit{ms} \\
     \hline
-    Algoritmo~\ref{back_data_opt} & \textit{loop unswitching} & 111 \textit{ms} \\
+    Algoritmo~\ref{back_data_opt} & \textit{loop unswitching} & 147 \textit{ms} \\
     \hline
-    Algoritmo~\ref{back_data_unroll} & \textit{loop unswitching, loop unroll} & 221 \textit{ms} \\
+    Algoritmo~\ref{back_data_unroll} & \textit{loop unswitching, loop unroll} & 148 \textit{ms} \\
     \hline
-    Algoritmo~\ref{back_data_fission} & \textit{loop unswitching, loop fission} & 111 \textit{ms} \\
+    Algoritmo~\ref{back_data_fission} & \textit{loop unswitching, loop fission} & 150 \textit{ms} \\
     \hline
-  Algoritmo~\ref{back_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} & 111 \textit{ms} \\
+    Algoritmo~\ref{back_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} & 144 \textit{ms} \\
     \hline
   \end{tabular}
 \end{center}
@@ -380,6 +423,11 @@ Sendo assim, foi aplicada a técnica \textit{loop unswitching} em cada um dos
 \textit{loops} do algoritmo~\ref{convert_double_orig} e resultando no
 algoritmo~\ref{convert_double_opt}.
 
+Para diminuir o número de iterações do algoritmo~\ref{convert_double_opt} será
+aplicado \textit{loop unrolling}. O algoritmo~\ref{convert_double_unroll} mostra
+o resultado de \textit{loop unrolling} nos \textit{loops} do
+algoritmo~\ref{convert_double_opt}.
+
 O algoritmo~\ref{convert_double_opt} agora sem declaração \textit{if} no corpo
 do \textit{loops} apresenta dois \textit{loops} para cada resultado de
 \textit{if} ou \textit{else if}, sendo assim, foi feito uma reordenação das
@@ -408,18 +456,22 @@ ficasse mais legível.
 O algoritmo~\ref{convert_double_fusion} mostra o 
 resultado de \textit{loop fusion} no algoritmo~\ref{convert_double_reo}. 
 
-O algoritmo~\ref{convert_double_fusion} apresenta dois \textit{loops}, onde o
-segundo \textit{loop} itera sobre uma cinco vetores com um número de iteração
-igual ao número de \textit{bytes} do arquivo de áudio. 
-Será aplicado \textit{loop fission} no segundo \textit{loop} com o intuito de
-dividi-lo em dois \textit{loops} onde cada um itere sobre um dos canais de
-áudio.
-O algoritmo~\ref{convert_double_fission} mostra o resultado de \textit{loop
-fission} no algoritmo~\ref{convert_double_fusion}.
-
 
 A tabela~\ref{tabela_convert_double} apresenta os resultados obtidos sobre o
 algoritmo~\ref{convert_double_orig}.
+O algoritmo~\ref{convert_double_unroll} apresentou o melhor desempenho, uma vez
+que, a técnica \textit{loop unswitching} fez com que fosse realizada as
+comparações de \textit{if, else if} uma única vez e não em cada iteração.
+O uso de \textit{loop unrolling} fez com que o número de iteração fosse dividido
+por dois, assim diminuindo o número de comparações realizadas na condição do
+\textit{loop}. 
+
+O algoritmo~\ref{convert_double_fusion} onde fora aplicado \textit{loop fusion}
+e \textit{loop unswitching}, mesmo apresentando melhora no desempenho não superou
+o uso de \textit{loop unrolling} no algoritmo~\ref{convert_double_opt}.
+Essa melhora menos significativa deve-se a desvantagem de \textit{loop
+fusion}, onde o aumento de dados acessados em cada iteração pode prejudicar o
+reuso da memória \textit{cache} \cite{Rivera:1999}.
 
 
 \begin{table}[H]
@@ -429,13 +481,14 @@ algoritmo~\ref{convert_double_orig}.
   \begin{tabular}{c|c|c}
     Algoritmo & Técnicas aplicadas & Tempo de execução\\
     \hline
-    Algoritmo~\ref{convert_double_orig} & nenhuma & 111 \textit{ms} \\
+    Algoritmo~\ref{convert_double_orig} & nenhuma & 494 \textit{ms} \\
     \hline
-    Algoritmo~\ref{convert_double_opt} & \textit{loop unswitching} & 111 \textit{ms} \\
+    Algoritmo~\ref{convert_double_opt} & \textit{loop unswitching} & 450 \textit{ms} \\
     \hline
-    Algoritmo~\ref{convert_double_fusion} & \textit{loop unswitching, loop fusion} & 221 \textit{ms} \\
+    Algoritmo~\ref{convert_double_unroll} & \textit{loop unswitching, loop
+                                unrolling}& 422 \textit{ms} \\
     \hline
-    Algoritmo~\ref{convert_double_fission} & \textit{loop unswitching, loop fusion, loop fission} & 111 \textit{ms} \\
+    Algoritmo~\ref{convert_double_fusion} & \textit{loop unswitching, loop fusion} & 477 \textit{ms} \\
     \hline
   \end{tabular}
 \end{center}
@@ -450,6 +503,12 @@ algoritmo~\ref{convert_double_orig}.
 \end{algorithm}
 
 \begin{algorithm}[H]
+  \caption{\textit{Loop unrolling} no algoritmo~\ref{convert_double_opt}.}
+\label{convert_double_unroll}
+\lstinputlisting[language=c]{resultados/src/convert_double_unroll.c}
+\end{algorithm}
+
+\begin{algorithm}[H]
   \caption{Reordenação das declarações do algoritmo~\ref{convert_double_opt}.}
 \label{convert_double_reo}
 \lstinputlisting[language=c]{resultados/src/convert_double_reo.c}
@@ -460,13 +519,6 @@ algoritmo~\ref{convert_double_orig}.
 \label{convert_double_fusion}
 \lstinputlisting[language=c]{resultados/src/convert_double_fusion.c}
 \end{algorithm}
-
-\begin{algorithm}[H]
-  \caption{\textit{Loop fission} no algoritmo~\ref{convert_double_fusion}.}
-\label{convert_double_fission}
-\lstinputlisting[language=c]{resultados/src/convert_double_fission.c}
-\end{algorithm}
-
 %%-------------------------------------------------------------------------------
 \subsection{Experimento 6}
 
@@ -490,8 +542,9 @@ resultado de \textit{loop unrolling} no algoritmo~\ref{save_file_orig}.
 \end{algorithm}
 
 A tabela~\ref{tabela_save_file} apresenta os resultados obtidos sobre o
-algoritmo~\ref{save_file_orig}.
-
+algoritmo~\ref{save_file_orig}. 
+A técnica \textit{loop unrolling} aplicada melhorou o tempo em 514 \textit{ms},
+sendo que a leitura e escrita em disco é um dos gargalos de \textit{wat}.
 
 \begin{table}[H]
   \caption{Resultados das técnicas sobre o algoritmo~\ref{save_file_orig}.}
@@ -500,9 +553,9 @@ algoritmo~\ref{save_file_orig}.
   \begin{tabular}{c|c|c}
     Algoritmo & Técnicas aplicadas & Tempo de execução\\
     \hline
-    Algoritmo~\ref{save_file_orig} & nenhuma & 111 \textit{ms} \\
+    Algoritmo~\ref{save_file_orig} & nenhuma & 6910 \textit{ms} \\
     \hline
-    Algoritmo~\ref{save_file_unroll} & \textit{loop unrolling} & 221 \textit{ms} \\
+    Algoritmo~\ref{save_file_unroll} & \textit{loop unrolling} & 6296 \textit{ms} \\
     \hline
   \end{tabular}
 \end{center}
@@ -521,9 +574,41 @@ algoritmo~\ref{save_file_orig}.
 %%-------------------------------------------------------------------------------
 \section{Resultados Experimentais}
 
-Analisando todos os \textit{loops} otimizados houve uma melhora na desempenho
-destes em um total de XXX \textit{ms}. Considerando o tempo total do programa a
-melhora do desempenho passa a não ser tão considerável devido ao fato de o
-cálculo da FFT já estar otimizado e nada mais pode ser feito para melhora-lo.
+Considerando os resultados experimentais da tabela~\ref{tabela_resultados}.
+O tempo total de execução dos \textit{loops} analisados foi de 8750 \textit{ms},
+após a aplicação das técnicas de tranformação de \textit{loops} o tempo total
+foi de 7816 \textit{ms}, ou seja, houve uma melhora de 11.94\% no tempo de  
+computação destes \textit{loops}.
 
-%\lstinputlisting[language=c]{resultados/src/file.c}
+\begin{table}[h]
+  \caption{Resultados experimentais.}
+  \label{tabela_resultados}
+\begin{center}
+  \begin{tabular}{c|c|c|c}
+    Experimento & Tempo sem otimização & Tempo com otimização & Ganho \%\\
+    \hline
+    1 & 470 \textit{ms} & 444 \textit{ms} & 5.85\% \\
+    \hline
+    2 & 485 \textit{ms} & 435 \textit{ms} & 11.26\% \\
+    \hline
+    3 & 240 \textit{ms} & 75 \textit{ms} & 320\% \\
+    \hline
+    4 & 150 \textit{ms} & 144 \textit{ms} & 4.16\% \\
+    \hline
+    5 & 494 \textit{ms} & 422 \textit{ms} & 17.06\% \\
+    \hline
+    6 & 6910 \textit{ms} & 6296 \textit{ms} & 9.75\% \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+Considerando o tempo de execução de \textit{wat} na equalização de um
+arquivo de áudio \textit{sterio} (2 canais de áudio) de 40 \textit{MB} e
+com 4 minutos e 15 segundos de duração. 
+O tempo total de execução de \textit{wat} sem otimização é de 19396 \textit{ms} 
+e o tempos de execução otimizado é de 18062 \textit{ms}, ou seja, uma melhora de 
+7.5\%. 
+O percentual de desempenho é menor devido ao fato de que o cálculo da
+transformada de Fourier \cite{fft} utilizado em \textit{wat} não pode ser otimizado, uma
+vez que, foi utilizado um código já otimizado para este cálculo.

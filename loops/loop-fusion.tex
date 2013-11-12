@@ -19,7 +19,7 @@ dados melhoram o \textit{temporal locality}, podendo assim impactar
 significativamente o desempenho da memória \textit{cache} e da memória virtual.
 Outra vantagem do uso de \textit{loop fusion} é tirar vantagem de otimizações 
 escalares mais eficiêntes no corpo do \textit{loop}, uma vez que o mesmo ficou
-maior após o seu uso \cite{hpcfpc}.
+maior após o seu uso \cite{McKinley:1996}.
 
 No algoritmo~\ref{fusion_ex} tem-se dois \textit{loops} adjacentes com limites
 compatíveis. 
@@ -150,7 +150,8 @@ código em algumas iterações.
 Ambas as alternativas possuem desvantagens, se utilizado \textit{loop peeling}
 ou \textit{index set splitting} irá adicionar mais código com um \textit{loop}
 extra, mesmo que pequeno. Se adicionar uma declaração condicional dentro do
-\textit{loop} deve-se considerar o \textit{overhead} sobre o teste condicional.
+\textit{loop} deve-se considerar o \textit{overhead} sobre o teste condicional
+\cite{Rivera:1999}.
 
 Se os \textit{loops} não forem adjacentes, será então necessário reordenar as
 delcarações para que se tornem adjacentes.

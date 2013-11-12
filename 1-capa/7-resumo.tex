@@ -1,7 +1,15 @@
 % vim: set ai tw=80 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
 \begin{resumo}
-        Paralelização de código permite ao programador a oportunidade de criar algoritmos para resolver problemas com maior eficiência.
-        Programas são ditos paralelos quando existem duas ou mais ações executando simultaneamente em diferentes unidades de processamento.
-        O objetivo deste trabalho é estudar técnicas de paralelização de código e tentar desenvolver uma nova otimização ou técnica de paralelização.
+O objetivo deste trabalho é otimizar a computação de \textit{loops}, os quais 
+são conhecidos por serem responsáveis pelo maior gasto computacional de um 
+programa. 
+\textit{Loops} com grande número de iterações sobre grandes vetores de dados,
+são os que apresentam grande gasto computacional e consequentemente maior chance
+de resultado na otimização.
+Técnicas de transformações de \textit{loops} como, \textit{loop unswitching, 
+loop fission, loop fusion, loop unrolling}, entre outras, foram utilizadas para 
+otimização.
+A análise de dependência de dados foi utilizada para manter o significado do 
+programa depois das otimizações.
 \end{resumo}
