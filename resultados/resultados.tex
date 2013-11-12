@@ -1,187 +1,396 @@
 % vim: set ai tw=80 sw=2 fileencoding=utf8: 
 %-------------------------------------------------------------------------------
+\chapter{Experimentos e Resultados}
 
-\chapter{Resultados Experimentais}
-
-Este capítulo apresenta os resultado obtidos na aplicação das técnicas e também
-os experimentos feitos que obtiveram ou não resultados positivos.
+Este capítulo apresenta os resultado obtidos na aplicação das técnicas de
+transformação de \textit{loops} e também
+os experimentos realizados.
 
 Para a realização dos experimentos foi escolhido o programa
 \textit{wat\footnote{https://github.com/luizguilhermecm/wat}}, que é um
 equalizador de áudio de 1 e 2 canais.
 
-A escolha de \textit{wat} foi motivado pela fato deste trabalhar com árquivos de
-áudio, ou seja, grandes vetores de dados e \textit{loops} que iterem sobre estes
-dados. 
-Estes \textit{loops} oferecem uma grande chance de ganho de desempenho por
-iterarem um grande número de vezes.
-Ganho de desempenho sobre \textit{wat} resultaria em uma equalização mais rápida.
+%A escolha de \textit{wat} foi motivado pela fato deste trabalhar com árquivos de
+%áudio, ou seja, grandes vetores de dados e \textit{loops} que iterem sobre estes
+%dados. 
+%Estes \textit{loops} oferecem uma grande chance de ganho de desempenho por
+%iterarem um grande número de vezes.
+%Ganho de desempenho sobre \textit{wat} resultaria em uma equalização mais rápida.
+
+Á escolha do \textit{wat} foi motivada pelo fato de ser compatível com arquivos 
+compostos de grandes vetores de dados. 
+Arquivos de áudio apresentam essa composição. 
+Sobre esses vetores são iterados \textit{loops} uma grande quantidade de vezes. 
+Isso permite que se ganhe desempenho aplicando modificações sobre os loops do 
+\textit{wat}. Tal ganho de desempenho resulta em uma equalização mais rápida.
 
 %-------------------------------------------------------------------------------
-\subsection{Experimentos}
-Analisando o \textit{loop} do algoritmo~\ref{read_data_1} que 
+\section{Experimentos}
+
+Nesta seção serão apresentados os testes e experimentos realizados sobre os
+\textit{loops} extraídos de \textit{wat}, assim como seus resultados
+individuais. 
+
+\subsection{Experimento 1}
+Analisando o \textit{loop} do algoritmo~\ref{read_data_orig} o qual 
 transforma dois \textit{bytes} em um \textit{double}.
 
+\begin{algorithm}[H]
+  \caption{\textit{Loop} extraído do \textit{wat}.}
+    \label{read_data_orig}
+\lstinputlisting[language=c]{resultados/src/read_data_orig.c}
+\end{algorithm}
+
+
 Devido a existência de uma declaração \textit{if} no corpo do \textit{loop} e
-sendo este \textit{if} independente do \textit{loop} foi
-aplicado a técnica \textit{loop unswitching}, que retira a comparação
-\textit{if} do corpo do \textit{loop} envolvendo um \textit{loop} para cada caso
+sendo este \textit{if} independente do \textit{loop}. 
+Foi aplicado a técnica \textit{loop unswitching}, que retira a comparação
+\textit{if} do corpo do \textit{loop} envolvendo um novo \textit{loop} para cada caso
 da comparação, assim nenhum dos \textit{loops} terão declações de comparação em seu
 corpo.
+O algoritmo~\ref{read_data_opt} mostra o resultado do
+algoritmo~\ref{read_data_orig} após a alteração com o uso de \textit{loop unswitching}.
 
-\begin{algorithm}
-    \caption{Declaração \textit{if} independente do loop}
-    \label{read_data_1}
-\lstinputlisting[language=c]{resultados/src/read_data_1.c}
+Considerando o algoritmo~\ref{read_data_opt} será aplicado a técnica 
+\textit{loop unroll} com o intuito de diminuir o número de iterações e 
+consequentemente a
+quantidade de comparações realizadas no \textit{loop} em duas vezes. 
+O algoritmo~\ref{read_data_unroll} mostra o resultado do \textit{loop
+unroll} duplicando o corpo do \textit{loop}.
+
+Considerando o algoritmo~\ref{read_data_opt} onde o primeiro \textit{loop} itera
+sobre dois vetores e o segundo \textit{loop} itera
+sobre três vetores, será aplicado \textit{loop fission} dividindo-os de forma
+que cada \textit{loop} itere somente sobre um vetor.
+O algoritmo~\ref{read_data_fission} mostra o resultado de \textit{loop fission}
+no algoritmo~\ref{read_data_opt}.
+
+O algoritmo~\ref{read_data_fission} apresenta cinco \textit{loops}, cada um
+iterando sobre um vetor. Será aplicado \textit{loop unrolling} dobrando o corpo
+de cada um dos \textit{loops} para que o número de iterações seja dividido por
+dois.
+O algoritmo~\ref{read_data_unrofis} mostra o resultado de \textit{loop
+unrolling} no algoritmo~\ref{read_data_fission}.
+
+A tabela~\ref{tabela_read_data} apresenta os resultados obtidos sobre o
+algoritmo~\ref{read_data_orig}.
+
+\begin{table}[H]
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{read_data_orig}.}
+  \label{tabela_read_data}
+\begin{center}
+  \begin{tabular}{c|c|c}
+    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+    \hline
+    Algoritmo~\ref{read_data_orig} & nenhuma & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{read_data_opt} & \textit{loop unswitching} & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{read_data_unroll} & \textit{loop unswitching, loop unroll} & 221 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{read_data_fission} & \textit{loop unswitching, loop fission} & 111 \textit{ms} \\
+    \hline
+  Algoritmo~\ref{read_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} & 111 \textit{ms} \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+
+\begin{algorithm}[H]
+  \caption{\textit{Loop unswitching} no algoritmo~\ref{read_data_orig}.}
+    \label{read_data_opt}
+\lstinputlisting[language=c]{resultados/src/read_data_opt.c}
 \end{algorithm}
 
-O algoritmo~\ref{read_data_2} mostra o resultado do algoritmo~\ref{read_data_1} 
-após o \textit{loop unswitching}.
+\begin{algorithm}[H]
+  \caption{\textit{Loop unroll} no algoritmo~\ref{read_data_opt}.}
+    \label{read_data_unroll}
+\lstinputlisting[language=c]{resultados/src/read_data_unroll.c}
+\end{algorithm}
 
-Com o uso de \textit{loop unswitching} o tempo médio gasto na computação deste
-\textit{loop}, passou de 696 ms para 461 ms, este ganho deve-se ao fato de não
-ser mais necessário a computação do \textit{if} a cada iteração. 
+\begin{algorithm}[H]
+  \caption{\textit{Loop fission} no algoritmo~\ref{read_data_opt}.}
+    \label{read_data_fission}
+\lstinputlisting[language=c]{resultados/src/read_data_fission.c}
+\end{algorithm}
 
-
-\begin{algorithm}
-    \caption{Loop sem declaração if }
-    \label{read_data_2}
-\lstinputlisting[language=c]{resultados/src/read_data_2.c}
+\begin{algorithm}[H]
+  \caption{\textit{Loop unrolling} no algoritmo~\ref{read_data_fission}.}
+    \label{read_data_unrofis}
+\lstinputlisting[language=c, basicstyle=\tiny ]{resultados/src/read_data_unrofis.c}
 \end{algorithm}
 
 %-------------------------------------------------------------------------------
+\subsection{Experimento 2}
 
-Analisando o \textit{loop} do algoritmo~\ref{fix_data_1} que rearranja os dados
-para computação da FFT. 
+Analisando o \textit{loop} do algoritmo~\ref{fix_data_orig} que rearranja os dados
+para o calculo da FFT. 
 
-O algoritmo~\ref{fix_data_1} é parecido com o algoritmo~\ref{read_data_1}, uma
+\begin{algorithm}[H]
+  \caption{Loop extraído do \textit{wat}.}
+    \label{fix_data_orig}
+\lstinputlisting[language=c]{resultados/src/fix_data_orig.c}
+\end{algorithm}
+
+O algoritmo~\ref{fix_data_orig} é parecido com o algoritmo~\ref{read_data_orig}, uma
 vez que ambos contêm uma declaração \textit{if} independente do \textit{loop} em seu corpo. 
 Assim, também foi aplicado a técnica \textit{loop unswitching} no
-algoritmo~\ref{fix_data_1}.
+algoritmo~\ref{fix_data_orig}.
+O algoritmo~\ref{fix_data_opt} mostra o resultado da aplicação de \textit{loop
+unswitching} no algoritmo~\ref{fix_data_orig}.
+
+Com o intuito de diminuir o número de iterações será aplicado \textit{loop
+unroll} no algoritmo~\ref{fix_data_opt}. 
+O algoritmo~\ref{fix_data_unroll} mostra o resultado de \textit{loop unroll} no
+algoritmo~\ref{fix_data_opt}.
+
+Considerando o algoritmo~\ref{fix_data_opt} onde o segundo \textit{loop} itera
+sobre dois vetores. Será aplicado \textit{loop fission}, dividindo-o em dois 
+\textit{loops} onde cada um itere em um vetor.
+O algoritmo~\ref{fix_data_fission} mostra o resultado de \textit{loop fission}
+no algoritmo~\ref{fix_data_opt}.
+
+Com algoritmo~\ref{fix_data_fission} agora com três \textit{loops}. Será
+aplicado \textit{loop unrolling} neste para que o número de iterações em cada
+\textit{loop} seja dividido por dois. 
+O algoritmo~\ref{fix_data_unrofis} mostra o resultado de \textit{loop unrolling}
+no algoritmo~\ref{fix_data_fission}.
+
+A tabela~\ref{tabela_fix_data} apresenta os resultados obtidos sobre o
+algoritmo~\ref{fix_data_orig}.
+
+\begin{table}[H]
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{fix_data_orig}.}
+  \label{tabela_fix_data}
+\begin{center}
+  \begin{tabular}{c|c|c}
+    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+    \hline
+    Algoritmo~\ref{fix_data_orig} & nenhuma & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{fix_data_opt} & \textit{loop unswitching} & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{fix_data_unroll} & \textit{loop unswitching, loop unroll} & 221 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{fix_data_fission} & \textit{loop unswitching, loop fission} & 111 \textit{ms} \\
+    \hline
+  Algoritmo~\ref{fix_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} & 111 \textit{ms} \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
 
 
-\begin{algorithm}
-    \caption{Loop com declaração if }
-    \label{fix_data_1}
-\lstinputlisting[language=c]{resultados/src/fix_data_1.c}
+
+\begin{algorithm}[H]
+  \caption{\textit{Loop unswitching} no algoritmo~\ref{fix_data_orig}.}
+    \label{fix_data_opt}
+\lstinputlisting[language=c]{resultados/src/fix_data_opt.c}
 \end{algorithm}
 
-O algoritmo~\ref{fix_data_2} mostra o resultado da aplicação de \textit{loop
-unswitching} no algoritmo~\ref{fix_data_1}.
-
-\begin{algorithm}
-    \caption{Loop sem declaração if }
-    \label{fix_data_2}
-\lstinputlisting[language=c]{resultados/src/fix_data_2.c}
+\begin{algorithm}[H]
+  \caption{\textit{Loop unroll} no algoritmo~\ref{fix_data_opt}.}
+    \label{fix_data_unroll}
+\lstinputlisting[language=c]{resultados/src/fix_data_unroll.c}
 \end{algorithm}
 
-Com o uso de \textit{loop unswitching} o tempo médio gasto na computação passou
-de XXX \textit{ms} para YYY \textit{ms}, este ganho deve ao fato de não ser
-realizada a computação da declaração \textit{if} a cada iteração do
-\textit{loop}.
+\begin{algorithm}[H]
+  \caption{\textit{Loop fission} no algoritmo~\ref{fix_data_opt}.}
+    \label{fix_data_fission}
+\lstinputlisting[language=c]{resultados/src/fix_data_fission.c}
+\end{algorithm}
 
-%-------------------------------------------------------------------------------
+\begin{algorithm}[H]
+  \caption{\textit{Loop unrolling} no algoritmo~\ref{fix_data_fission}.}
+    \label{fix_data_unrofis}
+\lstinputlisting[language=c]{resultados/src/fix_data_unrofis.c}
+\end{algorithm}
 
-Analisando o \textit{loop} do algoritmo~\ref{equalize_1} o qual multiplica um dado 
-vetor por 11 fatores de equalização.
+%%-------------------------------------------------------------------------------
+\subsection{Experimento 3}
 
-Assim como os algoritmos~\ref{read_data_1} e~\ref{fix_data_1} o
-algoritmo~\ref{equalize_1} também possui declaração de comparação no corpo do
-\textit{loop}, porém as comparações do algoritmo~\ref{equalize_1} dependem da
+Analisando o \textit{loop} do algoritmo~\ref{equalize_orig} o qual multiplica um dado 
+vetor por onze fatores de equalização.
+
+\begin{algorithm}[H]
+  \caption{\textit{Loop} extraído do \textit{wat}.}
+\label{equalize_orig}
+\lstinputlisting[language=c]{resultados/src/equalize_orig.c}
+\end{algorithm}
+
+O algoritmo~\ref{equalize_orig} também possui declaração de comparação no corpo do
+\textit{loop}, porém as comparações do algoritmo~\ref{equalize_orig} dependem da
 iteração do \textit{loop}, sendo assim não é permitido a aplicação de
 \textit{loop unswitching}.
 
-Para otimizar este \textit{loop} será aplicado a técnica \textit{index set
+Para este \textit{loop} foi aplicado a técnica \textit{index set
 splitting}, uma vez que os limites do \textit{loop} e também o valor de cada
 comparação realizada ser fixo no programa, o \textit{index set splitting} irá
-dividir o \textit{loop} em 11 \textit{loops} com o espaço de iteração variando
+dividir o \textit{loop} em onze \textit{loops} com o espaço de iteração variando
 de \textit{BAND\_MIN} até \textit{BAND\_0}, \textit{BAND\_0} até \textit{BAND\_1} e
 assim até o ultimo \textit{loop} que irá iterar de \textit{BAND\_9} até
 \textit{BAND\_MAX}. Com isso será eliminado todas as declarações de comparação e
 continuará iterando o mesmo número de vezes.
 
-\begin{algorithm}
-\caption{Loop com declaração if }
-\label{equalize_1}
-\lstinputlisting[language=c]{resultados/src/equalize_1.c}
+O algoritmo~\ref{equalize_opt} mostra o resultado da aplicação de 
+\textit{index set splitting} no algoritmo~\ref{equalize_orig}.
+
+Com o intuito de diminuir o número de iterações no algoritmo~\ref{equalize_opt}
+foi aplicado \textit{loop unrolling} em cada um dos onze \textit{loops}. 
+O algoritmo~\ref{equalize_unroll} mostra o resultado de \textit{loop unrolling}
+no algoritmo~\ref{equalize_opt}.
+
+A tabela~\ref{tabela_equalize} apresenta os resultados obtidos sobre o
+algoritmo~\ref{equalize_orig}.
+
+\begin{table}[H]
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{equalize_orig}.}
+  \label{tabela_equalize}
+\begin{center}
+  \begin{tabular}{c|c|c}
+    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+    \hline
+    Algoritmo~\ref{equalize_orig} & nenhuma & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{equalize_opt} & \textit{index set splitting} & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{equalize_unroll} & \textit{index set splitting, loop unroll} & 221 \textit{ms} \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+
+
+\begin{algorithm}[H]
+  \caption{\textit{Index set splitting} no algoritmo~\ref{equalize_orig}.}
+\label{equalize_opt}
+\lstinputlisting[language=c]{resultados/src/equalize_opt.c}
 \end{algorithm}
 
-O algoritmo~\ref{equalize_2} mostra o resultado do algoritmo~\ref{equalize_1}
-após o utilização da técnica \textit{index set splitting}.
-
-\begin{algorithm}
-\caption{Loop sem declarações de comparação}
-\label{equalize_2}
-\lstinputlisting[language=c]{resultados/src/equalize_2.c}
+\begin{algorithm}[H]
+  \caption{\textit{Loop unrolling} no algoritmo~\ref{equalize_opt}.}
+\label{equalize_unroll}
+\lstinputlisting[language=c, basicstyle=\tiny]{resultados/src/equalize_unroll.c}
 \end{algorithm}
 
-Com o uso de \textit{index set splitting} o tempo médio gasto na computação
-passou de XXX \textit{ms} para YYY \textit{ms}, esse ganho deve-se ao fato de
-que não será mais computado nenhuma comparação e o espaço de iteração continua o
-mesmo.
+%%-------------------------------------------------------------------------------
+\subsection{Experimento 4}
 
-%-------------------------------------------------------------------------------
-
-Analisando o \textit{loop} do algoritmo~\ref{back_data_1} que transforma os 
+Analisando o \textit{loop} do algoritmo~\ref{back_data_orig} que transforma os 
 dados após a aplicação da FFT.
 
-Como já visto anteriormente nos algoritmos~\ref{read_data_1} e~\ref{fix_data_1}
-o algoritmo~\ref{back_data_1} contém uma declaração \textit{if} no corpo do
-\textit{loop} que também é independente do \textit{loop}. Assim, será também
+\begin{algorithm}[H]
+  \caption{\textit{Loop} extraído do \textit{wat}.}
+\label{back_data_orig}
+\lstinputlisting[language=c]{resultados/src/back_data_orig.c}
+\end{algorithm}
+
+O algoritmo~\ref{back_data_orig} também contém uma declaração \textit{if} no corpo do
+\textit{loop} que é independente do \textit{loop}. Assim, foi também
 aplicado neste \textit{loop} a técnica \textit{loop unswitching}.
+O algoritmo~\ref{back_data_opt} mostra o resultado de \textit{loop unswitching} no
+algoritmo~\ref{back_data_orig}.
 
-\begin{algorithm}
-\caption{Loop com declaração if }
-\label{back_data_1}
-\lstinputlisting[language=c]{resultados/src/back_data_1.c}
+Para que o número de iteração no algoritmo~\ref{back_data_opt} diminua foi
+aplicado \textit{loop unrolling}. O algoritmo~\ref{back_data_unroll} mostra o
+resultado de \textit{loop unrolling} no algoritmo~\ref{back_data_orig}.
+
+O segundo \textit{loop} do algoritmo~\ref{back_data_opt} está iterando sobre dois
+vetores do lado direito das declarações de atribuição, sendo assim, foi
+aplicado \textit{loop fission}, dividindo-os em dois \textit{loops}.
+O algoritmo~\ref{back_data_fission} mostra o resultado de \textit{loop fission}
+no algoritmo~\ref{back_data_opt}.
+
+Para diminuir o número de iterações dos \textit{loops} do
+algoritmo~\ref{back_data_fission} foi aplicado \textit{loop unrolling} em cada um
+dos \textit{loops}. O algoritmo~\ref{back_data_unrofis} mostra o resultado de
+\textit{loop unrolling} no algoritmo~\ref{back_data_fission}.
+
+
+A tabela~\ref{tabela_back_data} apresenta os resultados obtidos sobre o
+algoritmo~\ref{back_data_orig}.
+
+\begin{table}[H]
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{back_data_orig}.}
+  \label{tabela_back_data}
+\begin{center}
+  \begin{tabular}{c|c|c}
+    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+    \hline
+    Algoritmo~\ref{back_data_orig} & nenhuma & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{back_data_opt} & \textit{loop unswitching} & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{back_data_unroll} & \textit{loop unswitching, loop unroll} & 221 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{back_data_fission} & \textit{loop unswitching, loop fission} & 111 \textit{ms} \\
+    \hline
+  Algoritmo~\ref{back_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} & 111 \textit{ms} \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+
+
+\begin{algorithm}[H]
+\caption{\textit{Loop unswitching} no algoritmo~\ref{back_data_orig}.}
+\label{back_data_opt}
+\lstinputlisting[language=c]{resultados/src/back_data_opt.c}
 \end{algorithm}
 
-O algoritmo~\ref{back_data_2} mostra o resultado de \textit{loop unswitching} no
-algoritmo~\ref{back_data_1}.
 
-\begin{algorithm}
-\caption{Loop sem declaração if }
-\label{back_data_2}
-\lstinputlisting[language=c]{resultados/src/back_data_2.c}
+\begin{algorithm}[H]
+\caption{\textit{Loop unrolling} no algoritmo~\ref{back_data_opt}.}
+\label{back_data_unroll}
+\lstinputlisting[language=c]{resultados/src/back_data_unroll.c}
 \end{algorithm}
 
-Com o uso de \textit{loop unswitching} o tempo médio gasto na computação passou
-de XXX \textit{ms} para YYY \textit{ms}, este ganho deve ao fato de não ser
-realizada a computação da declaração \textit{if} a cada iteração do
-\textit{loop}.
+\begin{algorithm}[H]
+\caption{\textit{Loop fission} no algoritmo~\ref{back_data_opt}.}
+\label{back_data_fission}
+\lstinputlisting[language=c]{resultados/src/back_data_fission.c}
+\end{algorithm}
 
-%-------------------------------------------------------------------------------
+\begin{algorithm}[H]
+\caption{\textit{Loop unrolling} no algoritmo~\ref{back_data_fission}.}
+\label{back_data_unrofis}
+\lstinputlisting[language=c]{resultados/src/back_data_unrofis.c}
+\end{algorithm}
+%%-------------------------------------------------------------------------------
+\subsection{Experimento 5}
 
-Analisando os \textit{loops} do  algoritmo~\ref{convert_double_1} que apresenta 
+Analisando o algoritmo~\ref{convert_double_orig} que apresenta 
 dois \textit{loops},
 sendo que o primeiro converte um vetor \textit{double} em um vetor 
 \textit{short int} e o segundo \textit{loop} combina os \textit{bytes} do vetor
-\textit{short} em um vetor \textit{unsigned char}.
+\textit{short int} em um vetor \textit{unsigned char}.
 
-\begin{algorithm}
-\caption{Loop com declaração if }
-\label{convert_double_1}
-\lstinputlisting[language=c]{resultados/src/convert_double_1.c}
+\begin{algorithm}[H]
+  \caption{\textit{Loop} extraído do \textit{wat}.}
+\label{convert_double_orig}
+\lstinputlisting[language=c]{resultados/src/convert_double_orig.c}
 \end{algorithm}
 
-
-Como já visto anteriormente nos algoritmos~\ref{read_data_1},~\ref{fix_data_1} 
-e~\ref{back_data_1} 
-o algoritmo~\ref{convert_double_1} contém uma declaração \textit{if} no corpo de
-cada um dos \textit{loops}, onde ambos são independentes do respectivo \textit{loop}. 
+O algoritmo~\ref{convert_double_orig} contém uma declaração \textit{if} no corpo de
+cada um dos \textit{loops}, onde ambos são independentes de seu respectivo \textit{loop}. 
 Sendo assim, foi aplicada a técnica \textit{loop unswitching} em cada um dos
-\textit{loops} do algoritmo~\ref{convert_double_1} e resultando no
-algoritmo~\ref{convert_double_2}.
+\textit{loops} do algoritmo~\ref{convert_double_orig} e resultando no
+algoritmo~\ref{convert_double_opt}.
 
-\begin{algorithm}
-\caption{Loops sem declaração if}
-\label{convert_double_2}
-\lstinputlisting[language=c]{resultados/src/convert_double_2.c}
-\end{algorithm}
+O algoritmo~\ref{convert_double_opt} agora sem declaração \textit{if} no corpo
+do \textit{loops} apresenta dois \textit{loops} para cada resultado de
+\textit{if} ou \textit{else if}, sendo assim, foi feito uma reordenação das
+declarações com o intuito de melhorar a legibilidade do código para aplicação de
+outras técnicas.
+O algoritmo~\ref{convert_double_reo} mostra o resultado da reordenação das
+declarações do algoritmo~\ref{convert_double_opt}, onde cada resultado das
+comparações possuem dois \textit{loops}, a ordem de computação dos
+\textit{loops} foi mantida para que o significado do programa não se altere.
 
-
-
-Analisando o algoritmo~\ref{convert_double_2}, nota-se que os 
+Analisando o algoritmo~\ref{convert_double_reo}, nota-se que os 
 \textit{loops} tem como
 espaço de iteração o valor de \textit{wi->nb\_samples}, embora o segundo
 \textit{loop} itere sobre \textit{wi->nb\_samples * iterator},  é possível aplicar
@@ -192,50 +401,113 @@ segundo \textit{loop} utilizar os dados computados pelo primeiro \textit{loop},
 será necessário garantir que essa dependência seja mantida.
 
 A aplicação do \textit{loop fusion} sobre o
-algoritmo~\ref{convert_double_2} pode se tornar confusa devido a aplicação do
-\textit{loop unswitching}, que torna mais complexa a leitura do código. O
-algoritmo~\ref{convert_double_3} mostra o 
-resultado de \textit{loop fusion} no algoritmo~\ref{convert_double_2}. 
+algoritmo~\ref{convert_double_opt} pode se tornar confusa devido a aplicação do
+\textit{loop unswitching}, que torna mais complexa a leitura do código. 
+A reordenação de declarações fez com que o algoritmo~\ref{convert_double_opt}
+ficasse mais legível.
+O algoritmo~\ref{convert_double_fusion} mostra o 
+resultado de \textit{loop fusion} no algoritmo~\ref{convert_double_reo}. 
 
-\begin{algorithm}
-\caption{Loop com declaração if }
-\label{convert_double_3}
-\lstinputlisting[language=c]{resultados/src/convert_double_3.c}
+O algoritmo~\ref{convert_double_fusion} apresenta dois \textit{loops}, onde o
+segundo \textit{loop} itera sobre uma cinco vetores com um número de iteração
+igual ao número de \textit{bytes} do arquivo de áudio. 
+Será aplicado \textit{loop fission} no segundo \textit{loop} com o intuito de
+dividi-lo em dois \textit{loops} onde cada um itere sobre um dos canais de
+áudio.
+O algoritmo~\ref{convert_double_fission} mostra o resultado de \textit{loop
+fission} no algoritmo~\ref{convert_double_fusion}.
+
+
+A tabela~\ref{tabela_convert_double} apresenta os resultados obtidos sobre o
+algoritmo~\ref{convert_double_orig}.
+
+
+\begin{table}[H]
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{convert_double_orig}.}
+  \label{tabela_convert_double}
+\begin{center}
+  \begin{tabular}{c|c|c}
+    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+    \hline
+    Algoritmo~\ref{convert_double_orig} & nenhuma & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{convert_double_opt} & \textit{loop unswitching} & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{convert_double_fusion} & \textit{loop unswitching, loop fusion} & 221 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{convert_double_fission} & \textit{loop unswitching, loop fusion, loop fission} & 111 \textit{ms} \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+
+
+\begin{algorithm}[H]
+  \caption{\textit{Loop unswitching} no algoritmo~\ref{convert_double_orig}.}
+\label{convert_double_opt}
+\lstinputlisting[language=c]{resultados/src/convert_double_opt.c}
 \end{algorithm}
 
+\begin{algorithm}[H]
+  \caption{Reordenação das declarações do algoritmo~\ref{convert_double_opt}.}
+\label{convert_double_reo}
+\lstinputlisting[language=c]{resultados/src/convert_double_reo.c}
+\end{algorithm}
 
-Com o uso de \textit{loop unswitching} o tempo médio gasto na computação passou
-de XXX \textit{ms} para YYY \textit{ms}, este ganho deve ao fato de não ser
-realizada a computação da declaração \textit{if} a cada iteração do
-\textit{loop}.
+\begin{algorithm}[H]
+  \caption{\textit{Loop fusion} no algoritmo~\ref{convert_double_reo}.}
+\label{convert_double_fusion}
+\lstinputlisting[language=c]{resultados/src/convert_double_fusion.c}
+\end{algorithm}
 
+\begin{algorithm}[H]
+  \caption{\textit{Loop fission} no algoritmo~\ref{convert_double_fusion}.}
+\label{convert_double_fission}
+\lstinputlisting[language=c]{resultados/src/convert_double_fission.c}
+\end{algorithm}
 
-%-------------------------------------------------------------------------------
+%%-------------------------------------------------------------------------------
+\subsection{Experimento 6}
 
-Analisando o \textit{loop} do algoritmo~\ref{save_file_1} que salva em arquivo o 
+Analisando o \textit{loop} do algoritmo~\ref{save_file_orig} que escreve em arquivo o 
 vetor \textit{buffer}.
 
-Como já visto anteriormente nos algoritmos~\ref{read_data_1},~\ref{fix_data_1} 
-,~\ref{back_data_1} e~\ref{convert_double_1} o algoritmo~\ref{save_file_1}
-também possui uma declaração \textit{if} independente do \textit{loop} em seu
-corpo. Sendo assim foi aplicado a técnica \textit{loop unswitching}.
-Pode também ser observado que o incremento de cada iteração do \textit{loop}
-depende do resultado do \textit{if}, uma vez que este agora determina qual
-\textit{loop} será computado, o valor de incremento de iteração foi alterado
-para o valor de comparação utilizado no \textit{if}. O
-algoritmo~\ref{save_file_2} foi obtido como resultado.
-
-\begin{algorithm}
-\caption{Loops sem declaração if}
-\label{save_file_1}
-\lstinputlisting[language=c]{resultados/src/save_file_1.c}
+\begin{algorithm}[H]
+  \caption{\textit{Loop} extraído do \textit{wat}.}
+\label{save_file_orig}
+\lstinputlisting[language=c]{resultados/src/save_file_orig.c}
 \end{algorithm}
 
-\begin{algorithm}
-\caption{Loop com declaração if }
-\label{save_file_2}
-\lstinputlisting[language=c]{resultados/src/save_file_2.c}
+Para diminuir o número de iterações no algoritmo~\ref{save_file_orig} foi
+aplicado \textit{loop unrolling}. O algoritmo~\ref{save_file_unroll} mostra o
+resultado de \textit{loop unrolling} no algoritmo~\ref{save_file_orig}.
+
+\begin{algorithm}[H]
+  \caption{\textit{Loop unrolling} no algoritmo~\ref{save_file_orig}.}
+\label{save_file_unroll}
+\lstinputlisting[language=c]{resultados/src/save_file_unroll.c}
 \end{algorithm}
+
+A tabela~\ref{tabela_save_file} apresenta os resultados obtidos sobre o
+algoritmo~\ref{save_file_orig}.
+
+
+\begin{table}[H]
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{save_file_orig}.}
+  \label{tabela_save_file}
+\begin{center}
+  \begin{tabular}{c|c|c}
+    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+    \hline
+    Algoritmo~\ref{save_file_orig} & nenhuma & 111 \textit{ms} \\
+    \hline
+    Algoritmo~\ref{save_file_unroll} & \textit{loop unrolling} & 221 \textit{ms} \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
 
 
 %\begin{algorithm}
@@ -246,5 +518,12 @@ algoritmo~\ref{save_file_2} foi obtido como resultado.
 %\end{lstlisting}
 %\end{algorithm}
 
+%%-------------------------------------------------------------------------------
+\section{Resultados Experimentais}
+
+Analisando todos os \textit{loops} otimizados houve uma melhora na desempenho
+destes em um total de XXX \textit{ms}. Considerando o tempo total do programa a
+melhora do desempenho passa a não ser tão considerável devido ao fato de o
+cálculo da FFT já estar otimizado e nada mais pode ser feito para melhora-lo.
 
 %\lstinputlisting[language=c]{resultados/src/file.c}
