@@ -19,7 +19,8 @@ ou seja, não altere o significado do programa \cite[9.1]{hpcfpc}.
 Está técnica pode ser utilizada para vários propósitos, para 
 amortizar a latência da memória, melhorar o \textit{data locality} movendo 
 declarações ou \textit{loops} que utilizam as mesmas variáveis próximas uma das 
-outras. 
+outras \cite{McKinley:1996}. 
+
 A reordenação de declarações é útil pois através dela é possível 
 a aplicação de outras técnicas. 
 
@@ -113,7 +114,7 @@ A desvantagem é o aumento da complexidade da estrutura do \textit{loop},
 um \textit{loop} contendo apenas um \textit{loop} mais interno,
 poderá ter dois ou mais \textit{loops} internos. 
 Essa desvantagem pode afetar a aplicabilidade de outras técnicas ou
-transformações \cite{hpcfpc}.
+transformações \cite{Ghodrat:2008} \cite{Yang:2002}.
 
 \textit{Unswitching} pode ser aplicado em um \textit{loop} semelhante ao 
 algoritmo~\ref{unswitching_ex}, onde a condição é independente do \textit{loop}.
@@ -218,7 +219,7 @@ Essa técnica depente de saber se a variável de controle da iteração
 o código com uma condição maior que zero.
 \textit{Loop peeling} também pode ser utilizado para retirar partes de código 
 que não dependem do \textit{index} do \textit{loop}, assim, executando-os apenas
-uma vez \cite{hpcfpc}.
+uma vez \cite{Song:2004}.
 
 \textit{Loop peeling} também pode ser utilizado para ajustar a variação do 
 \textit{index} do \textit{loop}, assim tornando possível a aplicação 
@@ -270,7 +271,7 @@ possível seria o algoritmo~\ref{peeling_ex2}.
 apropriadamente. 
 Assim como em \textit{loop peeling} essa técnica é útil para ajustar o percurso
 do \textit{loop}, ou para remover condições que testam a variável que controla
-as iterações do \textit{loop} \cite{hpcfpc}.
+as iterações do \textit{loop} \cite{Ghodrat:2008} \cite{Tasharofi:2010}.
 
 Considerando o algoritmo~\ref{iss_ex} com um \textit{loop} com percurso indo
 até $MAX$.
@@ -322,7 +323,7 @@ anterior ao loop. Neste caso alocando-se um vetor com o tamanho do percurso do
 \textit{loop} e trocando a referência de cada iteração para sua respectiva
 posição no vetor irá satisfazer as relações de dependências. Com cada iteração
 do \textit{loop} utilizando uma posição do vetor a \textit{anti-dependence} e 
-\textit{output dependence} são eliminadas \cite{hpcfpc}.
+\textit{output dependence} são eliminadas \cite{Wolf:1996}.
 
 O uso de \textit{scalar expansion} em \textit{loops} aninhados é possível,
 embora o tamanho do percurso do \textit{loop} possa ser proibitivo.

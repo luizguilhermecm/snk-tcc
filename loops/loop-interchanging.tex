@@ -9,7 +9,7 @@ serem trocados de posição, o \textit{loop} mais externo é trocado pelo mais
 interno.
 No caso de apenas um \textit{loop} carregar todas as dependências, este pode ser
 trocado de posição e se tornar o \textit{loop} mais externo, assim, os outros
-\textit{loops} podem ser executados em paralelo \cite{hpcfpc}.
+\textit{loops} podem ser executados em paralelo \cite{Ghodrat:2008}.
 
 \textit{Loop interchanging} tem sido utilizado para melhorar o desempenho 
 de um programa.
@@ -17,7 +17,7 @@ Um \textit{loop} mais externo com um número maior de iterações e o
 \textit{loop} mais interno com apenas algumas iterações, em um cenário como este
 haverá \textit{loop startup overhead} sobre o \textit{loop} mais interno,
 trocando-os de posição, a ocorrência de \textit{loop startup overhead} será de
-apenas algumas vezes.
+apenas algumas vezes \cite{Allen:2004}.
 
 %-------------------------------------------------------------------------------
 \subsubsection{Loops Fortemente Aninhados}
@@ -28,7 +28,7 @@ Para \textit{loops} contáveis, com percurso do \textit{loop} mais interno não
 dependendo da iteração do \textit{loop} mais externo, aplicar \textit{loop
 interchanging} será apenas troca-los de posição.
 Ao aplicar \textit{loop interchanging} no algoritmo~\ref{fortemente_ex1}
-seria obtido o algoritmo~\ref{fortemente_ex2} como resultado.
+seria obtido o algoritmo~\ref{fortemente_ex2} como resultado \cite{hpcfpc}.
 
 \begin{algorithm}
 \caption{Dois \textit{loops} fortemente aninhados}
