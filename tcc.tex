@@ -4,8 +4,8 @@
   % -- opções da classe memoir --
 	12pt,				% tamanho da fonte
 	openright,			% capítulos começam em pág ímpar (página vazia se preciso)
-  %twoside,			% para impressão em verso e anverso. Oposto a oneside
-  oneside,			% oposto de twoside, para nao gerar paginas 
+  twoside,			% para impressão em verso e anverso. Oposto a oneside
+  %oneside,			% oposto de twoside, para nao gerar paginas 
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe dc-uel --
 	tcc,			% tipo do trabalho (opções: tcc, dissertacao, qualificacaoms)
@@ -66,7 +66,7 @@ showstringspaces=false}
 % ---
 % Informações de dados para CAPA, FOLHA DE ROSTO e outros elementos
 % ---
-\titulo{Otimização de codigo com técnicas de transformação de loops}
+\titulo{Otimização de codigo utilizando técnicas de transformação de loops}
 \tituloingles{Code otimization with loop transformations techiniques}
 \palavraschave{otimizição.\ tranformação de loops.}
 \palavraschaveingles{optmization.\ loops transformations.}
@@ -99,7 +99,7 @@ showstringspaces=false}
 
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
- ----------------------------------------------------------
+% ----------------------------------------------------------
  \pretextual
 
 
@@ -129,6 +129,11 @@ showstringspaces=false}
 \cleardoublepage
 % ---
 
+\newcommand{\listalgorithmnameTCC}{Lista de Algoritmos}
+\pdfbookmark[0]{\listalgorithmnameTCC}{lot}
+\listofalgorithms
+\cleardoublepage
+
 \input{1-listas/lista-siglas}
 
 %\input{1-listas/lista-simbolos}
@@ -144,7 +149,7 @@ showstringspaces=false}
 \textual
 
 \input{2-introducao/introducao}
-%\input{2-introducao/relacionados.tex}
+\input{2-introducao/relacionados.tex}
 
 \chapter{Fundamentação Teórica}
 \input{taxonomia-flynn/taxonomia-flynn}

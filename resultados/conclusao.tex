@@ -14,13 +14,27 @@ em uma aplicação para melhora de seu desempenho.
 A aplicação utilizada foi o programa de equalização de áudio \textit{wat}. 
 Embora existam muitas técnicas, a obtenção de benefícios em usá-las é uma 
 característica empírica. 
-Devido a isso, os resultados obtidos após as alterações, 
-mesmo que apresentando maior desempenho, não demonstram vantagem significativa.
+Os resultados obtidos com as otimizações mostraram que o uso de técnicas de
+transformação de \textit{loops} podem significar um grande impacto no desempenho
+do programa.
+Casos onde as técnicas não obtiveram resultados significativos, acabou por ficar
+evidente que o custo computacional estava em chamadas de função que não podem
+ser melhoradas com transformação de \textit{loop}.
 
 Dessa forma, pode-se elencar alguns trabalhos futuros a fim de se chegar em 
-resultados mais expressivos do que os aqui obtidos. 
+resultados ainda mais expressivos do que os aqui obtidos. 
+
 Entre os trabalhos futuros é desejável que se aborde toda a questão de 
 transformação de \textit{loops} voltados a uma arquitetura específica. 
 Esse tipo de investigação pode ser motivada por possíveis comportamentos 
 diferenciados de um mesmo algoritmo conforme a plataforma de 
-\textit{hardware}.
+\textit{hardware} tal como memória \textit{cache} e \textit{intruction cache}.
+
+Técnicas de otimização de código a serem aplicados naqueles que estão no
+corpo do \textit{loop} pode ser primordial para que o custo compucional do
+\textit{loop} seja reduzido, tal como utilizar funções \textit{inline} e
+substituição de variáveis, evitando gasto com acesso a memória através de
+ponteiros.
+
+A utilização das ténicas de transformações de \textit{loops} voltadas à
+utilização de \textit{threads} em processadores \textit{multi-cores}.
