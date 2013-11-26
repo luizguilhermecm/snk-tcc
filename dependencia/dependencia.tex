@@ -3,7 +3,7 @@
 
 \section{Dependência}
 
-Quando um programador escreve um programa em uma linguagem sequêncial, o
+Quando um programador escreve um programa em uma linguagem sequencial, o
 resultado esperado será obtido pela execução da primeira linha, depois a segunda
 e assim em diante, considerando exceções de controles de fluxos como
 \textit{loops} e ramificações. 
@@ -13,10 +13,10 @@ Obter paralelismo de um programa respeitando a estas especificações não é
 possível, uma vez que obter paralelismo implica em alterar a ordem das
 operações realizadas \cite[1.8]{ocfma}.
 
-Paralelizar um programa sequêncial significa encontrar uma ordem de execução
+Paralelizar um programa sequencial significa encontrar uma ordem de execução
 diferente da especificada e que irá sempre computar o mesmo resultado.
-A programação sequêncial introduz restrições que podem ser críticas para o
-resultado esperado do programa, assim para transformar um programa em paralelo é
+A programação sequencial introduz restrições que podem ser críticas para o
+resultado esperado do programa, assim como para transformar um programa em paralelo é
 importante encontrar as restrições menos críticas e realizar transformações para
 que o programa continue retornando o resultado correto para qualquer entrada.
 
@@ -28,7 +28,7 @@ que o programa continue retornando o resultado correto para qualquer entrada.
 
 Uma dependência é uma relação entre duas declarações no programa. 
 Um par de declarações $<1,2>$ está em uma relação se $2$ é executada 
-depois de $1$ em um programa sequêncial, e deve ser executada após $1$ 
+depois de $1$ em um programa sequencial, e deve ser executada após $1$ 
 em qualquer reordenação válida do programa se a ordem de acesso a 
 memória será preservada.
 
@@ -55,7 +55,7 @@ Em termos de dependência pode-se observar que os pares $<1,3>$ e $<2,3>$
 estão em uma relação de dependência, embora o par $<1,2>$ não.
 Dependências desse tipo são ditas dependência de dados.
 
-Dependência em linhas de código sequêncial como visto anteriormente, é um
+Dependência em linhas de código sequencial como visto anteriormente, é um
 conceito simples de entender.
 O problema é que examinar somente linhas de códigos sequênciais não garante 
 eficiência em termos de paralelismo. 

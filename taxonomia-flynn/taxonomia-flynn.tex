@@ -8,7 +8,7 @@ paralelismo disponível no processador.
 
 Taxonomia de Flynn utiliza o conceito de sequência de objetos ou ações, que são
 chamados de \textit{stream}.
-Flynn introduziu dois tipos de \textit{stream}, o 
+Flynn introduziu dois tipos de \textit{stream}: o 
 \textit{stream} de instrução e também o \textit{stream} de dados. 
 
 O \textit{stream} de instrução consiste em uma sequência de instruções. 
@@ -30,10 +30,10 @@ Existem, no entanto, quatro combinações de \textit{streams} que descrevem as
 arquiteturas de computadores mais comuns \cite{Flynn:1996}:
 
 \begin{enumerate}
-        \item \textbf{SISD:} \textit{Single Instruction, Single Data}
-        \item \textbf{SIMD:} \textit{Single Instruction, Multiple Data}
-        \item \textbf{MISD:} \textit{Multiple Instruction, Single Data}
-        \item \textbf{MIMD:} \textit{Multiple Instruction, Multiple Data}
+        \item \textbf{SISD:} \textit{Single Instruction, Single Data};
+        \item \textbf{SIMD:} \textit{Single Instruction, Multiple Data};
+        \item \textbf{MISD:} \textit{Multiple Instruction, Single Data};
+        \item \textbf{MIMD:} \textit{Multiple Instruction, Multiple Data}.
 \end{enumerate}
 
 Cada combinação de \textit{streams} caracteriza uma classe de arquitetura 
@@ -66,12 +66,12 @@ A quantidade e o tipo de paralelismo possível em processadores \textit{SISD}
 é determinada por quatro fatores principais:
 
 \begin{enumerate}
-        \item O número de operações que podem ser executadas concorrentemente.
+        \item O número de operações que podem ser executadas concorrentemente;
         \item A forma como as operações serão arranjadas para execução,
                 podendo ser estaticamente, dinamicamente ou até mesmo utilizando
-                ambas.
+                ambas;
         \item A ordem em que as operações são colocadas e retiradas em relação
-                a ordem original do programa.
+                a ordem original do programa;
         \item A maneira como o processador irá tratar cada exceção, podendo ser: 
                 preciso impreciso ou ambos.
 \end{enumerate}
@@ -114,7 +114,7 @@ execução sequencial.
 \subsubsection{Processadores Superescalares}
 
 Enquanto processadores escalares estão limitados a executar uma única instrução 
-por ciclo de \textit{clock} de máquina os processadores superescalares decoficam
+por ciclo de \textit{clock} de máquina, os processadores superescalares decoficam
 várias instruções por ciclo de \textit{clock} de máquina, utilizando várias
 unidades funcionais e alocação dinâmica para executar várias instruções por
 ciclo de \textit{clock} de máquina. 
@@ -128,8 +128,8 @@ Processadores superescalares mais avançados geralmente incluem
 \textit{hardwares} que preservam a ordem e precisamente lida com as exceções, 
 assim simplificando o modelo de programação.
 
-Devido a complexidade da lógica para alocação dinâmica das instruções,
-processadores superescalares de alto desempenho, em geral estão limitados a
+Devido à complexidade da lógica para alocação dinâmica das instruções,
+processadores superescalares de alto desempenho, em geral, estão limitados a
 executarem de quatro a oito instruções por ciclo de \textit{clock} de máquina.
 
 
@@ -157,7 +157,7 @@ estática:
 \begin{enumerate}
         \item Atrasos de resultados das operações, devido à diferença da latência
                 ocorrida com a latência considerada durante a alocação pelo
-                compilador.
+                compilador;
         \item Exceções ou interrupções que colocam a ordem de execução em um
                 estado não antecipado pelo compilador.
 \end{enumerate}

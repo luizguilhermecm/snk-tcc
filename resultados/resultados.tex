@@ -44,8 +44,8 @@ transforma dois \textit{bytes} em um \textit{double}.
 
 
 Devido a existência de uma declaração \textit{if} no corpo do \textit{loop} e
-sendo este \textit{if} independente do \textit{loop}. 
-Foi aplicado a técnica \textit{loop unswitching}, que retira a comparação
+sendo este \textit{if} independente do \textit{loop}, foi aplicado a técnica 
+\textit{loop unswitching}, que retira a comparação
 \textit{if} do corpo do \textit{loop} envolvendo um novo \textit{loop} para cada caso
 da comparação, assim nenhum dos \textit{loops} terão declações de comparação em seu
 corpo.
@@ -86,7 +86,7 @@ onde o autor propõe utilizar funções \textit{inline} com o intuito de diminui
 de acesso à função.
 
 O algoritmo~\ref{read_data_fission} obteve resultado negativo em seu desempenho,
-aumentando em 31 \textit{ms} no tempo da computação, este é um indício de que a
+aumentando em 31 \textit{ms} no tempo da computação. Este é um indício de que a
 quantidade de dados acessados a cada iteração não é o suficiente para suprir a
 quantidade de dados suportada pela memoria \textit{cache} e \textit{instruction
 cache}. 
@@ -154,7 +154,7 @@ para o calculo da FFT.
 
 O algoritmo~\ref{fix_data_orig} é parecido com o algoritmo~\ref{read_data_orig}, uma
 vez que ambos contêm uma declaração \textit{if} independente do \textit{loop} em seu corpo. 
-Assim, também foi aplicado a técnica \textit{loop unswitching} no
+Assim, também foi aplicada a técnica \textit{loop unswitching} no
 algoritmo~\ref{fix_data_orig}.
 O algoritmo~\ref{fix_data_opt} mostra o resultado da aplicação de \textit{loop
 unswitching} no algoritmo~\ref{fix_data_orig}.
@@ -259,7 +259,7 @@ comparação realizada ser fixo no programa, o \textit{index set splitting} irá
 dividir o \textit{loop} em onze \textit{loops} com o espaço de iteração variando
 de \textit{BAND\_MIN} até \textit{BAND\_0}, \textit{BAND\_0} até \textit{BAND\_1} e
 assim até o ultimo \textit{loop} que irá iterar de \textit{BAND\_9} até
-\textit{BAND\_MAX}. Com isso será eliminado todas as declarações de comparação e
+\textit{BAND\_MAX}. Com isso será eliminadas todas as declarações de comparação e
 continuará iterando o mesmo número de vezes.
 
 O algoritmo~\ref{equalize_opt} mostra o resultado da aplicação de 
@@ -323,11 +323,11 @@ dados após a aplicação da FFT.
 
 O algoritmo~\ref{back_data_orig} também contém uma declaração \textit{if} no corpo do
 \textit{loop} que é independente do \textit{loop}. Assim, foi também
-aplicado neste \textit{loop} a técnica \textit{loop unswitching}.
+aplicada neste \textit{loop} a técnica \textit{loop unswitching}.
 O algoritmo~\ref{back_data_opt} mostra o resultado de \textit{loop unswitching} no
 algoritmo~\ref{back_data_orig}.
 
-Para que o número de iteração no algoritmo~\ref{back_data_opt} diminua foi
+Para que o número de iteração no algoritmo~\ref{back_data_opt} foi
 aplicado \textit{loop unrolling}. O algoritmo~\ref{back_data_unroll} mostra o
 resultado de \textit{loop unrolling} no algoritmo~\ref{back_data_orig}.
 
@@ -345,7 +345,8 @@ dos \textit{loops}. O algoritmo~\ref{back_data_unrofis} mostra o resultado de
 
 A tabela~\ref{tabela_back_data} apresenta os resultados obtidos sobre o
 algoritmo~\ref{back_data_orig}.
-O algoritmo~\ref{back_data_unrofis} apresentou o melhor desempenho, a melhora no
+O algoritmo~\ref{back_data_unrofis} apresentou o melhor desempenho 
+A melhora no
 desempenho seguiu de acordo com a ordem em que as técnicas foram sendo aplicadas, 
 removendo-se
 declarações de comparação do corpo do \textit{loop} com \textit{loop
@@ -449,11 +450,10 @@ segundo \textit{loop} utilizar os dados computados pelo primeiro \textit{loop},
 será necessário garantir que essa dependência seja mantida.
 
 A aplicação do \textit{loop fusion} sobre o
-algoritmo~\ref{convert_double_opt} pode se tornar confusa devido a aplicação do
+algoritmo~\ref{convert_double_opt} pode se tornar confusa devido à aplicação do
 \textit{loop unswitching}, que torna mais complexa a leitura do código. 
 A reordenação de declarações fez com que o algoritmo~\ref{convert_double_opt}
-ficasse mais legível.
-O algoritmo~\ref{convert_double_fusion} mostra o 
+ficasse mais legível, o algoritmo~\ref{convert_double_fusion} mostra o 
 resultado de \textit{loop fusion} no algoritmo~\ref{convert_double_reo}. 
 
 
@@ -574,8 +574,8 @@ sendo que a leitura e escrita em disco é um dos gargalos de \textit{wat}.
 %%-------------------------------------------------------------------------------
 \section{Resultados Experimentais}
 
-Considerando os resultados experimentais da tabela~\ref{tabela_resultados}.
-O tempo total de execução dos \textit{loops} analisados foi de 8750 \textit{ms},
+Considerando os resultados experimentais da tabela~\ref{tabela_resultados},
+o tempo total de execução dos \textit{loops} analisados foi de 8750 \textit{ms},
 após a aplicação das técnicas de tranformação de \textit{loops} o tempo total
 foi de 7816 \textit{ms}, ou seja, houve uma melhora de 11.94\% no tempo de  
 computação destes \textit{loops}.
@@ -605,8 +605,8 @@ computação destes \textit{loops}.
 
 Considerando o tempo de execução de \textit{wat} na equalização de um
 arquivo de áudio \textit{sterio} (2 canais de áudio) de 40 \textit{MB} e
-com 4 minutos e 15 segundos de duração. 
-O tempo total de execução de \textit{wat} sem otimização é de 19396 \textit{ms} 
+com 4 minutos e 15 segundos de duração, o tempo total de execução de \textit{wat} 
+sem otimização é de 19396 \textit{ms} 
 e o tempos de execução otimizado é de 18062 \textit{ms}, ou seja, uma melhora de 
 7.5\%. 
 O percentual de desempenho é menor devido ao fato de que o cálculo da
