@@ -22,13 +22,22 @@ tarefa difícil, uma vez que além de dividi-lo em pequenas tarefas, deve-se
 considerar a concorrência entre elas, as dependências de dados, entre outros 
 fatores que dificultam o trabalho de paralelização \cite{aipp}.
 
-Programas computacionalmente custosos, no geral gastam a maior parte do esforço 
+Programas computacionalmente custosos, em geral gastam a maior parte do esforço 
 na execução de \textit{loops}, assim, a maior parte do ganho de eficiência será
 obtido otimizando as partes do software onde há maior esforço computacional.
 As técnicas de reestruturação de \textit{loops} como \textit{loop 
 fusion, loop fission, loop peeling}, entre outras, podem ser utilizadas para
-otimizar \textit{loops} e obter ganho de eficiência, melhorar o \textit{data
-locality} e até o consumo energético pode ser diminuído \cite{Liu:2004}.
+otimizar \textit{loops} e obter ganho de eficiência, melhorar o 
+\textit{data locality} 
+\footnote{A memória \textit{cache} assume que se um dado é acessado uma vez este 
+        poderá ser acessado novamente em breve, esse comportamento é denominado 
+                \textit{data locality}, podendo ser de dois tipos:
+                \textit{temporal locality}, se o
+                dado é reusado e \textit{spatial locality}, se o programa pode utilizar
+                os dados próximos ao dado recém acessado, estes são também carregados
+                na memória \textit{cache}.
+}
+e até o consumo energético pode ser diminuído \cite{Liu:2004}.
 
 Neste contexto o objetivo deste trabalho será obter ganho de eficiência através da 
 utilização de técnicas de reestruturação de \textit{loops} e de dependências de 

@@ -16,7 +16,9 @@ Assim, dependência de dados pode ser definida como \cite[2.2]{ocfma}:
 \begin{enumerate}
         \item Ambas as declarações acessem o mesmo local de memória e ao menos
                 umas delas realizará \textit{store} na memória, e
-        \item Existe um caminho de execução viável de $1$ para $2$.
+        \item Existe um caminho de execução possível\footnote{O caminho para a
+                        execução destas declações deve ser factível durante a 
+                execução.} de $1$ para $2$.
 \end{enumerate}
 \end{description}
 
@@ -30,7 +32,7 @@ Em termos da ordem de \textit{load-store}, as dependências podem ocorrer de
 três formas em um programa \cite{Chang:2004}:
 
 \begin{alineas}
-\item \textit{True dependence} ou \textit{flow dependence}. Onde uma declaração realiza 
+\item \textit{True dependence} ou \textit{flow dependence}. Uma declaração realiza 
         \textit{store} em um local da memória em que será realizado um 
         \textit{load} por uma segunda declaração.
         \begin{algorithmic}[1]
@@ -79,7 +81,7 @@ três formas em um programa \cite{Chang:2004}:
 %-------------------------------------------------------------------------------
 \subsubsection{Dependência em Loops}
 
-Extendendo o conceito de dependência para \textit{loops} requer alguma forma de
+Estendendo o conceito de dependência para \textit{loops} requer alguma forma de
 parametrizar as declarações pelas iterações do \textit{loop} que são
 executadas.
 Para o \textit{loop} simples do algoritmo~\ref{loop_simples}:

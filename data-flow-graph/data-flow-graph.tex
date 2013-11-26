@@ -17,7 +17,7 @@ Embora muitas versões de DFGs tenham sido estudadas na literatura, elas possuem
 algumas características em comum:
 
 \begin{alineas}
-        \item DFG é um grafo orientado onde uma aresta é um caminho que um dado
+        \item DFG é um grafo orientado em que uma aresta é um caminho que um dado
         percorre do nó produtor para o nó consumidor;
         \item Dinamicamente, o nó de um DFG aceita um ou mais dado como entrada,
         realizando computações e devolvendo os dados do retorno para suas
@@ -28,7 +28,11 @@ algumas características em comum:
 Os estudos em DFGs tem sido focado principalmente em três modelos bem definidos:
 DFGs estáticos, DFGs dinâmicos e DFGs síncronos.
 
-Um exemplo de DFG pode ser visto na figura~\ref{dfg_ex}.
+Um exemplo de DFG pode ser visto na figura~\ref{dfg_ex}, onde o nó 1 é o
+produtor de dados para o nó 2 e 4, o nó 2 é produtor de dados para o nó 5, 
+o nó 3 é produtor de dados para os nós 4 e 5 e os nós 4 e 5 não são produtores,
+apenas consumidores. Entre as ordens de execuções que respeitem o DFG está 
+1, 2, 3, 4 e 5, outra execução possível é 3, 1, 4, 2 e 5.
 
 \begin{figure}[h]
 \centering

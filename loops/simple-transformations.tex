@@ -21,7 +21,7 @@ amortizar a latência da memória, melhorar o \textit{data locality} movendo
 declarações ou \textit{loops} que utilizam as mesmas variáveis próximas uma das 
 outras \cite{McKinley:1996}. 
 
-A reordenação de declarações é útil pois através dela é possível 
+A reordenação de declarações é útil, pois através dela é possível 
 a aplicação de outras técnicas. 
 
 Utilizando o algoritmo~\ref{reordenacao} para exemplificar a reordenação. 
@@ -49,7 +49,7 @@ O grafo de dependência do algoritmo~\ref{reordenacao} pode ser visto na
 figura~\ref{graph_statement_reordering}. 
 Neste exemplo deseja-se que as declarações $1$ e $4$ fiquem o mais próximo 
 possível do \textit{loop}. 
-Uma forma de faze-lo é reornando as declarações para a seguinte ordem $2,\; 3,\; 5,
+Uma forma de faze-lo é reordenando as declarações para a seguinte ordem $2,\; 3,\; 5,
 \;1,\; 4\; e\; 7$, como resultado tem-se o algoritmo~\ref{reordenado}.
 
 
@@ -224,6 +224,9 @@ uma vez \cite{Song:2004}.
 \textit{Loop peeling} também pode ser utilizado para ajustar a variação do 
 \textit{index} do \textit{loop}, assim tornando possível a aplicação 
 do \textit{loop fusion}.
+\textit{Loop peeling} não apresenta vantagens significativas no ganho de
+desempenho, sendo este ganho obtido pelas técnicas a serem aplicadas após
+o \textit{loop peeling}.
 
 Considerando o algoritmo~\ref{peeling_ex} um \textit{loop} contável e 
 com \textit{index} tendo como máximo $MAX$.

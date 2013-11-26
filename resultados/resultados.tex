@@ -94,12 +94,12 @@ O uso de \textit{loop unrolling} no algoritmo~\ref{read_data_fission} fez com
 que aumentasse a quantidade de dados acessados por iteração, assim, melhorando seu
 desempenho, mas ainda sendo maior que o algoritmo retirado de \textit{wat}.
 
-\begin{table}[H]
-  \caption{Resultados das técnicas sobre o algoritmo~\ref{read_data_orig}.}
+\begin{table}[ht]
   \label{tabela_read_data}
 \begin{center}
-  \begin{tabular}{c|c|c}
-    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Algoritmo} & \textbf{Técnicas aplicadas} & \textbf{Tempo de execução}\\
     \hline
     Algoritmo~\ref{read_data_orig} & nenhuma & 470 \textit{ms} \\
     \hline
@@ -112,6 +112,7 @@ desempenho, mas ainda sendo maior que o algoritmo retirado de \textit{wat}.
   Algoritmo~\ref{read_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} &  480 \textit{ms} \\
     \hline
   \end{tabular}
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{read_data_orig}.}
 \end{center}
 \end{table}
 
@@ -141,6 +142,7 @@ desempenho, mas ainda sendo maior que o algoritmo retirado de \textit{wat}.
 \end{algorithm}
 
 %-------------------------------------------------------------------------------
+\newpage
 \subsection{Experimento 2}
 
 Analisando o \textit{loop} do algoritmo~\ref{fix_data_orig} que rearranja os dados
@@ -188,12 +190,12 @@ algoritmo~\ref{fix_data_unroll} deve-se ao fato do
 algoritmo~\ref{fix_data_unrofis} iterar sobre um mesmo conjunto de vetores,
 assim, desfrutando dos benefícios de \textit{memory locality}.
 
-\begin{table}[H]
-  \caption{Resultados das técnicas sobre o algoritmo~\ref{fix_data_orig}.}
+\begin{table}[ht]
   \label{tabela_fix_data}
 \begin{center}
-  \begin{tabular}{c|c|c}
-    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Algoritmo} & \textbf{Técnicas aplicadas} & \textbf{Tempo de execução}\\
     \hline
     Algoritmo~\ref{fix_data_orig} & nenhuma & 485 \textit{ms} \\
     \hline
@@ -207,6 +209,7 @@ assim, desfrutando dos benefícios de \textit{memory locality}.
                         loop unroll} & 435 \textit{ms} \\
     \hline
   \end{tabular}
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{fix_data_orig}.}
 \end{center}
 \end{table}
 
@@ -237,6 +240,7 @@ assim, desfrutando dos benefícios de \textit{memory locality}.
 \end{algorithm}
 
 %%-------------------------------------------------------------------------------
+\newpage
 \subsection{Experimento 3}
 
 Analisando o \textit{loop} do algoritmo~\ref{equalize_orig} o qual multiplica um dado 
@@ -277,12 +281,12 @@ desempenho, onde fora aplicado \textit{index set splitting} dividindo o
 aninhadas. A técnica \textit{loop unrolling} dividiu por dois a quantidade de
 iterações dos onze \textit{loops}.
 
-\begin{table}[H]
-  \caption{Resultados das técnicas sobre o algoritmo~\ref{equalize_orig}.}
+\begin{table}[htp]
   \label{tabela_equalize}
 \begin{center}
-  \begin{tabular}{c|c|c}
-    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Algoritmo} & \textbf{Técnicas aplicadas} & \textbf{Tempo de execução}\\
     \hline
     Algoritmo~\ref{equalize_orig} & nenhuma & 240 \textit{ms} \\
     \hline
@@ -292,6 +296,7 @@ iterações dos onze \textit{loops}.
                                     & 75 \textit{ms} \\
     \hline
   \end{tabular}
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{equalize_orig}.}
 \end{center}
 \end{table}
 
@@ -310,6 +315,7 @@ iterações dos onze \textit{loops}.
 \end{algorithm}
 
 %%-------------------------------------------------------------------------------
+\newpage
 \subsection{Experimento 4}
 
 Analisando o \textit{loop} do algoritmo~\ref{back_data_orig} que transforma os 
@@ -356,12 +362,12 @@ e então multiplicando o
 corpo do \textit{loop} com \textit{loop unrolling} diminuindo o número de iterações, 
 desta forma, aproveitando os benefícios de \textit{memory locality}.
 
-\begin{table}[H]
-  \caption{Resultados das técnicas sobre o algoritmo~\ref{back_data_orig}.}
+\begin{table}[ht]
   \label{tabela_back_data}
 \begin{center}
-  \begin{tabular}{c|c|c}
-    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Algoritmo} & \textbf{Técnicas aplicadas} & \textbf{Tempo de execução}\\
     \hline
     Algoritmo~\ref{back_data_orig} & nenhuma & 150 \textit{ms} \\
     \hline
@@ -374,6 +380,7 @@ desta forma, aproveitando os benefícios de \textit{memory locality}.
     Algoritmo~\ref{back_data_unrofis} & \textit{loop unswitching, loop fisson, loop unroll} & 144 \textit{ms} \\
     \hline
   \end{tabular}
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{back_data_orig}.}
 \end{center}
 \end{table}
 
@@ -404,6 +411,7 @@ desta forma, aproveitando os benefícios de \textit{memory locality}.
 \lstinputlisting[language=c]{resultados/src/back_data_unrofis.c}
 \end{algorithm}
 %%-------------------------------------------------------------------------------
+\newpage
 \subsection{Experimento 5}
 
 Analisando o algoritmo~\ref{convert_double_orig} que apresenta 
@@ -474,12 +482,12 @@ fusion}, onde o aumento de dados acessados em cada iteração pode prejudicar o
 reuso da memória \textit{cache} \cite{Rivera:1999}.
 
 
-\begin{table}[H]
-  \caption{Resultados das técnicas sobre o algoritmo~\ref{convert_double_orig}.}
+\begin{table}[ht]
   \label{tabela_convert_double}
 \begin{center}
-  \begin{tabular}{c|c|c}
-    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Algoritmo} & \textbf{Técnicas aplicadas} & \textbf{Tempo de execução}\\
     \hline
     Algoritmo~\ref{convert_double_orig} & nenhuma & 494 \textit{ms} \\
     \hline
@@ -491,6 +499,7 @@ reuso da memória \textit{cache} \cite{Rivera:1999}.
     Algoritmo~\ref{convert_double_fusion} & \textit{loop unswitching, loop fusion} & 477 \textit{ms} \\
     \hline
   \end{tabular}
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{convert_double_orig}.}
 \end{center}
 \end{table}
 
@@ -546,18 +555,19 @@ algoritmo~\ref{save_file_orig}.
 A técnica \textit{loop unrolling} aplicada melhorou o tempo em 514 \textit{ms},
 sendo que a leitura e escrita em disco é um dos gargalos de \textit{wat}.
 
-\begin{table}[H]
-  \caption{Resultados das técnicas sobre o algoritmo~\ref{save_file_orig}.}
+\begin{table}[ht]
   \label{tabela_save_file}
 \begin{center}
-  \begin{tabular}{c|c|c}
-    Algoritmo & Técnicas aplicadas & Tempo de execução\\
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Algoritmo} & \textbf{Técnicas aplicadas} & \textbf{Tempo de execução}\\
     \hline
     Algoritmo~\ref{save_file_orig} & nenhuma & 6910 \textit{ms} \\
     \hline
     Algoritmo~\ref{save_file_unroll} & \textit{loop unrolling} & 6296 \textit{ms} \\
     \hline
   \end{tabular}
+  \caption{Resultados das técnicas sobre o algoritmo~\ref{save_file_orig}.}
 \end{center}
 \end{table}
 
@@ -574,18 +584,23 @@ sendo que a leitura e escrita em disco é um dos gargalos de \textit{wat}.
 %%-------------------------------------------------------------------------------
 \section{Resultados Experimentais}
 
+Os experimentos foram compilados utilizando o compilador \textit{GCC} e não foi
+utilizado nenhuma forma de otimização por parte do compilador.
+Os códigos foram escritos e reescritos manualmente a cada experimento.
+
 Considerando os resultados experimentais da tabela~\ref{tabela_resultados},
 o tempo total de execução dos \textit{loops} analisados foi de 8750 \textit{ms},
 após a aplicação das técnicas de tranformação de \textit{loops} o tempo total
 foi de 7816 \textit{ms}, ou seja, houve uma melhora de 11.94\% no tempo de  
 computação destes \textit{loops}.
 
-\begin{table}[h]
-  \caption{Resultados experimentais.}
+\begin{table}[ht]
   \label{tabela_resultados}
 \begin{center}
-  \begin{tabular}{c|c|c|c}
-    Experimento & Tempo sem otimização & Tempo com otimização & Ganho \%\\
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{Experimento} & \textbf{Tempo sem otimização} & \textbf{Tempo com
+          otimização} & \textbf{Ganho} \%\\
     \hline
     1 & 470 \textit{ms} & 444 \textit{ms} & 5.85\% \\
     \hline
@@ -600,6 +615,7 @@ computação destes \textit{loops}.
     6 & 6910 \textit{ms} & 6296 \textit{ms} & 9.75\% \\
     \hline
   \end{tabular}
+  \caption{Resultados experimentais.}
 \end{center}
 \end{table}
 
@@ -612,3 +628,8 @@ e o tempos de execução otimizado é de 18062 \textit{ms}, ou seja, uma melhora
 O percentual de desempenho é menor devido ao fato de que o cálculo da
 transformada de Fourier \cite{fft} utilizado em \textit{wat} não pode ser otimizado, uma
 vez que, foi utilizado um código já otimizado para este cálculo.
+
+Durante os experimentos foi observado que a utilização de mais de uma técnica
+pode não só obter o ganho individual de cada uma das técnicas, como também 
+potencializar os resultados uma das outras.
+
