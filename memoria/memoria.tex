@@ -48,14 +48,17 @@ tornando a memória visível a todos os processadores, permitindo que
 todos possam carregar e gravar do mesmo endereço de memória \cite[2.2]{sopc}. 
 
 Entre as dificuldades desta abordagem, os dois que chamam mais atenção são
-coerência\footnote{
-        Vários processadores acessando um mesmo dado compartilhado, deve-se
+coerência\footnote{Vários 
+        processadores acessando um mesmo dado compartilhado, deve-se
                 garantir que se este for atualizado todos os processadores
                 passem a utilizar o dado atualizado em vez de utilizar um dado
-                depreciado.} 
-e consistência\footnote{Se um dado é manipulado por mais de um processador,
+                depreciado.
+} 
+e consistência\footnote{Se 
+        um dado é manipulado por mais de um processador,
         a ordem de escrita e leitura deste dado entre os processadores deve 
-                ser respeitada.}
+                ser respeitada.
+}
 Sendo a consistência o mais problemático para o programador.
 
 
