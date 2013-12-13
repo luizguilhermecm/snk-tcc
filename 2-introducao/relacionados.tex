@@ -39,8 +39,8 @@ trabalho para a obtenção do melhor resultado.
 Técnicas de tranformação de \textit{loops} apresentam comportamentos diferentes 
 para cada arquitetura. 
 Por apresentarem este comportamento muitas vezes empirista, a experiência obtida
-pelos autores será de suma importância, para que no final deste trabalho tenhamos
-encontrado a melhor forma de utilizar esta técnica.
+pelos autores será de suma importância, para que no final deste trabalho tenha
+sido encontrada a melhor forma de utilizar esta técnica.
 
 Embora o uso de funções \textit{inline} apresentem bons resultados, estas não
 serão utilizadas neste trabalho, uma vez que não são técnicas de transformação
@@ -50,45 +50,45 @@ de \textit{loops}.
 % Exploitation of parallelism to nested loops with dependence cycles
 %-------------------------------------------------------------------------------
 
-%Em \textit{"Exploitation of parallelism to nested loops with dependence
-%cyles"} \cite{Chang:2004}, os autores estudam a exploração de paralelismo de
-%\textit{loops} contendo ciclos de dependências, com foco na quebra das relações 
-%de dependências para então extrair paralelismo destes \textit{loops} com menos
-%ou nenhuma relação de dependência.
-%
-%Os autores começam realizando uma revisão teórica, apresentando os principais
-%conceitos de dependência, assim como as principais relações de dependências, 
-%\textit{true-dependence}, \textit{output-dependence} e \textit{anti-dependence}.  
-%São também apresentados alguns conceitos como \textit{loop independent dependence}, 
-%\textit{loop-carried dependence}, \textit{dependence distance vector}, 
-%\textit{dependence distance matrix}, \textit{inter-statement} ou
-%\textit{intra-statement} dependences e \textit{direction vector matrix} de
-%\textit{loops} aninhados.
-%
-%De acordo com os autores os ciclos de relações \textit{anti-dependence} e
-%\textit{true-dependence} podem ser quebradas embora \textit{true-dependence} é 
-%inquebrável.
-%
-%A estratégia para quebrar a relação de dependência \textit{anti-dependence}
-%apresentada se baseia no uso de uma técnica de renomeação de variáveis
-%chamada \textit{sink}. 
-%A partir da qual é criada uma variável nova que será utilizada para manter os
-%valores daquela envolvida na relação \textit{anti-dependence}.  
-%Para \textit{output-dependence} o mesmo algoritmo é apresentado.
-%
-%Visto que os que os ciclos de relações de \textit{true-dependence} não pode ser
-%quebrados, os autores apresentam várias técnicas que permitem amenizar as
-%relações de dependências, o resultado deste último algoritmo é especialmente
-%voltado para a aplicação de vetorização.
-%
-%Os autores mostram que a aplicabilidade de seus algoritmos satisfizeram e
-%mantiveram todas as relações de dependências iniciais, assim não alterando o 
-%resultado final.
-%
-%Os resultados obtidos utilizando \textit{vector loops} mostraram que as técnicas
-%propostas são muito significativa em termos de \textit{speed-up}, a execução dos 
-%programas tranformados foram de 41 a 69 vezes mais rápidos em comparação a execução
-%dos programas originais.
+Em \textit{"Exploitation of parallelism to nested loops with dependence
+cyles"} \cite{Chang:2004}, os autores estudam a exploração de paralelismo de
+\textit{loops} contendo ciclos de dependências, com foco na quebra das relações 
+de dependências para então extrair paralelismo destes \textit{loops} com menos
+ou nenhuma relação de dependência.
+
+Os autores começam realizando uma revisão teórica, apresentando os principais
+conceitos de dependência, assim como as principais relações de dependências, 
+\textit{true-dependence}, \textit{output-dependence} e \textit{anti-dependence}.  
+São também apresentados alguns conceitos como \textit{loop independent dependence}, 
+\textit{loop-carried dependence}, \textit{dependence distance vector}, 
+\textit{dependence distance matrix}, \textit{inter-statement} ou
+\textit{intra-statement} dependences e \textit{direction vector matrix} de
+\textit{loops} aninhados.
+
+De acordo com os autores os ciclos de relações \textit{anti-dependence} e
+\textit{true-dependence} podem ser quebradas embora \textit{true-dependence} é 
+inquebrável.
+
+A estratégia para quebrar a relação de dependência \textit{anti-dependence}
+apresentada se baseia no uso de uma técnica de renomeação de variáveis
+chamada \textit{sink}. 
+A partir da qual é criada uma variável nova que será utilizada para manter os
+valores daquela envolvida na relação \textit{anti-dependence}.  
+Para \textit{output-dependence} o mesmo algoritmo é apresentado.
+
+Visto que os que os ciclos de relações de \textit{true-dependence} não pode ser
+quebrados, os autores apresentam várias técnicas que permitem amenizar as
+relações de dependências, o resultado deste último algoritmo é especialmente
+voltado para a aplicação de vetorização.
+
+Os autores mostram que a aplicabilidade de seus algoritmos satisfizeram e
+mantiveram todas as relações de dependências iniciais, assim não alterando o 
+resultado final.
+
+Os resultados obtidos utilizando \textit{vector loops} mostraram que as técnicas
+propostas são muito significativa em termos de \textit{speed-up}, a execução dos 
+programas tranformados foram de 41 a 69 vezes mais rápidos em comparação a execução
+dos programas originais.
 
 
 
